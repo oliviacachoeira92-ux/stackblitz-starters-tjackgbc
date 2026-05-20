@@ -1,5 +1,9 @@
 'use client';
 
+import USDConverter from './components/USDConverter';
+
+import { fetchUSDBRL } from './utils/currency';
+
 import { useEffect, useState } from 'react';
 
 import gsap from 'gsap';
@@ -10,31 +14,84 @@ import {
   calculateFromPoints,
   calculateFromDollars,
   calculateFromCharme,
-} from './utils/calculator';
+} from './utils/conversionEngine';
 
 import Header from './components/Header';
-import Calculator from './components/Calculator';
+import CalculatorPanel from './components/CalculatorPanel';
 import Parameters from './components/Parameters';
 import Rules from './components/Rules';
 
 export default function Home() {
+
   // CAMPOS
 
-  const [diamonds, setDiamonds] = useState('');
-  const [points, setPoints] = useState('');
-  const [dollars, setDollars] = useState('');
-  const [charme, setCharme] = useState('');
+  const [diamonds, setDiamonds] =
+    useState('');
+
+  const [points, setPoints] =
+    useState('');
+
+  const [dollars, setDollars] =
+    useState('');
+
+  const [charme, setCharme] =
+    useState('');
+
+  // USD REALTIME
+
+  const [usdRate, setUsdRate] =
+    useState(5);
+
+  const [lastUpdate, setLastUpdate] =
+    useState('');
+
+  const [usdVariation, setUsdVariation] =
+    useState(0);
+
+  const [loadingRate, setLoadingRate] =
+    useState(true);
 
   // PARÂMETROS
 
-  const [pointsPerDiamond, setPointsPerDiamond] =
-    useState(750);
+  const [pointsPerDiamond,
+    setPointsPerDiamond] =
+      useState(750);
 
-  const [pointsPer20USD, setPointsPer20USD] =
-    useState(12000000);
+  const [pointsPer20USD,
+    setPointsPer20USD] =
+      useState(12000000);
 
-  const [diamondsPerCharme, setDiamondsPerCharme] =
-    useState(5);
+  const [diamondsPerCharme,
+    setDiamondsPerCharme] =
+      useState(5);
+
+  // RESULTADOS
+
+  const parsedPoints = Number(
+    points.toString().replace(/\./g, '')
+  );
+
+  const minimumWithdraw =
+    pointsPer20USD;
+
+  const eligible =
+    parsedPoints >= minimumWithdraw;
+
+  const withdrawals =
+    Math.floor(
+      parsedPoints /
+      minimumWithdraw
+    );
+
+  // BRL DINÂMICO
+
+  const estimatedBRL =
+    dollars
+      ? (
+          Number(dollars) *
+          usdRate
+        ).toFixed(2)
+      : '0.00';
 
   // CONFIG
 
@@ -43,21 +100,6 @@ export default function Home() {
     pointsPer20USD,
     diamondsPerCharme,
   };
-
-  // RESULTADOS
-
-  const parsedPoints = Number(
-    points.toString().replace(/\./g, '')
-  );
-
-  const minimumWithdraw = 1000000;
-
-  const eligible =
-    parsedPoints >= minimumWithdraw;
-
-  const withdrawals = Math.floor(
-    parsedPoints / minimumWithdraw
-  );
 
   // HANDLERS
 
@@ -152,73 +194,71 @@ export default function Home() {
     setPoints(result.points);
     setDollars(result.dollars);
   };
-  // LOCAL STORAGE
+
+  // USD REALTIME
 
   useEffect(() => {
-    const saved = localStorage.getItem(
-      'fenix-arcane-calculator'
-    );
 
-    if (!saved) return;
+    const loadRate = async () => {
 
-    const data = JSON.parse(saved);
+      setLoadingRate(true);
 
-    setDiamonds(data.diamonds || '');
-    setPoints(data.points || '');
-    setDollars(data.dollars || '');
-    setCharme(data.charme || '');
+      const data =
+        await fetchUSDBRL();
 
-    setPointsPerDiamond(
-      data.pointsPerDiamond || 750
-    );
+      if (data.success) {
 
-    setPointsPer20USD(
-      data.pointsPer20USD || 12000000
-    );
+        setUsdRate(data.bid);
 
-    setDiamondsPerCharme(
-      data.diamondsPerCharme || 5
-    );
+        setUsdVariation(
+          data.pctChange
+        );
+
+        setLastUpdate(
+          data.createDate
+        );
+      }
+
+      setLoadingRate(false);
+    };
+
+    loadRate();
+
+    const interval =
+      setInterval(
+        loadRate,
+        1000 * 60 * 5
+      );
+
+    return () =>
+      clearInterval(interval);
+
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem(
-      'fenix-arcane-calculator',
-      JSON.stringify({
-        diamonds,
-        points,
-        dollars,
-        charme,
-        pointsPerDiamond,
-        pointsPer20USD,
-        diamondsPerCharme,
-      })
-    );
-  }, [
-    diamonds,
-    points,
-    dollars,
-    charme,
-    pointsPerDiamond,
-    pointsPer20USD,
-    diamondsPerCharme,
-  ]);
   // EFFECTS
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.registerPlugin(
+      ScrollTrigger
+    );
+
     gsap.from('.glow-card', {
       y: 20,
       duration: 1,
       stagger: 0.08,
       ease: 'power2.out',
     });
+
     const glow =
-      document.getElementById('mouse-glow');
+      document.getElementById(
+        'mouse-glow'
+      );
 
     const move = (
       e: MouseEvent
     ) => {
+
       if (!glow) return;
 
       gsap.to(glow, {
@@ -237,27 +277,32 @@ export default function Home() {
     );
 
     return () => {
+
       window.removeEventListener(
         'mousemove',
         move
       );
+
     };
+
   }, []);
 
   return (
+
     <main className="relative bg-black text-white min-h-screen overflow-hidden px-6 py-10">
 
       <div
         className="pointer-events-none fixed inset-0 z-0 opacity-40"
         id="mouse-glow"
       />
+
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
 
-<div className="absolute ambient-orb top-[-250px] left-[-180px] w-[700px] h-[700px] rounded-full bg-white/[0.025] blur-[140px]" />
+        <div className="absolute ambient-orb top-[-250px] left-[-180px] w-[700px] h-[700px] rounded-full bg-white/[0.025] blur-[140px]" />
 
-<div className="absolute bottom-[-300px] right-[-200px] w-[800px] h-[800px] rounded-full bg-white/[0.02] blur-[180px]" />
+        <div className="absolute bottom-[-300px] right-[-200px] w-[800px] h-[800px] rounded-full bg-white/[0.02] blur-[180px]" />
 
-</div>
+      </div>
 
       <div className="noise pointer-events-none" />
 
@@ -265,54 +310,62 @@ export default function Home() {
 
       <div className="w-full relative z-20 pt-10 px-4 max-w-[1500px] mx-auto">
 
-        {/* HEADER */}
-
         <Header />
 
-        {/* GRID */}
+        <div className="mt-8 mb-8">
+
+          <USDConverter
+            usdRate={usdRate}
+            lastUpdate={lastUpdate}
+            usdVariation={usdVariation}
+            loading={loadingRate}
+          />
+
+        </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
 
-  <Calculator
-    diamonds={diamonds}
-    points={points}
-    dollars={dollars}
-    charme={charme}
-    parsedPoints={parsedPoints}
-    eligible={eligible}
-    withdrawals={withdrawals}
-    pointsPerDiamond={pointsPerDiamond}
-    diamondsPerCharme={diamondsPerCharme}
-    handleDiamonds={handleDiamonds}
-    handlePoints={handlePoints}
-    handleDollars={handleDollars}
-    handleCharme={handleCharme}
-  />
+          <CalculatorPanel
+            diamonds={diamonds}
+            points={points}
+            dollars={dollars}
+            charme={charme}
+            estimatedBRL={estimatedBRL}
+            parsedPoints={parsedPoints}
+            eligible={eligible}
+            withdrawals={withdrawals}
+            pointsPerDiamond={pointsPerDiamond}
+            diamondsPerCharme={diamondsPerCharme}
+            handleDiamonds={handleDiamonds}
+            handlePoints={handlePoints}
+            handleDollars={handleDollars}
+            handleCharme={handleCharme}
+          />
 
-  <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6">
 
-    <Parameters
-      pointsPerDiamond={pointsPerDiamond}
-      pointsPer20USD={pointsPer20USD}
-      diamondsPerCharme={diamondsPerCharme}
-      setPointsPerDiamond={setPointsPerDiamond}
-      setPointsPer20USD={setPointsPer20USD}
-      setDiamondsPerCharme={setDiamondsPerCharme}
-    />
+            <Parameters
+              pointsPerDiamond={pointsPerDiamond}
+              pointsPer20USD={pointsPer20USD}
+              diamondsPerCharme={diamondsPerCharme}
+              setPointsPerDiamond={setPointsPerDiamond}
+              setPointsPer20USD={setPointsPer20USD}
+              setDiamondsPerCharme={setDiamondsPerCharme}
+            />
 
-    <Rules
-      pointsPerDiamond={pointsPerDiamond}
-      pointsPer20USD={pointsPer20USD}
-      diamondsPerCharme={diamondsPerCharme}
-    />
+            <Rules
+              pointsPerDiamond={pointsPerDiamond}
+              pointsPer20USD={pointsPer20USD}
+              diamondsPerCharme={diamondsPerCharme}
+            />
 
-  </div>
+          </div>
 
-  </div>
+        </div>
 
-</div>
+      </div>
 
-<style jsx global>{`
+      <style jsx global>{`
         .ambient-gradient {
           position: fixed;
           width: 1400px;
