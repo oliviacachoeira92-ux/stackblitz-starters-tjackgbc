@@ -1,5 +1,7 @@
 import './globals.css';
+
 import type { Metadata } from 'next';
+
 import { Inter } from 'next/font/google';
 
 const inter = Inter({
@@ -7,20 +9,59 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+
   title: 'Fenix Arcane',
 
   description:
-    'Calculadora premium de conversão para streamers Alii Live.',
+    'Dashboard premium de conversão para streamers Alii Live.',
+
+  manifest: '/manifest.json',
+
+  themeColor: '#000000',
+
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'Fenix Arcane',
+  },
+
+  icons: {
+
+    icon: [
+      {
+        url: '/icon-192.png',
+        sizes: '192x192',
+        type: 'image/png',
+      },
+      {
+        url: '/icon-512.png',
+        sizes: '512x512',
+        type: 'image/png',
+      },
+    ],
+
+    apple: [
+      {
+        url: '/icon-192.png',
+        sizes: '192x192',
+        type: 'image/png',
+      },
+    ],
+
+  },
 
   openGraph: {
+
     title: 'Fenix Arcane',
 
     description:
-      'Calculadora premium de conversão para streamers Alii Live.',
+      'Dashboard premium de conversão para streamers Alii Live.',
 
-    url: 'https://fenixarcane.vercel.app',
+    url:
+      'https://fenixarcane.vercel.app',
 
-    siteName: 'Fenix Arcane',
+    siteName:
+      'Fenix Arcane',
 
     images: [
       {
@@ -36,9 +77,18 @@ export const metadata: Metadata = {
   },
 
   twitter: {
+
     card: 'summary_large_image',
+
+    title: 'Fenix Arcane',
+
+    description:
+      'Dashboard premium de conversão para streamers Alii Live.',
+
     images: ['/og-image.png'],
+
   },
+
 };
 
 export default function RootLayout({
@@ -46,22 +96,63 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
-    <html lang="pt-BR">
+
+    <html
+      lang="pt-BR"
+      suppressHydrationWarning
+    >
 
       <head>
 
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1"
+          content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
+
+        <meta
+          name="mobile-web-app-capable"
+          content="yes"
+        />
+
+        <meta
+          name="apple-mobile-web-app-capable"
+          content="yes"
+        />
+
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+
+        <meta
+          name="apple-mobile-web-app-title"
+          content="Fenix Arcane"
+        />
+
+        <meta
+          name="application-name"
+          content="Fenix Arcane"
+        />
+
+        <meta
+          name="format-detection"
+          content="telephone=no"
         />
 
       </head>
 
-      <body className={inter.className}>
+      <body
+        className={`${inter.className} bg-black text-white antialiased`}
+      >
+
         {children}
+
       </body>
 
     </html>
+
   );
+
 }
