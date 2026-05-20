@@ -42,8 +42,8 @@ export const metadata: Metadata = {
 
     apple: [
       {
-        url: '/icon-192.png',
-        sizes: '192x192',
+        url: '/icon-512.png',
+        sizes: '512x512',
         type: 'image/png',
       },
     ],
@@ -105,6 +105,11 @@ export default function RootLayout({
     >
 
       <head>
+
+        <link
+          rel="apple-touch-icon"
+          href="/icon-512.png"
+        />
 
         <meta
           name="viewport"
