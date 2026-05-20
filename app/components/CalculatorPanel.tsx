@@ -36,6 +36,22 @@ const format = (value: string) => {
 
 };
 
+const formatCurrency = (
+  value: string | number
+) => {
+
+  return Number(
+    value || 0
+  ).toLocaleString(
+    'pt-BR',
+    {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }
+  );
+
+};
+
 export default function CalculatorPanel({
 
   diamonds,
@@ -60,7 +76,7 @@ export default function CalculatorPanel({
 
   return (
 
-    <div className="group xl:col-span-3 glow-card relative z-30 rounded-[2rem] border border-white/10 bg-white/[0.03] p-4 md:p-8 transition-all duration-500 hover:border-white/20 hover:bg-white/[0.05]">
+    <div className="group xl:col-span-3 glow-card relative z-30 rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur-2xl p-4 md:p-8 transition-all duration-700 hover:border-white/20 hover:bg-white/[0.045] shadow-[0_0_80px_rgba(255,255,255,0.02)]">
 
       {/* INPUTS */}
 
@@ -68,9 +84,9 @@ export default function CalculatorPanel({
 
         {/* DIAMANTES */}
 
-        <div className="rounded-3xl min-h-[120px] md:min-h-[180px] border border-white/10 bg-white/[0.02] p-4 md:p-6">
+        <div className="rounded-3xl min-h-[120px] md:min-h-[180px] border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.02] p-4 md:p-6 transition-all duration-500 hover:border-cyan-300/10 hover:bg-white/[0.04]">
 
-          <p className="text-zinc-400 uppercase tracking-[0.18em] text-[10px] md:text-xs mb-4">
+          <p className="text-zinc-400 uppercase tracking-[0.22em] text-[10px] md:text-xs mb-4">
             Diamantes Recebidos
           </p>
 
@@ -83,16 +99,16 @@ export default function CalculatorPanel({
               )
             }
             placeholder="Ex: 12.500"
-            className="w-full min-w-0 bg-transparent text-[clamp(1rem,3.8vw,1.6rem)] md:text-[clamp(1.8rem,4vw,3rem)] font-black outline-none placeholder:text-zinc-500 rounded-xl"
+            className="w-full min-w-0 bg-transparent text-[clamp(1rem,3.8vw,1.7rem)] md:text-[clamp(1.8rem,4vw,3rem)] font-black outline-none placeholder:text-zinc-600 rounded-xl text-white"
           />
 
         </div>
 
         {/* PONTOS */}
 
-        <div className="rounded-3xl min-h-[120px] md:min-h-[180px] border border-white/10 bg-white/[0.02] p-4 md:p-6">
+        <div className="rounded-3xl min-h-[120px] md:min-h-[180px] border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.02] p-4 md:p-6 transition-all duration-500 hover:border-white/20">
 
-          <p className="text-zinc-400 uppercase tracking-[0.18em] text-[10px] md:text-xs mb-4">
+          <p className="text-zinc-400 uppercase tracking-[0.22em] text-[10px] md:text-xs mb-4">
             Pontos Acumulados
           </p>
 
@@ -105,16 +121,16 @@ export default function CalculatorPanel({
               )
             }
             placeholder="Ex: 9.375.000"
-            className="w-full min-w-0 bg-transparent text-[clamp(1rem,3.8vw,1.6rem)] md:text-[clamp(1.8rem,4vw,3rem)] font-black outline-none placeholder:text-zinc-500 rounded-xl"
+            className="w-full min-w-0 bg-transparent text-[clamp(1rem,3.8vw,1.7rem)] md:text-[clamp(1.8rem,4vw,3rem)] font-black outline-none placeholder:text-zinc-600 rounded-xl text-white"
           />
 
         </div>
 
         {/* USD */}
 
-        <div className="rounded-3xl min-h-[120px] md:min-h-[180px] border border-white/10 bg-white/[0.02] p-4 md:p-6">
+        <div className="rounded-3xl min-h-[120px] md:min-h-[180px] border border-cyan-400/10 bg-cyan-400/[0.025] p-4 md:p-6 transition-all duration-500 hover:border-cyan-300/20 hover:bg-cyan-300/[0.04]">
 
-          <p className="text-zinc-400 uppercase tracking-[0.18em] text-[10px] md:text-xs mb-4">
+          <p className="text-cyan-200/70 uppercase tracking-[0.22em] text-[10px] md:text-xs mb-4">
             Valor USD
           </p>
 
@@ -127,22 +143,22 @@ export default function CalculatorPanel({
               )
             }
             placeholder="Ex: 15.62"
-            className="w-full min-w-0 bg-transparent text-[clamp(1rem,3.8vw,1.6rem)] md:text-[clamp(1.8rem,4vw,3rem)] font-black outline-none placeholder:text-zinc-500 rounded-xl"
+            className="w-full min-w-0 bg-transparent text-[clamp(1rem,3.8vw,1.7rem)] md:text-[clamp(1.8rem,4vw,3rem)] font-black outline-none placeholder:text-cyan-100/20 rounded-xl text-cyan-50"
           />
 
         </div>
 
         {/* BRL */}
 
-        <div className="rounded-3xl min-h-[120px] md:min-h-[180px] border border-emerald-500/20 bg-emerald-500/[0.03] p-4 md:p-6">
+        <div className="rounded-3xl min-h-[120px] md:min-h-[180px] border border-emerald-400/20 bg-emerald-400/[0.04] p-4 md:p-6 transition-all duration-500 hover:border-emerald-300/30 hover:bg-emerald-300/[0.06] shadow-[0_0_80px_rgba(16,185,129,0.05)]">
 
-          <p className="text-emerald-300 uppercase tracking-[0.18em] text-[10px] md:text-xs mb-4">
+          <p className="text-emerald-300 uppercase tracking-[0.22em] text-[10px] md:text-xs mb-4">
             Valor BRL
           </p>
 
-          <div className="w-full min-w-0 bg-transparent text-[clamp(1rem,3.8vw,1.6rem)] md:text-[clamp(1.8rem,4vw,3rem)] font-black text-emerald-200 break-words">
+          <div className="w-full min-w-0 bg-transparent text-[clamp(1rem,3.8vw,1.7rem)] md:text-[clamp(1.8rem,4vw,3rem)] font-black text-emerald-100 break-words">
 
-            R$ {estimatedBRL}
+            R$ {formatCurrency(estimatedBRL)}
 
           </div>
 
@@ -150,9 +166,9 @@ export default function CalculatorPanel({
 
         {/* CHARME */}
 
-        <div className="rounded-3xl min-h-[120px] md:min-h-[180px] border border-white/10 bg-white/[0.02] p-4 md:p-6">
+        <div className="rounded-3xl min-h-[120px] md:min-h-[180px] border border-fuchsia-400/10 bg-fuchsia-400/[0.02] p-4 md:p-6 transition-all duration-500 hover:border-fuchsia-300/20">
 
-          <p className="text-zinc-400 uppercase tracking-[0.18em] text-[10px] md:text-xs mb-4">
+          <p className="text-zinc-300 uppercase tracking-[0.22em] text-[10px] md:text-xs mb-4">
             Charme Estimado
           </p>
 
@@ -165,10 +181,10 @@ export default function CalculatorPanel({
               )
             }
             placeholder="Ex: 2.500"
-            className="w-full min-w-0 bg-transparent text-[clamp(1rem,3.8vw,1.6rem)] md:text-[clamp(1.8rem,4vw,3rem)] font-black outline-none placeholder:text-zinc-500 rounded-xl"
+            className="w-full min-w-0 bg-transparent text-[clamp(1rem,3.8vw,1.7rem)] md:text-[clamp(1.8rem,4vw,3rem)] font-black outline-none placeholder:text-zinc-600 rounded-xl text-white"
           />
 
-          <p className="text-zinc-600 mt-3 text-sm">
+          <p className="text-zinc-500 mt-3 text-sm">
             {diamondsPerCharme} diamantes = 1 charme
           </p>
 
@@ -182,28 +198,46 @@ export default function CalculatorPanel({
 
         {/* DIAMANTES */}
 
-        <div className="rounded-3xl min-h-[110px] md:min-h-[180px] border border-white/10 bg-white/[0.03] p-4 md:p-5 flex flex-col items-center justify-center text-center">
+        <div className="rounded-3xl min-h-[110px] md:min-h-[180px] border border-cyan-300/10 bg-cyan-300/[0.02] p-4 md:p-5 flex flex-col items-center justify-center text-center transition-all duration-500 hover:border-cyan-200/20">
 
-          <p className="text-[10px] md:text-xs uppercase tracking-[0.18em] text-white/40 mb-4">
+          <p className="text-[10px] md:text-xs uppercase tracking-[0.18em] text-cyan-100/40 mb-4">
             Diamantes
           </p>
 
-          <h3 className="w-full text-[clamp(0.9rem,3vw,1.4rem)] font-black tracking-tight leading-none text-white break-words">
+          <h3 className="w-full text-[clamp(0.9rem,3vw,1.5rem)] font-black tracking-tight leading-none text-white break-words">
+
             {format(diamonds) || '—'}
+
           </h3>
 
         </div>
 
         {/* SAQUE */}
 
-        <div className="rounded-3xl min-h-[110px] md:min-h-[180px] border border-white/10 bg-white/[0.03] p-4 md:p-5 flex flex-col items-center justify-center text-center">
+        <div className={`rounded-3xl min-h-[110px] md:min-h-[180px] border p-4 md:p-5 flex flex-col items-center justify-center text-center transition-all duration-500 ${
+          eligible
+            ? 'border-emerald-400/20 bg-emerald-400/[0.04]'
+            : 'border-amber-300/15 bg-amber-300/[0.03]'
+        }`}>
 
-          <p className="text-[10px] md:text-xs uppercase tracking-[0.18em] text-white/40 mb-4">
+          <p className={`text-[10px] md:text-xs uppercase tracking-[0.18em] mb-4 ${
+            eligible
+              ? 'text-emerald-200/50'
+              : 'text-amber-100/40'
+          }`}>
+
             Pronto para saque
+
           </p>
 
-          <h3 className="w-full text-[clamp(0.9rem,3vw,1.4rem)] font-black tracking-tight leading-none text-white">
+          <h3 className={`w-full text-[clamp(0.9rem,3vw,1.6rem)] font-black tracking-tight leading-none ${
+            eligible
+              ? 'text-emerald-100'
+              : 'text-amber-100'
+          }`}>
+
             {eligible ? 'Sim' : 'Não'}
+
           </h3>
 
         </div>
@@ -216,37 +250,41 @@ export default function CalculatorPanel({
             Saques possíveis
           </p>
 
-          <h3 className="w-full text-[clamp(0.9rem,3vw,1.4rem)] font-black tracking-tight leading-none text-white">
+          <h3 className="w-full text-[clamp(0.9rem,3vw,1.5rem)] font-black tracking-tight leading-none text-white">
+
             {withdrawals}
+
           </h3>
 
         </div>
 
         {/* USD */}
 
-        <div className="rounded-3xl min-h-[110px] md:min-h-[180px] border border-white/20 bg-white/[0.08] p-4 md:p-5 flex flex-col items-center justify-center text-center">
+        <div className="rounded-3xl min-h-[110px] md:min-h-[180px] border border-cyan-300/15 bg-cyan-300/[0.04] p-4 md:p-5 flex flex-col items-center justify-center text-center shadow-[0_0_60px_rgba(103,232,249,0.03)]">
 
-          <p className="text-[10px] md:text-xs uppercase tracking-[0.18em] text-white/50 mb-4">
+          <p className="text-[10px] md:text-xs uppercase tracking-[0.18em] text-cyan-100/50 mb-4">
             Valor USD
           </p>
 
-          <h3 className="w-full text-[clamp(1rem,4vw,2rem)] font-black tracking-tight leading-none text-white break-words">
-            ${dollars || '0.00'}
+          <h3 className="w-full text-[clamp(1rem,4vw,2rem)] font-black tracking-tight leading-none text-cyan-50 break-words">
+
+            US$ {formatCurrency(dollars)}
+
           </h3>
 
         </div>
 
         {/* BRL */}
 
-        <div className="rounded-3xl min-h-[110px] md:min-h-[180px] border border-emerald-500/20 bg-emerald-500/[0.05] p-4 md:p-5 flex flex-col items-center justify-center text-center md:col-span-2 xl:col-span-4">
+        <div className="rounded-3xl min-h-[110px] md:min-h-[180px] border border-emerald-400/20 bg-emerald-400/[0.05] p-4 md:p-5 flex flex-col items-center justify-center text-center md:col-span-2 xl:col-span-4 shadow-[0_0_100px_rgba(16,185,129,0.05)]">
 
-          <p className="text-[10px] md:text-xs uppercase tracking-[0.18em] text-emerald-300 mb-4">
+          <p className="text-[10px] md:text-xs uppercase tracking-[0.18em] text-emerald-200/70 mb-4">
             Valor estimado em reais
           </p>
 
-          <h3 className="w-full text-[clamp(1.1rem,5vw,2.6rem)] font-black tracking-tight leading-none text-emerald-200 break-words">
+          <h3 className="w-full text-[clamp(1.1rem,5vw,2.8rem)] font-black tracking-tight leading-none text-emerald-50 break-words">
 
-            R$ {estimatedBRL}
+            R$ {formatCurrency(estimatedBRL)}
 
           </h3>
 
@@ -266,8 +304,10 @@ export default function CalculatorPanel({
               Conversão
             </p>
 
-            <h2 className="text-[clamp(1rem,5vw,2.2rem)] font-black tracking-tight text-white mt-3 break-words">
+            <h2 className="text-[clamp(1rem,5vw,2.3rem)] font-black tracking-tight text-white mt-3 break-words">
+
               {format(points) || '—'}
+
             </h2>
 
           </div>
@@ -278,7 +318,7 @@ export default function CalculatorPanel({
               Conversão média
             </p>
 
-            <h3 className="text-[clamp(0.9rem,3vw,1.4rem)] font-black tracking-tight text-white">
+            <h3 className="text-[clamp(0.9rem,3vw,1.5rem)] font-black tracking-tight text-white">
 
               {parsedPoints
                 ? (
@@ -292,6 +332,14 @@ export default function CalculatorPanel({
           </div>
 
         </div>
+
+        {/* AVISO */}
+
+        <p className="mt-6 text-xs text-zinc-500 leading-relaxed max-w-[900px]">
+
+          As conversões exibidas são estimativas em tempo real e podem sofrer variações conforme alterações de câmbio, plataforma e arredondamentos.
+
+        </p>
 
       </div>
 
