@@ -661,37 +661,49 @@ export default function Home() {
 
             {/* LIVE TRACKER */}
 
-            <LiveTracker
+<LiveTracker
 
-              normalizeTime={normalizeTime}
+normalizeTime={normalizeTime}
 
-              formatTime={formatTime}
+formatTime={formatTime}
 
-              totalSeconds={totalSeconds}
+totalSeconds={totalSeconds}
 
-              dailyTotalSeconds={dailyTotalSeconds}
+dailyTotalSeconds={dailyTotalSeconds}
 
-              remainingSeconds={remainingSeconds}
+remainingSeconds={remainingSeconds}
 
-              progress={progress}
+progress={progress}
 
-              weeklyStatus={weeklyStatus}
+weeklyStatus={weeklyStatus}
 
-              weeklyStatusColor={weeklyStatusColor}
+weeklyStatusColor={weeklyStatusColor}
 
-              setSession1={setSession1}
-              setSession2={setSession2}
-              setSession3={setSession3}
-              setSession4={setSession4}
+session1={session1}
+session2={session2}
+session3={session3}
+session4={session4}
 
-              setDay1={setDay1}
-              setDay2={setDay2}
-              setDay3={setDay3}
-              setDay4={setDay4}
-              setDay5={setDay5}
-              setDay6={setDay6}
+day1={day1}
+day2={day2}
+day3={day3}
+day4={day4}
+day5={day5}
+day6={day6}
 
-            />
+setSession1={setSession1}
+setSession2={setSession2}
+setSession3={setSession3}
+setSession4={setSession4}
+
+setDay1={setDay1}
+setDay2={setDay2}
+setDay3={setDay3}
+setDay4={setDay4}
+setDay5={setDay5}
+setDay6={setDay6}
+
+/>
 
             {/* CONFIG */}
 
