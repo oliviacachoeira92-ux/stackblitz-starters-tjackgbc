@@ -1,6 +1,8 @@
 'use client';
 
 import USDConverter from './components/USDConverter';
+import ConversionSection from './components/ConversionSection';
+import LiveTracker from './components/LiveTracker';
 
 import { fetchUSDBRL } from './utils/currency';
 
@@ -17,13 +19,14 @@ import {
 } from './utils/conversionEngine';
 
 import Header from './components/Header';
-import CalculatorPanel from './components/CalculatorPanel';
 import Parameters from './components/Parameters';
 import Rules from './components/Rules';
 
 export default function Home() {
 
-  // CAMPOS
+  // =========================
+  // CAMPOS PRINCIPAIS
+  // =========================
 
   const [diamonds, setDiamonds] =
     useState('');
@@ -37,7 +40,9 @@ export default function Home() {
   const [charme, setCharme] =
     useState('');
 
-  // USD REALTIME
+  // =========================
+  // USD
+  // =========================
 
   const [usdRate, setUsdRate] =
     useState(5);
@@ -51,7 +56,57 @@ export default function Home() {
   const [loadingRate, setLoadingRate] =
     useState(true);
 
+  // =========================
+  // HORÁRIO SP
+  // =========================
+
+  const [saoPauloTime, setSaoPauloTime] =
+    useState('');
+
+  // =========================
+  // CALCULADORA DIÁRIA
+  // =========================
+
+  const [session1, setSession1] =
+    useState('');
+
+  const [session2, setSession2] =
+    useState('');
+
+  const [session3, setSession3] =
+    useState('');
+
+  const [session4, setSession4] =
+    useState('');
+
+  // =========================
+  // META SEMANAL
+  // =========================
+
+  const [day1, setDay1] =
+    useState('');
+
+  const [day2, setDay2] =
+    useState('');
+
+  const [day3, setDay3] =
+    useState('');
+
+  const [day4, setDay4] =
+    useState('');
+
+  const [day5, setDay5] =
+    useState('');
+
+  const [day6, setDay6] =
+    useState('');
+
+  const weeklyGoalSeconds =
+    18 * 60 * 60;
+
+  // =========================
   // PARÂMETROS
+  // =========================
 
   const [pointsPerDiamond,
     setPointsPerDiamond] =
@@ -65,7 +120,187 @@ export default function Home() {
     setDiamondsPerCharme] =
       useState(5);
 
+  // =========================
+  // FORMATADOR DE HORAS
+  // =========================
+
+  const normalizeTime = (
+    value: string
+  ) => {
+
+    const numbers =
+      value.replace(/\D/g, '');
+
+    if (!numbers)
+      return '';
+
+    const padded =
+      numbers.padStart(6, '0');
+
+    const hh =
+      padded.slice(-6, -4);
+
+    const mm =
+      padded.slice(-4, -2);
+
+    const ss =
+      padded.slice(-2);
+
+    return `${hh}:${mm}:${ss}`;
+  };
+
+  // =========================
+  // CONVERTER PRA SEGUNDOS
+  // =========================
+
+  const convertToSeconds = (
+    time: string
+  ) => {
+
+    if (!time)
+      return 0;
+
+    const parts =
+      time.split(':');
+
+    if (parts.length !== 3)
+      return 0;
+
+    const hours =
+      Number(parts[0]);
+
+    const minutes =
+      Number(parts[1]);
+
+    const seconds =
+      Number(parts[2]);
+
+    return (
+      hours * 3600 +
+      minutes * 60 +
+      seconds
+    );
+  };
+
+  // =========================
+  // FORMATADOR FINAL
+  // =========================
+
+  const formatTime = (
+    total: number
+  ) => {
+
+    const hours =
+      Math.floor(total / 3600);
+
+    const minutes =
+      Math.floor(
+        (total % 3600) / 60
+      );
+
+    const seconds =
+      total % 60;
+
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  };
+
+  // =========================
+  // TOTAL DIÁRIO
+  // =========================
+
+  const dailyTotalSeconds =
+    convertToSeconds(session1) +
+    convertToSeconds(session2) +
+    convertToSeconds(session3) +
+    convertToSeconds(session4);
+
+  // =========================
+  // TOTAL SEMANAL
+  // =========================
+
+  const totalSeconds =
+    convertToSeconds(day1) +
+    convertToSeconds(day2) +
+    convertToSeconds(day3) +
+    convertToSeconds(day4) +
+    convertToSeconds(day5) +
+    convertToSeconds(day6);
+
+  const remainingSeconds =
+    Math.max(
+      weeklyGoalSeconds -
+        totalSeconds,
+      0
+    );
+
+  const progress =
+    Math.min(
+      (totalSeconds /
+        weeklyGoalSeconds) *
+        100,
+      100
+    );
+
+  // =========================
+  // STATUS SEMANAL
+  // =========================
+
+  let weeklyStatus =
+    '🔥 Ritmo ideal';
+
+  let weeklyStatusColor =
+    'text-emerald-400';
+
+  if (
+    totalSeconds <
+    weeklyGoalSeconds * 0.5
+  ) {
+
+    weeklyStatus =
+      '⚠️ Atenção ao ritmo';
+
+    weeklyStatusColor =
+      'text-yellow-400';
+  }
+
+  if (
+    totalSeconds <
+    weeklyGoalSeconds * 0.3
+  ) {
+
+    weeklyStatus =
+      '❌ Abaixo da meta mínima';
+
+    weeklyStatusColor =
+      'text-red-400';
+  }
+
+  // =========================
+  // BRL FIX
+  // =========================
+
+  const parsedDollarValue =
+    parseFloat(
+      dollars
+        .toString()
+        .trim()
+    ) || 0;
+
+  const estimatedBRL =
+    (
+      parsedDollarValue *
+      usdRate
+    ).toLocaleString(
+      'pt-BR',
+      {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }
+    );
+
+  // =========================
   // RESULTADOS
+  // =========================
 
   const parsedPoints = Number(
     points.toString().replace(/\./g, '')
@@ -83,17 +318,9 @@ export default function Home() {
       minimumWithdraw
     );
 
-  // BRL DINÂMICO
-
-  const estimatedBRL =
-    dollars
-      ? (
-          Number(dollars) *
-          usdRate
-        ).toFixed(2)
-      : '0.00';
-
+  // =========================
   // CONFIG
+  // =========================
 
   const config = {
     pointsPerDiamond,
@@ -101,17 +328,22 @@ export default function Home() {
     diamondsPerCharme,
   };
 
+  // =========================
   // HANDLERS
+  // =========================
 
   const handleDiamonds = (
     value: string
   ) => {
+
     setDiamonds(value);
 
     if (!value) {
+
       setPoints('');
       setDollars('');
       setCharme('');
+
       return;
     }
 
@@ -129,12 +361,15 @@ export default function Home() {
   const handlePoints = (
     value: string
   ) => {
+
     setPoints(value);
 
     if (!value) {
+
       setDiamonds('');
       setDollars('');
       setCharme('');
+
       return;
     }
 
@@ -152,12 +387,15 @@ export default function Home() {
   const handleDollars = (
     value: string
   ) => {
+
     setDollars(value);
 
     if (!value) {
+
       setDiamonds('');
       setPoints('');
       setCharme('');
+
       return;
     }
 
@@ -175,12 +413,15 @@ export default function Home() {
   const handleCharme = (
     value: string
   ) => {
+
     setCharme(value);
 
     if (!value) {
+
       setDiamonds('');
       setPoints('');
       setDollars('');
+
       return;
     }
 
@@ -195,7 +436,9 @@ export default function Home() {
     setDollars(result.dollars);
   };
 
-  // USD REALTIME
+  // =========================
+  // USD API
+  // =========================
 
   useEffect(() => {
 
@@ -235,7 +478,109 @@ export default function Home() {
 
   }, []);
 
-  // EFFECTS
+  // =========================
+  // HORÁRIO SP
+  // =========================
+
+  useEffect(() => {
+
+    const updateClock = () => {
+
+      const time =
+        new Date()
+          .toLocaleTimeString(
+            'pt-BR',
+            {
+              timeZone:
+                'America/Sao_Paulo',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit',
+            }
+          );
+
+      setSaoPauloTime(time);
+    };
+
+    updateClock();
+
+    const interval =
+      setInterval(
+        updateClock,
+        1000
+      );
+
+    return () =>
+      clearInterval(interval);
+
+  }, []);
+
+  // =========================
+  // CACHE LOCAL
+  // =========================
+
+  useEffect(() => {
+
+    const savedData =
+      localStorage.getItem(
+        'fenix-live-data'
+      );
+
+    if (savedData) {
+
+      const parsed =
+        JSON.parse(savedData);
+
+      setSession1(parsed.session1 || '');
+      setSession2(parsed.session2 || '');
+      setSession3(parsed.session3 || '');
+      setSession4(parsed.session4 || '');
+
+      setDay1(parsed.day1 || '');
+      setDay2(parsed.day2 || '');
+      setDay3(parsed.day3 || '');
+      setDay4(parsed.day4 || '');
+      setDay5(parsed.day5 || '');
+      setDay6(parsed.day6 || '');
+
+    }
+
+  }, []);
+
+  useEffect(() => {
+
+    localStorage.setItem(
+      'fenix-live-data',
+      JSON.stringify({
+        session1,
+        session2,
+        session3,
+        session4,
+        day1,
+        day2,
+        day3,
+        day4,
+        day5,
+        day6,
+      })
+    );
+
+  }, [
+    session1,
+    session2,
+    session3,
+    session4,
+    day1,
+    day2,
+    day3,
+    day4,
+    day5,
+    day6,
+  ]);
+
+  // =========================
+  // GSAP
+  // =========================
 
   useEffect(() => {
 
@@ -250,63 +595,11 @@ export default function Home() {
       ease: 'power2.out',
     });
 
-    const glow =
-      document.getElementById(
-        'mouse-glow'
-      );
-
-    const move = (
-      e: MouseEvent
-    ) => {
-
-      if (!glow) return;
-
-      gsap.to(glow, {
-        background: `radial-gradient(
-          600px at ${e.clientX}px ${e.clientY}px,
-          rgba(255,255,255,0.10),
-          transparent 80%
-        )`,
-        duration: 0.4,
-      });
-    };
-
-    window.addEventListener(
-      'mousemove',
-      move
-    );
-
-    return () => {
-
-      window.removeEventListener(
-        'mousemove',
-        move
-      );
-
-    };
-
   }, []);
 
   return (
 
     <main className="relative bg-black text-white min-h-screen overflow-hidden px-6 py-10">
-
-      <div
-        className="pointer-events-none fixed inset-0 z-0 opacity-40"
-        id="mouse-glow"
-      />
-
-      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-
-        <div className="absolute ambient-orb top-[-250px] left-[-180px] w-[700px] h-[700px] rounded-full bg-white/[0.025] blur-[140px]" />
-
-        <div className="absolute bottom-[-300px] right-[-200px] w-[800px] h-[800px] rounded-full bg-white/[0.02] blur-[180px]" />
-
-      </div>
-
-      <div className="noise pointer-events-none" />
-
-      <div className="ambient-gradient pointer-events-none" />
 
       <div className="w-full relative z-20 pt-10 px-4 max-w-[1500px] mx-auto">
 
@@ -325,7 +618,7 @@ export default function Home() {
 
         <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
 
-          <CalculatorPanel
+          <ConversionSection
             diamonds={diamonds}
             points={points}
             dollars={dollars}
@@ -343,6 +636,64 @@ export default function Home() {
           />
 
           <div className="flex flex-col gap-6">
+
+            {/* HORÁRIO */}
+
+            <div className="glow-card rounded-3xl border border-orange-500/20 bg-black/40 backdrop-blur-2xl p-8">
+
+              <div className="flex flex-col items-center justify-center text-center">
+
+                <p className="text-sm uppercase tracking-[0.35em] text-orange-400">
+                  Horário Oficial
+                </p>
+
+                <h2 className="mt-5 text-6xl font-black tracking-tight text-white">
+                  {saoPauloTime}
+                </h2>
+
+                <p className="mt-4 text-sm text-zinc-500">
+                  São Paulo • UTC -3
+                </p>
+
+              </div>
+
+            </div>
+
+            {/* LIVE TRACKER */}
+
+            <LiveTracker
+
+              normalizeTime={normalizeTime}
+
+              formatTime={formatTime}
+
+              totalSeconds={totalSeconds}
+
+              dailyTotalSeconds={dailyTotalSeconds}
+
+              remainingSeconds={remainingSeconds}
+
+              progress={progress}
+
+              weeklyStatus={weeklyStatus}
+
+              weeklyStatusColor={weeklyStatusColor}
+
+              setSession1={setSession1}
+              setSession2={setSession2}
+              setSession3={setSession3}
+              setSession4={setSession4}
+
+              setDay1={setDay1}
+              setDay2={setDay2}
+              setDay3={setDay3}
+              setDay4={setDay4}
+              setDay5={setDay5}
+              setDay6={setDay6}
+
+            />
+
+            {/* CONFIG */}
 
             <Parameters
               pointsPerDiamond={pointsPerDiamond}
@@ -364,82 +715,6 @@ export default function Home() {
         </div>
 
       </div>
-
-      <style jsx global>{`
-        .ambient-gradient {
-          position: fixed;
-          width: 1400px;
-          height: 1400px;
-          border-radius: 9999px;
-          background: radial-gradient(
-            circle,
-            rgba(255,255,255,0.06),
-            transparent 70%
-          );
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          filter: blur(120px);
-          animation: ambientMove 18s ease-in-out infinite alternate;
-          pointer-events: none;
-          z-index: 0;
-        }
-
-        @keyframes ambientMove {
-          0% {
-            transform: translate(-50%, -50%) scale(1);
-          }
-
-          50% {
-            transform: translate(-45%, -55%) scale(1.1);
-          }
-
-          100% {
-            transform: translate(-55%, -45%) scale(0.95);
-          }
-        }
-
-        .glow-card {
-          position: relative;
-          overflow: hidden;
-        }
-
-        .glow-card::before {
-          content: '';
-          position: absolute;
-          inset: -1px;
-          border-radius: inherit;
-          padding: 1px;
-
-          pointer-events: none;
-
-          background: linear-gradient(
-            135deg,
-            rgba(255,255,255,0.15),
-            rgba(255,255,255,0.02),
-            rgba(255,255,255,0.15)
-          );
-
-          -webkit-mask:
-            linear-gradient(#000 0 0) content-box,
-            linear-gradient(#000 0 0);
-
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-
-          opacity: 0.4;
-        }
-
-        .noise {
-          position: fixed;
-          inset: 0;
-          pointer-events: none;
-          opacity: 0.035;
-          z-index: 999;
-          background-image: url('/noise.png');
-          mix-blend-mode: soft-light;
-        }
-      `}</style>
 
     </main>
   );

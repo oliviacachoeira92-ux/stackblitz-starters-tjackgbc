@@ -158,7 +158,7 @@ export default function CalculatorPanel({
 
           <div className="w-full min-w-0 bg-transparent text-[clamp(1rem,3.8vw,1.7rem)] md:text-[clamp(1.8rem,4vw,3rem)] font-black text-emerald-100 break-words">
 
-            R$ {formatCurrency(estimatedBRL)}
+            R$ {estimatedBRL}
 
           </div>
 
@@ -284,7 +284,7 @@ export default function CalculatorPanel({
 
           <h3 className="w-full text-[clamp(1.1rem,5vw,2.8rem)] font-black tracking-tight leading-none text-emerald-50 break-words">
 
-            R$ {formatCurrency(estimatedBRL)}
+            R$ {estimatedBRL}
 
           </h3>
 
@@ -332,8 +332,6 @@ export default function CalculatorPanel({
           </div>
 
         </div>
-
-        {/* AVISO */}
 
         <p className="mt-6 text-xs text-zinc-500 leading-relaxed max-w-[900px]">
 

@@ -1,179 +1,214 @@
-export type CalculatorConfig = {
+export function calculateFromDiamonds(
+  diamondsInput: string,
+  config: {
     pointsPerDiamond: number;
     pointsPer20USD: number;
     diamondsPerCharme: number;
+  }
+) {
+
+  const diamonds =
+    Number(
+      diamondsInput
+        .replace(/\./g, '')
+        .replace(',', '')
+    ) || 0;
+
+  const points =
+    diamonds *
+    config.pointsPerDiamond;
+
+  const dollars =
+    (points /
+      config.pointsPer20USD) *
+    20;
+
+  const charme =
+    Math.floor(
+      diamonds /
+      config.diamondsPerCharme
+    );
+
+  return {
+
+    diamonds:
+      diamonds.toLocaleString(
+        'pt-BR'
+      ),
+
+    points:
+      points.toLocaleString(
+        'pt-BR'
+      ),
+
+    dollars:
+      dollars.toFixed(2),
+
+    charme:
+      charme.toLocaleString(
+        'pt-BR'
+      ),
   };
-  
-  const format = (value: number) =>
-    new Intl.NumberFormat(
-      'pt-BR'
-    ).format(Math.floor(value));
-  
-  export function calculateFromDiamonds(
-    value: string,
-    config: CalculatorConfig
-  ) {
-    const diamonds = Number(
-      value.replace(/\./g, '')
-    );
-  
-    if (!diamonds) {
-      return {
-        diamonds: '',
-        points: '',
-        dollars: '',
-        charme: '',
-      };
-    }
-  
-    const points =
-      diamonds *
-      config.pointsPerDiamond;
-  
-    const dollars =
-      (points * 20) /
-      config.pointsPer20USD;
-  
-    const charme =
+}
+
+export function calculateFromPoints(
+  pointsInput: string,
+  config: {
+    pointsPerDiamond: number;
+    pointsPer20USD: number;
+    diamondsPerCharme: number;
+  }
+) {
+
+  const points =
+    Number(
+      pointsInput
+        .replace(/\./g, '')
+        .replace(',', '')
+    ) || 0;
+
+  const diamonds =
+    points /
+    config.pointsPerDiamond;
+
+  const dollars =
+    (points /
+      config.pointsPer20USD) *
+    20;
+
+  const charme =
+    Math.floor(
       diamonds /
-      config.diamondsPerCharme;
-  
-    return {
-      diamonds: value,
-      points: format(points),
-      dollars:
-        dollars.toFixed(2),
-      charme: format(charme),
-    };
-  }
-  
-  export function calculateFromPoints(
-    value: string,
-    config: CalculatorConfig
-  ) {
-    const points = Number(
-      value.replace(/\./g, '')
+      config.diamondsPerCharme
     );
-  
-    if (!points) {
-      return {
-        diamonds: '',
-        points: '',
-        dollars: '',
-        charme: '',
-      };
-    }
-  
-    const diamonds =
-      points /
-      config.pointsPerDiamond;
-  
-    const dollars =
-      (points * 20) /
-      config.pointsPer20USD;
-  
-    const charme =
+
+  return {
+
+    diamonds:
+      Math.floor(
+        diamonds
+      ).toLocaleString(
+        'pt-BR'
+      ),
+
+    points:
+      points.toLocaleString(
+        'pt-BR'
+      ),
+
+    dollars:
+      dollars.toFixed(2),
+
+    charme:
+      charme.toLocaleString(
+        'pt-BR'
+      ),
+  };
+}
+
+export function calculateFromDollars(
+  dollarsInput: string,
+  config: {
+    pointsPerDiamond: number;
+    pointsPer20USD: number;
+    diamondsPerCharme: number;
+  }
+) {
+
+  const dollars =
+    Number(
+      dollarsInput
+        .replace(/\./g, '')
+        .replace(',', '.')
+    ) || 0;
+
+  const points =
+    (dollars / 20) *
+    config.pointsPer20USD;
+
+  const diamonds =
+    points /
+    config.pointsPerDiamond;
+
+  const charme =
+    Math.floor(
       diamonds /
-      config.diamondsPerCharme;
-  
-    return {
-      diamonds:
-        format(diamonds),
-  
-      points: value,
-  
-      dollars:
-        dollars.toFixed(2),
-  
-      charme:
-        format(charme),
-    };
-  }
-  
-  export function calculateFromDollars(
-    value: string,
-    config: CalculatorConfig
-  ) {
-    const dollars = Number(
-      value.replace(',', '.')
+      config.diamondsPerCharme
     );
-  
-    if (!dollars) {
-      return {
-        diamonds: '',
-        points: '',
-        dollars: '',
-        charme: '',
-      };
-    }
-  
-    const points =
-      dollars *
-      (config.pointsPer20USD /
-        20);
-  
-    const diamonds =
-      points /
-      config.pointsPerDiamond;
-  
-    const charme =
-      diamonds /
-      config.diamondsPerCharme;
-  
-    return {
-      diamonds:
-        format(diamonds),
-  
-      points:
-        format(points),
-  
-      dollars:
-        dollars.toFixed(2),
-  
-      charme:
-        format(charme),
-    };
+
+  return {
+
+    diamonds:
+      Math.floor(
+        diamonds
+      ).toLocaleString(
+        'pt-BR'
+      ),
+
+    points:
+      Math.floor(
+        points
+      ).toLocaleString(
+        'pt-BR'
+      ),
+
+    dollars:
+      dollars.toFixed(2),
+
+    charme:
+      charme.toLocaleString(
+        'pt-BR'
+      ),
+  };
+}
+
+export function calculateFromCharme(
+  charmeInput: string,
+  config: {
+    pointsPerDiamond: number;
+    pointsPer20USD: number;
+    diamondsPerCharme: number;
   }
-  
-  export function calculateFromCharme(
-    value: string,
-    config: CalculatorConfig
-  ) {
-    const charme = Number(
-      value.replace(/\./g, '')
-    );
-  
-    if (!charme) {
-      return {
-        diamonds: '',
-        points: '',
-        dollars: '',
-        charme: '',
-      };
-    }
-  
-    const diamonds =
-      charme *
-      config.diamondsPerCharme;
-  
-    const points =
-      diamonds *
-      config.pointsPerDiamond;
-  
-    const dollars =
-      (points * 20) /
-      config.pointsPer20USD;
-  
-    return {
-      diamonds:
-        format(diamonds),
-  
-      points:
-        format(points),
-  
-      dollars:
-        dollars.toFixed(2),
-  
-      charme: value,
-    };
-  }
+) {
+
+  const charme =
+    Number(
+      charmeInput
+        .replace(/\./g, '')
+        .replace(',', '')
+    ) || 0;
+
+  const diamonds =
+    charme *
+    config.diamondsPerCharme;
+
+  const points =
+    diamonds *
+    config.pointsPerDiamond;
+
+  const dollars =
+    (points /
+      config.pointsPer20USD) *
+    20;
+
+  return {
+
+    diamonds:
+      diamonds.toLocaleString(
+        'pt-BR'
+      ),
+
+    points:
+      points.toLocaleString(
+        'pt-BR'
+      ),
+
+    dollars:
+      dollars.toFixed(2),
+
+    charme:
+      charme.toLocaleString(
+        'pt-BR'
+      ),
+  };
+}
