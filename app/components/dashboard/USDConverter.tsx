@@ -21,19 +21,19 @@ export default function USDConverter({
 
   return (
 
-    <Card className="p-6">
+    <Card className="px-6 py-5">
 
-      <div className="flex items-center justify-between">
+      <div className="flex items-start justify-between gap-4">
 
         <div>
 
-          <p className="text-xs uppercase tracking-[0.25em] text-white/40">
+          <p className="text-[10px] uppercase tracking-[0.28em] text-white/35">
 
             USD → BRL
 
           </p>
 
-          <h2 className="mt-4 text-3xl md:text-4xl font-black">
+          <h2 className="mt-3 text-2xl md:text-3xl font-black leading-none">
 
             {loading
               ? '...'
@@ -46,7 +46,7 @@ export default function USDConverter({
         </div>
 
         <div
-          className={`text-sm font-semibold ${
+          className={`text-xs md:text-sm font-semibold ${
             usdVariation >= 0
               ? 'text-green-400'
               : 'text-red-400'
@@ -63,22 +63,26 @@ export default function USDConverter({
 
       </div>
 
-      <div className="mt-6 flex flex-col gap-2">
+      <div className="mt-4 flex items-end justify-between gap-4 flex-wrap">
 
-        <p className="text-white/60 text-sm">
+        <div>
 
-          Cotação atual:
+          <p className="text-white/45 text-xs mb-1">
 
-        </p>
+            Cotação atual
 
-        <h3 className="text-2xl font-bold">
+          </p>
 
-          1 USD = R$
-          {usdRate.toFixed(2)}
+          <h3 className="text-lg md:text-xl font-bold leading-none">
 
-        </h3>
+            1 USD = R$
+            {usdRate.toFixed(2)}
 
-        <p className="text-white/30 text-xs">
+          </h3>
+
+        </div>
+
+        <p className="text-white/25 text-[11px]">
 
           Atualizado:
           {' '}

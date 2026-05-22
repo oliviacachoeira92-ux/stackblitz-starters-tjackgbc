@@ -10,27 +10,31 @@ export default function ClockCard({
 
   return (
 
-    <Card className="p-8">
+    <Card className="px-5 py-4">
 
-      <div className="flex flex-col items-center justify-center text-center">
+      <div className="flex items-center justify-between gap-4">
 
-        <p className="text-sm uppercase tracking-[0.35em] text-orange-400">
+        <div>
 
-          Horário Oficial
+          <p className="text-[10px] uppercase tracking-[0.28em] text-orange-400/80">
 
-        </p>
+            Horário Oficial
 
-        <h2 className="mt-5 text-6xl font-black tracking-tight text-white">
+          </p>
+
+          <p className="mt-1 text-xs text-zinc-500">
+
+            São Paulo • UTC -3
+
+          </p>
+
+        </div>
+
+        <h2 className="text-3xl md:text-4xl font-black tracking-tight text-white leading-none">
 
           {time}
 
         </h2>
-
-        <p className="mt-4 text-sm text-zinc-500">
-
-          São Paulo • UTC -3
-
-        </p>
 
       </div>
 

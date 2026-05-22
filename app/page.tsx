@@ -10,6 +10,7 @@ import Header from './components/core/Header';
 import USDConverter from './components/dashboard/USDConverter';
 import ConversionSection from './components/dashboard/ConversionSection';
 import ClockCard from './components/dashboard/ClockCard';
+import StatsBar from './components/dashboard/StatsBar';
 
 import LiveTracker from './components/tracker/LiveTracker';
 
@@ -78,43 +79,74 @@ export default function Home() {
       ScrollTrigger
     );
 
-    gsap.from('.glow-card', {
-      y: 20,
-      duration: 1,
-      stagger: 0.08,
-      ease: 'power2.out',
-    });
+    gsap.fromTo(
+      '.glow-card',
+      {
+        opacity: 0,
+        y: 12,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.04,
+        ease: 'power2.out',
+        clearProps: 'all',
+      }
+    );
 
   }, []);
 
   return (
 
-    <main className="relative bg-black text-white min-h-screen overflow-hidden px-6 py-10">
+    <main className="relative bg-black text-white min-h-screen overflow-hidden px-4 xl:px-6 py-6">
 
-      <div className="w-full relative z-20 pt-10 px-4 max-w-[1500px] mx-auto">
+      <div className="w-full relative z-20 pt-6 max-w-[1450px] mx-auto">
 
         <Header />
 
-        <div className="mt-8 mb-8">
+        {/* MAIN GRID */}
 
-          <USDConverter
-            usdRate={usdRate}
-            lastUpdate={lastUpdate}
-            usdVariation={usdVariation}
-            loading={loadingRate}
-          />
+        <div className="grid grid-cols-1 xl:grid-cols-[1.65fr_0.85fr] gap-4 mt-6">
 
-        </div>
+          {/* LEFT SIDE */}
 
-        <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
+          <div className="flex flex-col gap-4">
 
-          <ConversionSection
-            {...conversion}
-            pointsPerDiamond={pointsPerDiamond}
-            diamondsPerCharme={diamondsPerCharme}
-          />
+            {/* USD HERO */}
 
-          <div className="flex flex-col gap-6">
+            <USDConverter
+              usdRate={usdRate}
+              lastUpdate={lastUpdate}
+              usdVariation={usdVariation}
+              loading={loadingRate}
+            />
+
+            {/* MINI STATS BAR */}
+
+            <StatsBar
+              usdRate={usdRate}
+              usdVariation={usdVariation}
+              progress={tracker.progress}
+              remainingSeconds={tracker.remainingSeconds}
+              dailyTotalSeconds={tracker.dailyTotalSeconds}
+              formatTime={tracker.formatTime}
+              weeklyStatus={tracker.weeklyStatus}
+            />
+
+            {/* CONVERSION */}
+
+            <ConversionSection
+              {...conversion}
+              pointsPerDiamond={pointsPerDiamond}
+              diamondsPerCharme={diamondsPerCharme}
+            />
+
+          </div>
+
+          {/* RIGHT SIDEBAR */}
+
+          <div className="flex flex-col gap-4">
 
             {/* CLOCK */}
 
@@ -128,7 +160,7 @@ export default function Home() {
               {...tracker}
             />
 
-            {/* CONFIG */}
+            {/* PARAMETERS */}
 
             <Parameters
               pointsPerDiamond={pointsPerDiamond}
@@ -138,6 +170,8 @@ export default function Home() {
               setPointsPer20USD={setPointsPer20USD}
               setDiamondsPerCharme={setDiamondsPerCharme}
             />
+
+            {/* RULES */}
 
             <Rules
               pointsPerDiamond={pointsPerDiamond}

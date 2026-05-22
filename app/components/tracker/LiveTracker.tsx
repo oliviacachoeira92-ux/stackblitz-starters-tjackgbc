@@ -118,11 +118,13 @@ export default function LiveTracker({
 
   const inputStyle =
     `
-      rounded-2xl
+      rounded-xl
       border
       border-zinc-800
-      bg-black/50
-      p-3
+      bg-black/40
+      px-3
+      py-2.5
+      text-sm
       text-white
       outline-none
       transition-all
@@ -136,15 +138,15 @@ export default function LiveTracker({
 
       {/* CALCULADORA DIÁRIA */}
 
-      <Card className="p-6 border-orange-500/20 bg-black/40">
+      <Card className="p-4 border-orange-500/20 bg-black/40">
 
-        <p className="text-sm uppercase tracking-[0.25em] text-orange-400">
+        <p className="text-[10px] uppercase tracking-[0.22em] text-orange-400">
 
           Calculadora Diária
 
         </p>
 
-        <div className="mt-5 grid grid-cols-2 gap-3">
+        <div className="mt-3 grid grid-cols-2 gap-2">
 
           <input
             type="tel"
@@ -208,7 +210,7 @@ export default function LiveTracker({
 
         </div>
 
-        <h2 className="mt-6 text-4xl font-black text-white">
+        <h2 className="mt-4 text-2xl md:text-3xl font-black text-white leading-none">
 
           {formatTime(dailyTotalSeconds)}
 
@@ -218,15 +220,15 @@ export default function LiveTracker({
 
       {/* META SEMANAL */}
 
-      <Card className="p-6 border-emerald-500/20 bg-black/40">
+      <Card className="p-4 border-emerald-500/20 bg-black/40">
 
-        <p className="text-sm uppercase tracking-[0.25em] text-emerald-400">
+        <p className="text-[10px] uppercase tracking-[0.22em] text-emerald-400">
 
           Meta Semanal
 
         </p>
 
-        <div className="mt-5 grid grid-cols-2 gap-3">
+        <div className="mt-3 grid grid-cols-2 gap-2">
 
           <input
             type="tel"
@@ -320,13 +322,13 @@ export default function LiveTracker({
 
         </div>
 
-        <h2 className="mt-6 text-4xl font-black text-white">
+        <h2 className="mt-4 text-2xl md:text-3xl font-black text-white leading-none">
 
           {formatTime(totalSeconds)}
 
         </h2>
 
-        <div className="mt-5 h-3 overflow-hidden rounded-full bg-zinc-900">
+        <div className="mt-4 h-2 overflow-hidden rounded-full bg-zinc-900">
 
           <div
             className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-orange-400 transition-all duration-500"
@@ -337,9 +339,9 @@ export default function LiveTracker({
 
         </div>
 
-        <div className="mt-5 flex flex-col gap-2">
+        <div className="mt-4 flex flex-col gap-1">
 
-          <p className="text-sm text-zinc-400">
+          <p className="text-xs text-zinc-400">
 
             Faltam{' '}
 
@@ -353,7 +355,7 @@ export default function LiveTracker({
 
           </p>
 
-          <p className={`text-sm font-medium ${weeklyStatusColor}`}>
+          <p className={`text-xs font-medium ${weeklyStatusColor}`}>
 
             {weeklyStatus}
 

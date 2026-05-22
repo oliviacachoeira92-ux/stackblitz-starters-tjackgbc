@@ -67,7 +67,7 @@ export default function CalculatorPanel({
 
   parsedPoints,
   eligible,
- withdrawals,
+  withdrawals,
   pointsPerDiamond,
   diamondsPerCharme,
 
@@ -86,14 +86,14 @@ export default function CalculatorPanel({
         xl:col-span-3
         relative
         z-30
-        p-4
-        md:p-8
+        p-3
+        md:p-5
       "
     >
 
       {/* INPUTS */}
 
-      <div className="flex flex-col gap-4 md:gap-5">
+      <div className="flex flex-col gap-3">
 
         <InputCard
           title="Diamantes Recebidos"
@@ -139,7 +139,7 @@ export default function CalculatorPanel({
 
       {/* RESULTADOS */}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 mt-6">
 
         <MetricCard
           title="Diamantes"
@@ -186,19 +186,19 @@ export default function CalculatorPanel({
 
       {/* INFO */}
 
-      <div className="mt-10 overflow-hidden rounded-3xl min-h-[120px] md:min-h-[180px] border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.02] p-4 md:p-6">
+      <div className="mt-6 overflow-hidden rounded-3xl min-h-[100px] md:min-h-[130px] border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.02] p-4">
 
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
 
           <div>
 
-            <p className="text-zinc-400 uppercase tracking-[0.2em] text-[10px] md:text-sm">
+            <p className="text-zinc-400 uppercase tracking-[0.2em] text-[10px] md:text-xs">
 
               Conversão
 
             </p>
 
-            <h2 className="text-[clamp(1rem,5vw,2.3rem)] font-black tracking-tight text-white mt-3 break-words">
+            <h2 className="text-[clamp(1rem,4vw,2rem)] font-black tracking-tight text-white mt-2 break-words">
 
               {format(points) || '—'}
 
@@ -208,13 +208,13 @@ export default function CalculatorPanel({
 
           <div className="text-right">
 
-            <p className="text-zinc-400 text-[10px] md:text-sm">
+            <p className="text-zinc-400 text-[10px] md:text-xs">
 
               Conversão média
 
             </p>
 
-            <h3 className="text-[clamp(0.9rem,3vw,1.5rem)] font-black tracking-tight text-white">
+            <h3 className="text-[clamp(0.9rem,2vw,1.3rem)] font-black tracking-tight text-white">
 
               {parsedPoints
                 ? (
@@ -229,7 +229,7 @@ export default function CalculatorPanel({
 
         </div>
 
-        <p className="mt-6 text-xs text-zinc-500 leading-relaxed max-w-[900px]">
+        <p className="mt-4 text-[11px] text-zinc-500 leading-relaxed max-w-[900px]">
 
           As conversões exibidas são estimativas em tempo real e podem sofrer variações conforme alterações de câmbio, plataforma e arredondamentos.
 

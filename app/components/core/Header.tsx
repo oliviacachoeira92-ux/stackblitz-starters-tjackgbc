@@ -4,15 +4,15 @@ export default function Header() {
 
   return (
 
-    <div className="mb-14">
+    <div className="mb-10 overflow-hidden">
 
       {/* TOP TAG */}
 
-      <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-xl mb-6">
+      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-xl mb-5">
 
-        <div className="w-2 h-2 rounded-full bg-white animate-pulse" />
+        <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
 
-        <p className="text-[11px] uppercase tracking-[0.28em] text-white/50">
+        <p className="text-[10px] uppercase tracking-[0.24em] text-white/45">
 
           Alii Live Conversion System
 
@@ -22,9 +22,9 @@ export default function Header() {
 
       {/* TITLE */}
 
-      <div className="flex items-center gap-4 md:gap-6 flex-wrap">
+      <div className="flex items-center gap-4 flex-wrap max-w-full">
 
-        <h1 className="text-6xl md:text-7xl lg:text-8xl font-black tracking-[-0.06em] leading-none text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.08)]">
+        <h1 className="text-5xl md:text-6xl xl:text-[5.5rem] font-black tracking-[-0.05em] leading-[0.92] text-white drop-shadow-[0_0_24px_rgba(255,255,255,0.05)] break-words">
 
           Fenix Arcane
 
@@ -32,7 +32,7 @@ export default function Header() {
 
         {/* RADIO */}
 
-        <div className="translate-y-1">
+        <div className="translate-y-0.5 scale-90 origin-left shrink-0">
 
           <FenixRadio />
 
@@ -42,11 +42,11 @@ export default function Header() {
 
       {/* SUB */}
 
-      <div className="mt-5 flex items-center gap-3">
+      <div className="mt-3 flex items-center gap-3">
 
-        <div className="h-[1px] w-12 bg-white/10" />
+        <div className="h-[1px] w-10 bg-white/10" />
 
-        <p className="text-zinc-500 tracking-[0.32em] uppercase text-xs">
+        <p className="text-zinc-500 tracking-[0.28em] uppercase text-[10px]">
 
           by Olivia Cachoeira
 
@@ -56,7 +56,7 @@ export default function Header() {
 
       {/* DESCRIPTION */}
 
-      <p className="text-zinc-400 mt-8 text-lg md:text-xl max-w-[720px] leading-relaxed">
+      <p className="text-zinc-400 mt-5 text-base md:text-lg max-w-[680px] leading-relaxed">
 
         Ferramenta premium de conversão para streamers Alii Live.
         Calcule valores, pontos, diamantes e saques de forma rápida e precisa.

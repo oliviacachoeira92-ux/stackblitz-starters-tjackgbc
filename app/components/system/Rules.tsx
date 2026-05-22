@@ -9,14 +9,16 @@ export default function Rules({
   pointsPer20USD,
   diamondsPerCharme,
 }: RulesProps) {
-  return (
-    <div className="glow-card rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur-2xl p-8">
 
-      <p className="text-zinc-500 uppercase tracking-[0.2em] text-sm mb-8">
+  return (
+
+    <div className="glow-card rounded-[1.6rem] border border-white/10 bg-white/[0.03] backdrop-blur-2xl p-4">
+
+      <p className="text-zinc-500 uppercase tracking-[0.18em] text-[10px] mb-4">
         Regras
       </p>
 
-      <div className="space-y-4 text-zinc-400">
+      <div className="space-y-3 text-zinc-400 text-sm leading-relaxed">
 
         <p>
           • 1 Diamante = {pointsPerDiamond} pontos

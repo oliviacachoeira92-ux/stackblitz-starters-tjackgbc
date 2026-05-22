@@ -135,12 +135,12 @@ export default function InputCard({
 
     <div
       className={`
-        rounded-3xl
-        min-h-[120px]
-        md:min-h-[180px]
+        rounded-2xl
+        min-h-[90px]
+        md:min-h-[120px]
         border
-        p-4
-        md:p-6
+        p-3
+        md:p-4
         transition-all
         duration-500
         ${style.border}
@@ -152,10 +152,10 @@ export default function InputCard({
       <p
         className={`
           uppercase
-          tracking-[0.22em]
-          text-[10px]
-          md:text-xs
-          mb-4
+          tracking-[0.2em]
+          text-[9px]
+          md:text-[10px]
+          mb-2
           ${style.label}
         `}
       >
@@ -170,9 +170,10 @@ export default function InputCard({
           className={`
             w-full
             min-w-0
-            text-[clamp(1rem,3.8vw,1.7rem)]
-            md:text-[clamp(1.8rem,4vw,3rem)]
+            text-[clamp(1rem,2.8vw,1.5rem)]
+            md:text-[clamp(1.2rem,2vw,2rem)]
             font-black
+            leading-none
             break-words
             ${style.text}
           `}
@@ -199,9 +200,10 @@ export default function InputCard({
             w-full
             min-w-0
             bg-transparent
-            text-[clamp(1rem,3.8vw,1.7rem)]
-            md:text-[clamp(1.8rem,4vw,3rem)]
+            text-[clamp(1rem,2.8vw,1.5rem)]
+            md:text-[clamp(1.2rem,2vw,2rem)]
             font-black
+            leading-none
             outline-none
             rounded-xl
             ${style.text}
@@ -213,7 +215,7 @@ export default function InputCard({
 
       {footer && (
 
-        <p className="text-zinc-500 mt-3 text-sm">
+        <p className="text-zinc-500 mt-2 text-[11px]">
 
           {footer}
 
