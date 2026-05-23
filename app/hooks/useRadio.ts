@@ -22,17 +22,20 @@ export default function useRadio() {
   // STATE
   // =========================
 
-  const [isPlaying,
-    setIsPlaying] =
-      useState(false);
+  const [
+    isPlaying,
+    setIsPlaying,
+  ] = useState(false);
 
-  const [volume,
-    setVolume] =
-      useState(0.5);
+  const [
+    volume,
+    setVolume,
+  ] = useState(0.5);
 
-  const [currentTrack,
-    setCurrentTrack] =
-      useState(0);
+  const [
+    currentTrack,
+    setCurrentTrack,
+  ] = useState(0);
 
   // =========================
   // AUDIO REF
@@ -152,9 +155,15 @@ export default function useRadio() {
     audioRef.current =
       audio;
 
+    const onEnded = () => {
+
+      handleNextTrack();
+
+    };
+
     audio.addEventListener(
       'ended',
-      handleNextTrack
+      onEnded
     );
 
     return () => {
@@ -163,7 +172,7 @@ export default function useRadio() {
 
       audio.removeEventListener(
         'ended',
-        handleNextTrack
+        onEnded
       );
 
     };
@@ -248,4 +257,5 @@ export default function useRadio() {
     handlePreviousTrack,
 
   };
+
 }
