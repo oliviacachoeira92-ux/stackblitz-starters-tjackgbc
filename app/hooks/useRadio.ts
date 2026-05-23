@@ -1,6 +1,11 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 export default function useRadio() {
 
@@ -51,7 +56,7 @@ export default function useRadio() {
   // =========================
 
   const handleNextTrack =
-    async () => {
+    useCallback(async () => {
 
       if (
         !audioRef.current
@@ -89,14 +94,18 @@ export default function useRadio() {
 
       }
 
-    };
+    }, [
+      currentTrack,
+      isPlaying,
+      playlist,
+    ]);
 
   // =========================
   // PREVIOUS TRACK
   // =========================
 
   const handlePreviousTrack =
-    async () => {
+    useCallback(async () => {
 
       if (
         !audioRef.current
@@ -136,7 +145,11 @@ export default function useRadio() {
 
       }
 
-    };
+    }, [
+      currentTrack,
+      isPlaying,
+      playlist,
+    ]);
 
   // =========================
   // INIT
@@ -155,15 +168,9 @@ export default function useRadio() {
     audioRef.current =
       audio;
 
-    const onEnded = () => {
-
-      handleNextTrack();
-
-    };
-
     audio.addEventListener(
       'ended',
-      onEnded
+      handleNextTrack
     );
 
     return () => {
@@ -172,12 +179,16 @@ export default function useRadio() {
 
       audio.removeEventListener(
         'ended',
-        onEnded
+        handleNextTrack
       );
 
     };
 
-  }, []);
+  }, [
+    handleNextTrack,
+    volume,
+    playlist,
+  ]);
 
   // =========================
   // VOLUME
