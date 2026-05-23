@@ -48,82 +48,82 @@ export default function InputCard({
 
     default: {
       border:
-        'border-white/10',
+        'border-white/8',
 
-      background:
-        'bg-gradient-to-b from-white/[0.04] to-white/[0.02]',
-
-      hover:
-        'hover:border-white/20',
+      glow:
+        'from-white/[0.04]',
 
       text:
         'text-white',
 
       label:
-        'text-zinc-400',
+        'text-white/38',
 
       placeholder:
         'placeholder:text-zinc-600',
+
+      inputGlow:
+        'focus-within:border-white/10',
     },
 
     cyan: {
       border:
         'border-cyan-400/10',
 
-      background:
-        'bg-cyan-400/[0.025]',
-
-      hover:
-        'hover:border-cyan-300/20 hover:bg-cyan-300/[0.04]',
+      glow:
+        'from-cyan-400/[0.07]',
 
       text:
         'text-cyan-50',
 
       label:
-        'text-cyan-200/70',
+        'text-cyan-100/60',
 
       placeholder:
-        'placeholder:text-cyan-100/20',
+        'placeholder:text-cyan-100/18',
+
+      inputGlow:
+        'focus-within:border-cyan-300/18',
     },
 
     emerald: {
       border:
-        'border-emerald-400/20',
+        'border-emerald-400/10',
 
-      background:
-        'bg-emerald-400/[0.04]',
-
-      hover:
-        'hover:border-emerald-300/30 hover:bg-emerald-300/[0.06]',
+      glow:
+        'from-emerald-400/[0.07]',
 
       text:
-        'text-emerald-100',
+        'text-emerald-50',
 
       label:
-        'text-emerald-300',
+        'text-emerald-200/65',
 
       placeholder:
-        'placeholder:text-emerald-100/20',
+        'placeholder:text-emerald-100/18',
+
+      inputGlow:
+        'focus-within:border-emerald-300/18',
     },
 
     fuchsia: {
       border:
         'border-fuchsia-400/10',
 
-      background:
-        'bg-fuchsia-400/[0.02]',
-
-      hover:
-        'hover:border-fuchsia-300/20',
+      glow:
+        'from-fuchsia-400/[0.06]',
 
       text:
-        'text-white',
+        'text-fuchsia-50',
 
       label:
-        'text-zinc-300',
+        'text-fuchsia-100/58',
 
       placeholder:
-        'placeholder:text-zinc-600',
+        'placeholder:text-fuchsia-100/18',
+
+      inputGlow:
+        'focus-within:border-fuchsia-300/18',
     },
 
   };
@@ -135,94 +135,193 @@ export default function InputCard({
 
     <div
       className={`
-        rounded-2xl
-        min-h-[90px]
-        md:min-h-[120px]
-        border
-        p-3
-        md:p-4
+        card-premium
+        hover-premium
+        group
+        relative
+        overflow-hidden
+        min-h-[96px]
+        md:min-h-[124px]
+        px-4
+        py-5
+        md:px-5
+        md:py-6
+        backdrop-blur-2xl
         transition-all
-        duration-500
+        duration-300
         ${style.border}
-        ${style.background}
-        ${style.hover}
       `}
     >
 
-      <p
-        className={`
-          uppercase
-          tracking-[0.2em]
-          text-[9px]
-          md:text-[10px]
-          mb-2
-          ${style.label}
-        `}
-      >
+      {/* AMBIENT */}
 
-        {title}
-
-      </p>
-
-      {readonly ? (
+      <div className="absolute inset-0 opacity-50 pointer-events-none">
 
         <div
           className={`
-            w-full
-            min-w-0
-            text-[clamp(1rem,2.8vw,1.5rem)]
-            md:text-[clamp(1.2rem,2vw,2rem)]
-            font-black
-            leading-none
-            break-words
-            ${style.text}
-          `}
-        >
-
-          {displayValue}
-
-        </div>
-
-      ) : (
-
-        <input
-          type="text"
-          value={value}
-          onChange={(
-            e: ChangeEvent<HTMLInputElement>
-          ) =>
-            onChange(
-              e.target.value
-            )
-          }
-          placeholder={placeholder}
-          className={`
-            w-full
-            min-w-0
-            bg-transparent
-            text-[clamp(1rem,2.8vw,1.5rem)]
-            md:text-[clamp(1.2rem,2vw,2rem)]
-            font-black
-            leading-none
-            outline-none
-            rounded-xl
-            ${style.text}
-            ${style.placeholder}
+            absolute
+            -top-20
+            right-[-20px]
+            w-40
+            h-40
+            rounded-full
+            blur-3xl
+            bg-gradient-to-br
+            ${style.glow}
+            to-transparent
           `}
         />
 
-      )}
+      </div>
 
-      {footer && (
+      {/* TOP LIGHT */}
 
-        <p className="text-zinc-500 mt-2 text-[11px]">
+      <div
+        className="
+          absolute
+          inset-0
+          pointer-events-none
+          bg-gradient-to-b
+          from-white/[0.025]
+          via-transparent
+          to-transparent
+        "
+      />
 
-          {footer}
+      {/* CONTENT */}
 
-        </p>
+      <div className="relative z-10 h-full flex flex-col justify-between">
 
-      )}
+        <div>
+
+          {/* LABEL */}
+
+          <p
+            className={`
+              uppercase
+              tracking-[0.22em]
+              text-[8px]
+              md:text-[9px]
+              mb-3
+              font-medium
+              ${style.label}
+            `}
+          >
+
+            {title}
+
+          </p>
+
+          {/* READONLY */}
+
+          {readonly ? (
+
+            <div
+              className={`
+                w-full
+                min-w-0
+                text-[clamp(1rem,2.8vw,1.65rem)]
+                md:text-[clamp(1.1rem,2vw,1.9rem)]
+                font-semibold
+                leading-none
+                break-words
+                tracking-[-0.04em]
+                ${style.text}
+              `}
+            >
+
+              {displayValue}
+
+            </div>
+
+          ) : (
+
+            <div
+              className={`
+                relative
+                rounded-2xl
+                border
+                border-white/5
+                bg-black/25
+                backdrop-blur-xl
+                transition-all
+                duration-300
+                ${style.inputGlow}
+              `}
+            >
+
+              {/* INPUT LIGHT */}
+
+              <div
+                className="
+                  absolute
+                  inset-0
+                  rounded-2xl
+                  bg-gradient-to-r
+                  from-white/[0.015]
+                  to-transparent
+                  pointer-events-none
+                "
+              />
+
+              <input
+                type="text"
+                value={value}
+                onChange={(
+                  e: ChangeEvent<HTMLInputElement>
+                ) =>
+                  onChange(
+                    e.target.value
+                  )
+                }
+                placeholder={placeholder}
+                className={`
+                  relative
+                  z-10
+                  w-full
+                  min-w-0
+                  bg-transparent
+                  px-4
+                  py-3
+                  text-[clamp(1rem,2.8vw,1.6rem)]
+                  md:text-[clamp(1.1rem,2vw,1.9rem)]
+                  font-semibold
+                  leading-none
+                  tracking-[-0.04em]
+                  outline-none
+                  ${style.text}
+                  ${style.placeholder}
+                `}
+              />
+
+            </div>
+
+          )}
+
+        </div>
+
+        {/* FOOTER */}
+
+        {footer && (
+
+          <p
+            className="
+              text-white/30
+              mt-4
+              text-[10px]
+              tracking-wide
+            "
+          >
+
+            {footer}
+
+          </p>
+
+        )}
+
+      </div>
 
     </div>
+
   );
 }

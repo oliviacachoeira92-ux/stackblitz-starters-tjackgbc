@@ -28,8 +28,7 @@ export default function Home() {
   // HOOKS
   // =========================
 
-  const saoPauloTime =
-    useClock();
+  const saoPauloTime = useClock();
 
   const {
     usdRate,
@@ -38,153 +37,149 @@ export default function Home() {
     loadingRate,
   } = useUSD();
 
-  const tracker =
-    useLiveTracker();
+  const tracker = useLiveTracker();
 
   // =========================
-  // PARÂMETROS
+  // PARAMETERS
   // =========================
 
-  const [pointsPerDiamond,
-    setPointsPerDiamond] =
-      useState(750);
-
-  const [pointsPer20USD,
-    setPointsPer20USD] =
-      useState(12000000);
-
-  const [diamondsPerCharme,
-    setDiamondsPerCharme] =
-      useState(5);
+  const [pointsPerDiamond, setPointsPerDiamond] = useState(750);
+  const [pointsPer20USD, setPointsPer20USD] = useState(12000000);
+  const [diamondsPerCharme, setDiamondsPerCharme] = useState(5);
 
   // =========================
   // CONVERSION
   // =========================
 
-  const conversion =
-    useConversionEngine(
-      pointsPerDiamond,
-      pointsPer20USD,
-      diamondsPerCharme,
-      usdRate,
-    );
+  const conversion = useConversionEngine(
+    pointsPerDiamond,
+    pointsPer20USD,
+    diamondsPerCharme,
+    usdRate,
+  );
 
   // =========================
   // GSAP
   // =========================
 
   useEffect(() => {
-
-    gsap.registerPlugin(
-      ScrollTrigger
-    );
+    gsap.registerPlugin(ScrollTrigger);
 
     gsap.fromTo(
       '.glow-card',
-      {
-        opacity: 0,
-        y: 12,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.04,
-        ease: 'power2.out',
-        clearProps: 'all',
-      }
+      { opacity: 0, y: 18 },
+      { opacity: 1, y: 0, duration: 0.9, stagger: 0.05, ease: 'power3.out', clearProps: 'all' }
     );
-
   }, []);
 
   return (
+    <main className="relative min-h-screen overflow-hidden bg-[#07070A] text-white">
 
-    <main className="relative bg-black text-white min-h-screen overflow-hidden px-4 xl:px-6 py-6">
+      {/* BACKGROUND */}
+      <div className="absolute inset-0 pointer-events-none">
 
-      <div className="w-full relative z-20 pt-6 max-w-[1450px] mx-auto">
+        <div className="absolute top-[-180px] left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-violet-600/[0.08] blur-[160px] rounded-full" />
+        <div className="absolute top-[20%] right-[-180px] w-[420px] h-[420px] bg-fuchsia-500/[0.05] blur-[140px] rounded-full" />
+        <div className="absolute bottom-[-220px] left-[10%] w-[520px] h-[520px] bg-cyan-500/[0.04] blur-[160px] rounded-full" />
 
+      </div>
+
+      {/* CONTENT */}
+      <div className="relative z-20 max-w-[1500px] mx-auto px-4 md:px-6 xl:px-8 pt-8 pb-16">
+
+        {/* HEADER */}
         <Header />
 
-        {/* MAIN GRID */}
+        {/* HERO / INTRO */}
+        <section className="glow-card mb-8 p-6 rounded-xl">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs tracking-[0.3em] text-white/40 uppercase">Fenix Arcane</p>
+              <h2 className="text-lg font-medium text-white/90 mt-1">Sistema de Conversão</h2>
+            </div>
+            <div className="text-xs text-green-400 font-medium">Sistema Ativo</div>
+          </div>
+        </section>
 
-        <div className="grid grid-cols-1 xl:grid-cols-[1.65fr_0.85fr] gap-4 mt-6">
+        {/* MAIN LAYOUT */}
+        <div className="grid grid-cols-1 xl:grid-cols-[1.7fr_0.82fr] gap-5 mt-5">
 
           {/* LEFT SIDE */}
+          <div className="flex flex-col gap-5">
 
-          <div className="flex flex-col gap-4">
+            {/* USD CONVERTER */}
+            <section className="glow-card">
+              <USDConverter
+                usdRate={usdRate}
+                lastUpdate={lastUpdate}
+                usdVariation={usdVariation}
+                loading={loadingRate}
+              />
+            </section>
 
-            {/* USD HERO */}
-
-            <USDConverter
-              usdRate={usdRate}
-              lastUpdate={lastUpdate}
-              usdVariation={usdVariation}
-              loading={loadingRate}
-            />
-
-            {/* MINI STATS BAR */}
-
-            <StatsBar
-              usdRate={usdRate}
-              usdVariation={usdVariation}
-              progress={tracker.progress}
-              remainingSeconds={tracker.remainingSeconds}
-              dailyTotalSeconds={tracker.dailyTotalSeconds}
-              formatTime={tracker.formatTime}
-              weeklyStatus={tracker.weeklyStatus}
-            />
+            {/* STATS */}
+            <section className="glow-card">
+              <StatsBar
+                usdRate={usdRate}
+                usdVariation={usdVariation}
+                progress={tracker.progress}
+                remainingSeconds={tracker.remainingSeconds}
+                dailyTotalSeconds={tracker.dailyTotalSeconds}
+                formatTime={tracker.formatTime}
+                weeklyStatus={tracker.weeklyStatus}
+              />
+            </section>
 
             {/* CONVERSION */}
-
-            <ConversionSection
-              {...conversion}
-              pointsPerDiamond={pointsPerDiamond}
-              diamondsPerCharme={diamondsPerCharme}
-            />
+            <section className="glow-card">
+              <ConversionSection
+                {...conversion}
+                pointsPerDiamond={pointsPerDiamond}
+                diamondsPerCharme={diamondsPerCharme}
+              />
+            </section>
 
           </div>
 
-          {/* RIGHT SIDEBAR */}
-
-          <div className="flex flex-col gap-4">
+          {/* RIGHT SIDE */}
+          <div className="flex flex-col gap-5">
 
             {/* CLOCK */}
+            <section className="glow-card">
+              <ClockCard time={saoPauloTime} />
+            </section>
 
-            <ClockCard
-              time={saoPauloTime}
-            />
-
-            {/* LIVE TRACKER */}
-
-            <LiveTracker
-              {...tracker}
-            />
+            {/* TRACKER */}
+            <section className="glow-card">
+              <LiveTracker {...tracker} />
+            </section>
 
             {/* PARAMETERS */}
-
-            <Parameters
-              pointsPerDiamond={pointsPerDiamond}
-              pointsPer20USD={pointsPer20USD}
-              diamondsPerCharme={diamondsPerCharme}
-              setPointsPerDiamond={setPointsPerDiamond}
-              setPointsPer20USD={setPointsPer20USD}
-              setDiamondsPerCharme={setDiamondsPerCharme}
-            />
+            <section className="glow-card">
+              <Parameters
+                pointsPerDiamond={pointsPerDiamond}
+                pointsPer20USD={pointsPer20USD}
+                diamondsPerCharme={diamondsPerCharme}
+                setPointsPerDiamond={setPointsPerDiamond}
+                setPointsPer20USD={setPointsPer20USD}
+                setDiamondsPerCharme={setDiamondsPerCharme}
+              />
+            </section>
 
             {/* RULES */}
-
-            <Rules
-              pointsPerDiamond={pointsPerDiamond}
-              pointsPer20USD={pointsPer20USD}
-              diamondsPerCharme={diamondsPerCharme}
-            />
+            <section className="glow-card">
+              <Rules
+                pointsPerDiamond={pointsPerDiamond}
+                pointsPer20USD={pointsPer20USD}
+                diamondsPerCharme={diamondsPerCharme}
+              />
+            </section>
 
           </div>
 
         </div>
 
       </div>
-
     </main>
   );
 }

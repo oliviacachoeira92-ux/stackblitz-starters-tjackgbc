@@ -1,0 +1,73 @@
+:root {
+    --bg-primary: #07070A;
+  
+    --surface-primary: rgba(17, 17, 22, 0.72);
+    --surface-secondary: rgba(255, 255, 255, 0.03);
+  
+    --border-primary: rgba(255,255,255,0.06);
+  
+    --violet-primary: #8B5CF6;
+    --violet-secondary: #A855F7;
+  
+    --text-primary: rgba(255,255,255,0.96);
+    --text-secondary: rgba(255,255,255,0.65);
+  }
+  
+  .app-bg {
+    background:
+      radial-gradient(
+        circle at top,
+        rgba(139,92,246,0.12),
+        transparent 45%
+      ),
+      var(--bg-primary);
+  }
+  
+  .surface {
+    background: var(--surface-primary);
+    border: 1px solid var(--border-primary);
+    backdrop-filter: blur(14px);
+  }
+  
+  .card-premium {
+    border-radius: 24px;
+  
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,0.03),
+        rgba(255,255,255,0.015)
+      ),
+      var(--surface-primary);
+  
+    border: 1px solid var(--border-primary);
+  
+    box-shadow:
+      0 8px 40px rgba(0,0,0,0.35),
+      inset 0 1px 0 rgba(255,255,255,0.03);
+  
+    backdrop-filter: blur(14px);
+  }
+  
+  .glow-violet {
+    box-shadow:
+      0 0 30px rgba(139,92,246,0.18);
+  }
+  
+  .hover-premium {
+    transition:
+      transform .28s ease,
+      border-color .28s ease,
+      box-shadow .28s ease;
+  }
+  
+  .hover-premium:hover {
+    transform: translateY(-2px);
+  
+    border-color:
+      rgba(139,92,246,0.22);
+  
+    box-shadow:
+      0 12px 50px rgba(0,0,0,0.42),
+      0 0 30px rgba(139,92,246,0.12);
+  }

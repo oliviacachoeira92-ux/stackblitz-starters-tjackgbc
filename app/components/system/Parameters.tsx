@@ -33,76 +33,299 @@ export default function Parameters({
   setDiamondsPerCharme,
 }: ParametersProps) {
 
+  const inputStyle =
+    `
+      w-full
+      bg-transparent
+      text-2xl
+      md:text-3xl
+      font-black
+      leading-none
+      tracking-tight
+      outline-none
+      text-white
+      placeholder:text-white/20
+    `;
+
   return (
 
-    <div className="glow-card rounded-[1.6rem] border border-white/10 bg-white/[0.03] backdrop-blur-2xl p-4">
+    <div
+      className="
+        glow-card
+        relative
+        overflow-hidden
+        rounded-[2rem]
+        border
+        border-white/[0.07]
+        bg-[rgba(15,15,20,0.72)]
+        backdrop-blur-2xl
+        p-5
+      "
+    >
 
-      <p className="text-zinc-500 uppercase tracking-[0.18em] text-[10px] mb-4">
-        Parâmetros
-      </p>
+      {/* AMBIENT LIGHT */}
 
-      <div className="space-y-3">
+      <div className="absolute inset-0 pointer-events-none">
 
-        {/* PONTOS POR DIAMANTE */}
+        {/* MAIN */}
 
-        <div className="bg-white/[0.04] border border-white/10 rounded-2xl p-3">
+        <div
+          className="
+            absolute
+            top-[-80px]
+            right-[-40px]
+            h-52
+            w-52
+            rounded-full
+            bg-violet-500/[0.08]
+            blur-[120px]
+          "
+        />
 
-          <p className="text-zinc-500 text-[11px] mb-2">
-            Pontos por diamante
+        {/* SECONDARY */}
+
+        <div
+          className="
+            absolute
+            bottom-[-40px]
+            left-[10%]
+            h-32
+            w-32
+            rounded-full
+            bg-cyan-400/[0.05]
+            blur-[80px]
+          "
+        />
+
+      </div>
+
+      {/* CONTENT */}
+
+      <div className="relative z-10">
+
+        {/* HEADER */}
+
+        <div className="mb-6">
+
+          <p
+            className="
+              text-white/35
+              uppercase
+              tracking-[0.24em]
+              text-[10px]
+            "
+          >
+
+            CONFIGURAÇÕES OPERACIONAIS
+
           </p>
 
-          <input
-            type="text"
-            value={format(pointsPerDiamond)}
-            onChange={(e) =>
-              setPointsPerDiamond(
-                parse(e.target.value)
-              )
-            }
-            className="w-full bg-transparent text-xl md:text-2xl font-black leading-none outline-none cursor-text"
-          />
+          <h2
+            className="
+              mt-3
+              text-2xl
+              md:text-3xl
+              font-black
+              tracking-[-0.05em]
+              title-gradient
+            "
+          >
+
+            Parâmetros do Sistema
+
+          </h2>
 
         </div>
 
-        {/* PONTOS POR US$20 */}
+        {/* GRID */}
 
-        <div className="bg-white/[0.04] border border-white/10 rounded-2xl p-3">
+        <div className="space-y-4">
 
-          <p className="text-zinc-500 text-[11px] mb-2">
-            Pontos por US$20
-          </p>
+          {/* PONTOS POR DIAMANTE */}
 
-          <input
-            type="text"
-            value={format(pointsPer20USD)}
-            onChange={(e) =>
-              setPointsPer20USD(
-                parse(e.target.value)
-              )
-            }
-            className="w-full bg-transparent text-xl md:text-2xl font-black leading-none outline-none cursor-text"
-          />
+          <div
+            className="
+              relative
+              overflow-hidden
+              rounded-[1.6rem]
+              border
+              border-white/10
+              bg-white/[0.03]
+              p-4
+              backdrop-blur-xl
+              transition-all
+              duration-300
+              hover:border-white/15
+            "
+          >
 
-        </div>
+            <div
+              className="
+                absolute
+                top-0
+                right-0
+                h-24
+                w-24
+                rounded-full
+                bg-violet-500/[0.05]
+                blur-3xl
+              "
+            />
 
-        {/* DIAMANTES POR CHARME */}
+            <div className="relative z-10">
 
-        <div className="bg-white/[0.04] border border-white/10 rounded-2xl p-3">
+              <p
+                className="
+                  text-white/35
+                  text-[11px]
+                  uppercase
+                  tracking-[0.18em]
+                  mb-3
+                "
+              >
 
-          <p className="text-zinc-500 text-[11px] mb-2">
-            Diamantes por charme
-          </p>
+                Pontos por Diamante
 
-          <input
-            type="text"
-            value={format(diamondsPerCharme)}
-            onChange={(e) =>
-              setDiamondsPerCharme(
-                parse(e.target.value)
-              )
-            }
-            className="w-full bg-transparent text-xl md:text-2xl font-black leading-none outline-none cursor-text"
-          />
+              </p>
+
+              <input
+                type="text"
+                value={format(pointsPerDiamond)}
+                onChange={(e) =>
+                  setPointsPerDiamond(
+                    parse(e.target.value)
+                  )
+                }
+                className={inputStyle}
+              />
+
+            </div>
+
+          </div>
+
+          {/* PONTOS POR USD */}
+
+          <div
+            className="
+              relative
+              overflow-hidden
+              rounded-[1.6rem]
+              border
+              border-white/10
+              bg-white/[0.03]
+              p-4
+              backdrop-blur-xl
+              transition-all
+              duration-300
+              hover:border-white/15
+            "
+          >
+
+            <div
+              className="
+                absolute
+                top-0
+                right-0
+                h-24
+                w-24
+                rounded-full
+                bg-cyan-500/[0.05]
+                blur-3xl
+              "
+            />
+
+            <div className="relative z-10">
+
+              <p
+                className="
+                  text-white/35
+                  text-[11px]
+                  uppercase
+                  tracking-[0.18em]
+                  mb-3
+                "
+              >
+
+                Pontos por US$20
+
+              </p>
+
+              <input
+                type="text"
+                value={format(pointsPer20USD)}
+                onChange={(e) =>
+                  setPointsPer20USD(
+                    parse(e.target.value)
+                  )
+                }
+                className={inputStyle}
+              />
+
+            </div>
+
+          </div>
+
+          {/* CHARM */}
+
+          <div
+            className="
+              relative
+              overflow-hidden
+              rounded-[1.6rem]
+              border
+              border-white/10
+              bg-white/[0.03]
+              p-4
+              backdrop-blur-xl
+              transition-all
+              duration-300
+              hover:border-white/15
+            "
+          >
+
+            <div
+              className="
+                absolute
+                top-0
+                right-0
+                h-24
+                w-24
+                rounded-full
+                bg-fuchsia-500/[0.05]
+                blur-3xl
+              "
+            />
+
+            <div className="relative z-10">
+
+              <p
+                className="
+                  text-white/35
+                  text-[11px]
+                  uppercase
+                  tracking-[0.18em]
+                  mb-3
+                "
+              >
+
+                Diamantes por Charm
+
+              </p>
+
+              <input
+                type="text"
+                value={format(diamondsPerCharme)}
+                onChange={(e) =>
+                  setDiamondsPerCharme(
+                    parse(e.target.value)
+                  )
+                }
+                className={inputStyle}
+              />
+
+            </div>
+
+          </div>
 
         </div>
 
