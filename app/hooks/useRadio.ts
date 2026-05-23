@@ -13,7 +13,7 @@ export default function useRadio() {
   // PLAYLIST
   // =========================
 
-  const playlist = [
+  const playlist = useRef([
 
     '/audio/Diamante Puro.mp3',
 
@@ -21,7 +21,7 @@ export default function useRadio() {
 
     '/audio/Garota Liberiana.mp3',
 
-  ];
+  ]).current;
 
   // =========================
   // STATE
@@ -97,7 +97,6 @@ export default function useRadio() {
     }, [
       currentTrack,
       isPlaying,
-      playlist,
     ]);
 
   // =========================
@@ -148,7 +147,6 @@ export default function useRadio() {
     }, [
       currentTrack,
       isPlaying,
-      playlist,
     ]);
 
   // =========================
@@ -187,7 +185,6 @@ export default function useRadio() {
   }, [
     handleNextTrack,
     volume,
-    playlist,
   ]);
 
   // =========================
