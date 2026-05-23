@@ -1,14 +1,18 @@
 'use client';
+
 import CalculatorPanel from './CalculatorPanel';
 
 type Props = {
 
   diamonds: string;
-  points: string;
-  dollars: string;
-  charme: string;
 
-  estimatedBRL: string;
+  points: string;
+
+  dollars: string;
+
+  brl: string;
+
+  charme: string;
 
   parsedPoints: number;
 
@@ -32,6 +36,10 @@ type Props = {
     value: string
   ) => void;
 
+  handleBRL: (
+    value: string
+  ) => void;
+
   handleCharme: (
     value: string
   ) => void;
@@ -40,11 +48,14 @@ type Props = {
 export default function ConversionSection({
 
   diamonds,
-  points,
-  dollars,
-  charme,
 
-  estimatedBRL,
+  points,
+
+  dollars,
+
+  brl,
+
+  charme,
 
   parsedPoints,
 
@@ -57,8 +68,13 @@ export default function ConversionSection({
   diamondsPerCharme,
 
   handleDiamonds,
+
   handlePoints,
+
   handleDollars,
+
+  handleBRL,
+
   handleCharme,
 
 }: Props) {
@@ -73,9 +89,9 @@ export default function ConversionSection({
 
       dollars={dollars}
 
-      charme={charme}
+      brl={brl}
 
-      estimatedBRL={estimatedBRL}
+      charme={charme}
 
       parsedPoints={parsedPoints}
 
@@ -93,9 +109,12 @@ export default function ConversionSection({
 
       handleDollars={handleDollars}
 
+      handleBRL={handleBRL}
+
       handleCharme={handleCharme}
 
     />
 
   );
+
 }
