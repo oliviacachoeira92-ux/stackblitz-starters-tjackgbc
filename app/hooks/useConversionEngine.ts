@@ -27,6 +27,9 @@ export default function useConversionEngine(
   const [dollars, setDollars] =
     useState('');
 
+  const [brl, setBRL] =
+    useState('');
+
   const [charme, setCharme] =
     useState('');
 
@@ -39,29 +42,6 @@ export default function useConversionEngine(
     pointsPer20USD,
     diamondsPerCharme,
   };
-
-  // =========================
-  // BRL
-  // =========================
-
-  const parsedDollarValue =
-    parseFloat(
-      dollars
-        .toString()
-        .trim()
-    ) || 0;
-
-  const estimatedBRL =
-    (
-      parsedDollarValue *
-      usdRate
-    ).toLocaleString(
-      'pt-BR',
-      {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }
-    );
 
   // =========================
   // RESULTADOS
@@ -84,6 +64,62 @@ export default function useConversionEngine(
     );
 
   // =========================
+  // HELPERS
+  // =========================
+
+  const convertUSDToBRL = (
+    usd: string
+  ) => {
+
+    const parsed =
+      parseFloat(
+        usd
+          .toString()
+          .replace(',', '.')
+          .trim()
+      ) || 0;
+
+    return (
+      parsed *
+      usdRate
+    ).toFixed(2);
+
+  };
+
+  const convertBRLToUSD = (
+    brlValue: string
+  ) => {
+
+    const parsed =
+      parseFloat(
+        brlValue
+          .toString()
+          .replace(',', '.')
+          .trim()
+      ) || 0;
+
+    return (
+      parsed /
+      usdRate
+    ).toFixed(2);
+
+  };
+
+  // =========================
+  // RESET
+  // =========================
+
+  const resetAll = () => {
+
+    setDiamonds('');
+    setPoints('');
+    setDollars('');
+    setBRL('');
+    setCharme('');
+
+  };
+
+  // =========================
   // HANDLERS
   // =========================
 
@@ -95,9 +131,7 @@ export default function useConversionEngine(
 
     if (!value) {
 
-      setPoints('');
-      setDollars('');
-      setCharme('');
+      resetAll();
 
       return;
     }
@@ -110,7 +144,13 @@ export default function useConversionEngine(
 
     setPoints(result.points);
     setDollars(result.dollars);
+    setBRL(
+      convertUSDToBRL(
+        result.dollars
+      )
+    );
     setCharme(result.charme);
+
   };
 
   const handlePoints = (
@@ -121,9 +161,7 @@ export default function useConversionEngine(
 
     if (!value) {
 
-      setDiamonds('');
-      setDollars('');
-      setCharme('');
+      resetAll();
 
       return;
     }
@@ -136,7 +174,13 @@ export default function useConversionEngine(
 
     setDiamonds(result.diamonds);
     setDollars(result.dollars);
+    setBRL(
+      convertUSDToBRL(
+        result.dollars
+      )
+    );
     setCharme(result.charme);
+
   };
 
   const handleDollars = (
@@ -147,9 +191,7 @@ export default function useConversionEngine(
 
     if (!value) {
 
-      setDiamonds('');
-      setPoints('');
-      setCharme('');
+      resetAll();
 
       return;
     }
@@ -163,6 +205,41 @@ export default function useConversionEngine(
     setDiamonds(result.diamonds);
     setPoints(result.points);
     setCharme(result.charme);
+
+    setBRL(
+      convertUSDToBRL(value)
+    );
+
+  };
+
+  const handleBRL = (
+    value: string
+  ) => {
+
+    setBRL(value);
+
+    if (!value) {
+
+      resetAll();
+
+      return;
+    }
+
+    const usd =
+      convertBRLToUSD(value);
+
+    setDollars(usd);
+
+    const result =
+      calculateFromDollars(
+        usd,
+        config
+      );
+
+    setDiamonds(result.diamonds);
+    setPoints(result.points);
+    setCharme(result.charme);
+
   };
 
   const handleCharme = (
@@ -173,9 +250,7 @@ export default function useConversionEngine(
 
     if (!value) {
 
-      setDiamonds('');
-      setPoints('');
-      setDollars('');
+      resetAll();
 
       return;
     }
@@ -189,15 +264,23 @@ export default function useConversionEngine(
     setDiamonds(result.diamonds);
     setPoints(result.points);
     setDollars(result.dollars);
+
+    setBRL(
+      convertUSDToBRL(
+        result.dollars
+      )
+    );
+
   };
 
   return {
+
     diamonds,
     points,
     dollars,
+    brl,
     charme,
 
-    estimatedBRL,
     parsedPoints,
     eligible,
     withdrawals,
@@ -205,6 +288,9 @@ export default function useConversionEngine(
     handleDiamonds,
     handlePoints,
     handleDollars,
+    handleBRL,
     handleCharme,
+
   };
+
 }

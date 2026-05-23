@@ -44,49 +44,51 @@ export default function StatsBar({
         card-premium
         relative
         overflow-hidden
-        p-3
-        md:p-4
+        px-3
+        py-3
+        md:px-4
+        md:py-4
       "
     >
 
-      {/* AMBIENT GLOW */}
+      {/* AMBIENT */}
 
       <div
         className="
           pointer-events-none
           absolute
           inset-0
-          opacity-70
+          opacity-50
         "
       >
 
-        {/* ORANGE LIGHT */}
+        {/* TOP LIGHT */}
 
         <div
           className="
             absolute
-            top-[-40px]
-            left-[15%]
-            h-36
-            w-36
+            top-[-30px]
+            left-[20%]
+            h-24
+            w-24
             rounded-full
-            bg-orange-500/10
-            blur-3xl
+            bg-orange-500/[0.05]
+            blur-[55px]
           "
         />
 
-        {/* CYAN LIGHT */}
+        {/* SIDE LIGHT */}
 
         <div
           className="
             absolute
-            bottom-[-50px]
+            bottom-[-40px]
             right-[-20px]
-            h-44
-            w-44
+            h-28
+            w-28
             rounded-full
-            bg-cyan-500/10
-            blur-3xl
+            bg-cyan-500/[0.04]
+            blur-[60px]
           "
         />
 
@@ -96,23 +98,20 @@ export default function StatsBar({
 
         {/* HEADER */}
 
-        <div className="flex items-center gap-3 mb-5 px-1">
+        <div className="flex items-center gap-2 mb-4 px-1">
 
-          <div className="relative flex items-center justify-center">
+          <div className="flex items-center justify-center">
 
-            <div className="absolute w-3 h-3 rounded-full bg-emerald-400/30 blur-sm" />
-
-            <div className="relative w-1.5 h-1.5 rounded-full bg-emerald-300" />
+            <div className="w-1.5 h-1.5 rounded-full bg-emerald-300" />
 
           </div>
 
           <p
             className="
-              text-[9px]
-              md:text-[10px]
+              text-[8px]
               uppercase
-              tracking-[0.28em]
-              text-white/38
+              tracking-[0.24em]
+              text-white/28
             "
           >
 
@@ -127,39 +126,38 @@ export default function StatsBar({
         <div
           className="
             grid
-            grid-cols-1
-            sm:grid-cols-2
+            grid-cols-2
             xl:grid-cols-5
-            gap-3
+            gap-2.5
             items-stretch
           "
         >
 
           <MiniStatCard
-            label="Cotação USD"
+            label="USD"
             value={`R$ ${usdRate.toFixed(2)}`}
             accent="orange"
           />
 
           <MiniStatCard
-            label="Meta Semanal"
+            label="Meta"
             value={`${progress.toFixed(0)}%`}
             accent="emerald"
           />
 
           <MiniStatCard
-            label="Tempo Restante"
+            label="Restante"
             value={formatTime(remainingSeconds)}
             accent="cyan"
           />
 
           <MiniStatCard
-            label="Tempo em Live"
+            label="Live"
             value={formatTime(dailyTotalSeconds)}
           />
 
           <MiniStatCard
-            label="Status Atual"
+            label="Status"
             value={weeklyStatus
               .replace(/[🔥⚠️❌]/g, '')
               .trim()}

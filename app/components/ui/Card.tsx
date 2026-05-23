@@ -18,16 +18,16 @@ export default function Card({
         group
         relative
         overflow-hidden
-        rounded-[2rem]
+        rounded-[1.9rem]
         border
-        border-white/[0.06]
-        bg-[rgba(12,12,16,0.72)]
-        backdrop-blur-[24px]
-        transition-all
+        border-white/[0.03]
+        bg-[rgba(12,12,16,0.68)]
+        backdrop-blur-xl
+        transition-transform
         duration-500
-        shadow-[0_8px_40px_rgba(0,0,0,0.28)]
-        hover:border-white/[0.08]
-        hover:shadow-[0_12px_55px_rgba(0,0,0,0.34)]
+        shadow-[0_6px_30px_rgba(0,0,0,0.22)]
+        hover:-translate-y-[1px]
+        hover:shadow-[0_10px_40px_rgba(0,0,0,0.28)]
         ${className}
       `}
     >
@@ -39,7 +39,7 @@ export default function Card({
           pointer-events-none
           absolute
           inset-0
-          opacity-50
+          opacity-35
         "
       >
 
@@ -48,44 +48,29 @@ export default function Card({
         <div
           className="
             absolute
-            -top-28
+            -top-20
             left-1/2
-            h-44
-            w-44
+            h-32
+            w-32
             -translate-x-1/2
             rounded-full
-            bg-violet-500/[0.05]
-            blur-[100px]
+            bg-violet-500/[0.03]
+            blur-[70px]
           "
         />
 
-        {/* RIGHT LIGHT */}
+        {/* SIDE LIGHT */}
 
         <div
           className="
             absolute
-            top-[40%]
-            right-[-40px]
-            h-28
-            w-28
-            rounded-full
-            bg-cyan-400/[0.04]
-            blur-[80px]
-          "
-        />
-
-        {/* BOTTOM LIGHT */}
-
-        <div
-          className="
-            absolute
-            bottom-[-40px]
-            left-[12%]
+            top-[42%]
+            right-[-25px]
             h-20
             w-20
             rounded-full
-            bg-orange-400/[0.03]
-            blur-[60px]
+            bg-cyan-400/[0.025]
+            blur-[50px]
           "
         />
 
@@ -99,7 +84,7 @@ export default function Card({
           absolute
           inset-0
           bg-gradient-to-b
-          from-white/[0.025]
+          from-white/[0.015]
           via-transparent
           to-transparent
         "
@@ -112,9 +97,9 @@ export default function Card({
           pointer-events-none
           absolute
           inset-[1px]
-          rounded-[calc(2rem-1px)]
+          rounded-[calc(1.9rem-1px)]
           border
-          border-white/[0.02]
+          border-white/[0.015]
         "
       />
 
@@ -136,15 +121,15 @@ export default function Card({
           className="
             absolute
             top-0
-            left-[-25%]
+            left-[-20%]
             h-full
-            w-[26%]
+            w-[22%]
             rotate-12
             bg-gradient-to-r
             from-transparent
-            via-white/[0.02]
+            via-white/[0.012]
             to-transparent
-            blur-2xl
+            blur-xl
           "
         />
 

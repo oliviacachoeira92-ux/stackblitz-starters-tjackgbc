@@ -23,13 +23,13 @@
     rgba(255,255,255,0.96);
 
   --card:
-    rgba(15,15,20,0.72);
+    rgba(15,15,20,0.68);
 
   --border:
-    rgba(255,255,255,0.08);
+    rgba(255,255,255,0.03);
 
   --soft-border:
-    rgba(255,255,255,0.04);
+    rgba(255,255,255,0.015);
 
   --violet:
     rgba(139,92,246,1);
@@ -64,13 +64,13 @@ body {
   background:
     radial-gradient(
       circle at top,
-      rgba(139, 92, 246, 0.12),
-      transparent 38%
+      rgba(139, 92, 246, 0.08),
+      transparent 34%
     ),
     radial-gradient(
       circle at bottom right,
-      rgba(34, 211, 238, 0.08),
-      transparent 30%
+      rgba(34, 211, 238, 0.05),
+      transparent 24%
     ),
     #07070A;
 
@@ -87,6 +87,8 @@ body {
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  text-rendering: optimizeLegibility;
 }
 
 /* NOISE */
@@ -100,21 +102,21 @@ body::before {
 
   pointer-events: none;
 
-  opacity: 0.035;
+  opacity: 0.018;
 
   background-image:
     radial-gradient(
-      rgba(255,255,255,0.15) 0.6px,
-      transparent 0.6px
+      rgba(255,255,255,0.12) 0.5px,
+      transparent 0.5px
     );
 
   background-size:
-    6px 6px;
+    7px 7px;
 
   mask-image:
     radial-gradient(
       rgba(255,255,255,1),
-      transparent 75%
+      transparent 78%
     );
 
 }
@@ -150,12 +152,12 @@ input[type='number'] {
 /* SCROLLBAR */
 
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
   background:
-    rgba(255,255,255,0.02);
+    rgba(255,255,255,0.015);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -163,8 +165,8 @@ input[type='number'] {
   background:
     linear-gradient(
       to bottom,
-      rgba(139,92,246,0.45),
-      rgba(34,211,238,0.35)
+      rgba(139,92,246,0.35),
+      rgba(34,211,238,0.25)
     );
 
   border-radius: 999px;
@@ -175,8 +177,8 @@ input[type='number'] {
   background:
     linear-gradient(
       to bottom,
-      rgba(139,92,246,0.7),
-      rgba(34,211,238,0.55)
+      rgba(139,92,246,0.5),
+      rgba(34,211,238,0.4)
     );
 
 }
@@ -185,7 +187,7 @@ input[type='number'] {
 
 ::selection {
   background:
-    rgba(139,92,246,0.28);
+    rgba(139,92,246,0.22);
 
   color:
     white;
@@ -201,7 +203,7 @@ input[type='number'] {
       linear-gradient(
         to bottom,
         rgba(255,255,255,1),
-        rgba(255,255,255,0.72)
+        rgba(255,255,255,0.74)
       );
 
     -webkit-background-clip: text;
@@ -218,7 +220,7 @@ input[type='number'] {
       linear-gradient(
         to right,
         transparent,
-        rgba(255,255,255,0.08),
+        rgba(255,255,255,0.05),
         transparent
       );
   }
@@ -230,31 +232,33 @@ input[type='number'] {
     overflow: hidden;
 
     border:
-      1px solid rgba(255,255,255,0.08);
+      1px solid rgba(255,255,255,0.03);
 
     background:
-      rgba(15,15,20,0.72);
+      rgba(15,15,20,0.68);
 
     backdrop-filter:
-      blur(24px);
+      blur(16px);
 
     border-radius:
-      2rem;
+      1.8rem;
   }
 
   .hover-premium {
 
     transition:
-      all 0.4s ease;
+      transform 0.35s ease,
+      border-color 0.35s ease,
+      opacity 0.35s ease;
   }
 
   .hover-premium:hover {
 
     transform:
-      translateY(-2px);
+      translateY(-1px);
 
     border-color:
-      rgba(255,255,255,0.12);
+      rgba(255,255,255,0.05);
   }
 
   .glass-shine {
@@ -268,7 +272,7 @@ input[type='number'] {
       linear-gradient(
         120deg,
         transparent 0%,
-        rgba(255,255,255,0.025) 50%,
+        rgba(255,255,255,0.012) 50%,
         transparent 100%
       );
   }
@@ -286,7 +290,7 @@ input[type='number'] {
 
   50% {
     transform:
-      translateY(-8px);
+      translateY(-4px);
   }
 
   100% {
@@ -299,15 +303,15 @@ input[type='number'] {
 @keyframes softPulse {
 
   0% {
-    opacity: 0.6;
+    opacity: 0.55;
   }
 
   50% {
-    opacity: 1;
+    opacity: 0.9;
   }
 
   100% {
-    opacity: 0.6;
+    opacity: 0.55;
   }
 
 }
@@ -335,8 +339,8 @@ input[type='number'] {
     background:
       radial-gradient(
         circle at top,
-        rgba(139, 92, 246, 0.10),
-        transparent 35%
+        rgba(139, 92, 246, 0.08),
+        transparent 30%
       ),
       #07070A;
 

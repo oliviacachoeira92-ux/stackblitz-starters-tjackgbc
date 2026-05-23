@@ -21,61 +21,52 @@ export default function FenixRadio() {
         relative
         flex
         items-center
-        gap-4
+        gap-3
         overflow-hidden
         rounded-full
         border
-        border-white/[0.08]
-        bg-[rgba(15,15,20,0.72)]
-        backdrop-blur-2xl
-        px-4
-        py-3
-        transition-all
-        duration-500
-        hover:border-orange-400/20
-        hover:translate-y-[-2px]
-        active:scale-[0.98]
+        border-white/[0.03]
+        bg-[rgba(15,15,20,0.58)]
+        backdrop-blur-md
+        px-3
+        py-2.5
+        transition-transform
+        duration-300
+        hover:-translate-y-[1px]
+        active:scale-[0.985]
       "
     >
 
-      {/* AMBIENT LIGHT */}
+      {/* AMBIENT */}
 
-      <div className="absolute inset-0 pointer-events-none">
+      <div
+        className="
+          absolute
+          inset-0
+          pointer-events-none
+          opacity-45
+        "
+      >
 
         {/* MAIN */}
 
         <div
           className={`
             absolute
-            top-[-40px]
-            right-[-20px]
-            h-32
-            w-32
-            rounded-full
-            blur-[90px]
-            transition-all
-            duration-700
-            ${
-              isPlaying
-                ? 'bg-orange-500/[0.14] opacity-100'
-                : 'bg-violet-500/[0.06] opacity-60'
-            }
-          `}
-        />
-
-        {/* SECONDARY */}
-
-        <div
-          className="
-            absolute
-            bottom-[-20px]
-            left-[10%]
+            top-[-25px]
+            right-[-10px]
             h-20
             w-20
             rounded-full
-            bg-cyan-500/[0.05]
-            blur-[60px]
-          "
+            blur-[45px]
+            transition-opacity
+            duration-500
+            ${
+              isPlaying
+                ? 'bg-orange-500/[0.08] opacity-100'
+                : 'bg-violet-500/[0.03] opacity-60'
+            }
+          `}
         />
 
       </div>
@@ -88,8 +79,8 @@ export default function FenixRadio() {
           flex
           items-center
           justify-center
-          h-16
-          w-16
+          h-14
+          w-14
           shrink-0
         "
       >
@@ -102,12 +93,12 @@ export default function FenixRadio() {
             inset-0
             rounded-full
             border
-            transition-all
-            duration-500
+            transition-colors
+            duration-300
             ${
               isPlaying
-                ? 'border-orange-400/30 shadow-[0_0_60px_rgba(255,120,0,0.25)]'
-                : 'border-white/10'
+                ? 'border-orange-400/[0.12]'
+                : 'border-white/[0.04]'
             }
           `}
         />
@@ -117,11 +108,11 @@ export default function FenixRadio() {
         <div
           className={`
             relative
-            h-12
-            w-12
+            h-10
+            w-10
             rounded-full
             border
-            border-white/10
+            border-white/[0.04]
             bg-gradient-to-br
             from-zinc-900
             via-black
@@ -133,7 +124,7 @@ export default function FenixRadio() {
             }
           `}
           style={{
-            animationDuration: '7s',
+            animationDuration: '10s',
           }}
         >
 
@@ -145,17 +136,17 @@ export default function FenixRadio() {
               inset-1
               rounded-full
               border
-              border-white/5
+              border-white/[0.03]
             "
           />
 
           <div
             className="
               absolute
-              inset-[10px]
+              inset-[8px]
               rounded-full
               border
-              border-white/5
+              border-white/[0.03]
             "
           />
 
@@ -169,15 +160,14 @@ export default function FenixRadio() {
               flex
               items-center
               justify-center
-              h-5
-              w-5
+              h-4
+              w-4
               -translate-x-1/2
               -translate-y-1/2
               rounded-full
               bg-gradient-to-br
               from-orange-400
               to-red-500
-              shadow-[0_0_25px_rgba(255,120,0,0.55)]
             "
           >
 
@@ -185,9 +175,9 @@ export default function FenixRadio() {
 
               <div className="flex items-center gap-[2px]">
 
-                <div className="h-2 w-[2px] rounded-full bg-white" />
+                <div className="h-1.5 w-[2px] rounded-full bg-white" />
 
-                <div className="h-2 w-[2px] rounded-full bg-white" />
+                <div className="h-1.5 w-[2px] rounded-full bg-white" />
 
               </div>
 
@@ -195,11 +185,11 @@ export default function FenixRadio() {
 
               <div
                 className="
-                  ml-[2px]
+                  ml-[1px]
                   h-0
                   w-0
-                  border-y-[4px]
-                  border-l-[6px]
+                  border-y-[3px]
+                  border-l-[5px]
                   border-y-transparent
                   border-l-white
                 "
@@ -215,7 +205,16 @@ export default function FenixRadio() {
 
       {/* INFO */}
 
-      <div className="relative z-10 flex flex-col items-start text-left">
+      <div
+        className="
+          relative
+          z-10
+          flex
+          flex-col
+          items-start
+          text-left
+        "
+      >
 
         {/* STATUS */}
 
@@ -223,14 +222,14 @@ export default function FenixRadio() {
 
           <div
             className={`
-              h-2
-              w-2
+              h-1.5
+              w-1.5
               rounded-full
-              transition-all
-              duration-500
+              transition-colors
+              duration-300
               ${
                 isPlaying
-                  ? 'bg-red-500 animate-pulse shadow-[0_0_10px_rgba(255,0,0,0.8)]'
+                  ? 'bg-red-500'
                   : 'bg-zinc-600'
               }
             `}
@@ -238,15 +237,15 @@ export default function FenixRadio() {
 
           <p
             className={`
-              text-[9px]
+              text-[8px]
               uppercase
-              tracking-[0.26em]
-              transition-all
-              duration-500
+              tracking-[0.22em]
+              transition-colors
+              duration-300
               ${
                 isPlaying
-                  ? 'text-orange-200'
-                  : 'text-white/35'
+                  ? 'text-orange-200/85'
+                  : 'text-white/28'
               }
             `}
           >
@@ -263,15 +262,15 @@ export default function FenixRadio() {
 
         <h3
           className={`
-            mt-2
-            text-sm
-            font-semibold
-            transition-all
-            duration-500
+            mt-1.5
+            text-[13px]
+            font-medium
+            transition-colors
+            duration-300
             ${
               isPlaying
                 ? 'text-white'
-                : 'text-white/60'
+                : 'text-white/55'
             }
           `}
         >
@@ -287,4 +286,5 @@ export default function FenixRadio() {
     </button>
 
   );
+
 }

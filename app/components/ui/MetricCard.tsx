@@ -26,70 +26,70 @@ export default function MetricCard({
 
     default: {
       border:
-        'border-white/8',
+        'border-white/[0.03]',
 
       glow:
-        'from-white/[0.05]',
+        'from-white/[0.025]',
 
       label:
-        'text-white/38',
+        'text-white/30',
 
       text:
         'text-white',
 
       ambient:
-        'bg-white/[0.03]',
+        'bg-white/[0.02]',
     },
 
     cyan: {
       border:
-        'border-cyan-300/10',
+        'border-cyan-300/[0.05]',
 
       glow:
-        'from-cyan-400/[0.07]',
+        'from-cyan-400/[0.04]',
 
       label:
-        'text-cyan-100/55',
+        'text-cyan-100/50',
 
       text:
         'text-cyan-50',
 
       ambient:
-        'bg-cyan-400/[0.05]',
+        'bg-cyan-400/[0.03]',
     },
 
     emerald: {
       border:
-        'border-emerald-400/10',
+        'border-emerald-400/[0.05]',
 
       glow:
-        'from-emerald-400/[0.08]',
+        'from-emerald-400/[0.05]',
 
       label:
-        'text-emerald-200/60',
+        'text-emerald-200/55',
 
       text:
         'text-emerald-50',
 
       ambient:
-        'bg-emerald-400/[0.05]',
+        'bg-emerald-400/[0.03]',
     },
 
     amber: {
       border:
-        'border-amber-300/10',
+        'border-amber-300/[0.05]',
 
       glow:
-        'from-amber-300/[0.07]',
+        'from-amber-300/[0.04]',
 
       label:
-        'text-amber-100/50',
+        'text-amber-100/45',
 
       text:
         'text-amber-50',
 
       ambient:
-        'bg-amber-300/[0.05]',
+        'bg-amber-300/[0.03]',
     },
 
   };
@@ -102,24 +102,24 @@ export default function MetricCard({
     <div
       className={`
         card-premium
-        hover-premium
         group
         relative
         overflow-hidden
-        min-h-[88px]
-        md:min-h-[112px]
+        min-h-[82px]
+        md:min-h-[100px]
         px-4
-        py-5
+        py-4
         md:px-5
-        md:py-6
+        md:py-5
         flex
         flex-col
         items-center
         justify-center
         text-center
-        backdrop-blur-2xl
-        transition-all
+        backdrop-blur-xl
+        transition-transform
         duration-300
+        hover:-translate-y-[1px]
         ${style.border}
         ${
           large
@@ -135,7 +135,7 @@ export default function MetricCard({
         className="
           absolute
           inset-0
-          opacity-60
+          opacity-45
           pointer-events-none
         "
       >
@@ -143,36 +143,23 @@ export default function MetricCard({
         <div
           className={`
             absolute
-            -top-20
-            right-[-20px]
-            w-40
-            md:w-48
-            h-40
-            md:h-48
+            -top-16
+            right-[-10px]
+            w-28
+            md:w-36
+            h-28
+            md:h-36
             rounded-full
-            blur-3xl
+            blur-[55px]
             bg-gradient-to-br
             ${style.glow}
             to-transparent
           `}
         />
 
-        <div
-          className={`
-            absolute
-            bottom-[-30px]
-            left-[12%]
-            w-14
-            h-14
-            rounded-full
-            blur-2xl
-            ${style.ambient}
-          `}
-        />
-
       </div>
 
-      {/* FEATURED LIGHT */}
+      {/* FEATURED */}
 
       {featured && (
 
@@ -184,13 +171,13 @@ export default function MetricCard({
               top-[-10px]
               left-1/2
               -translate-x-1/2
-              w-[160px]
-              md:w-[200px]
-              h-[80px]
-              md:h-[100px]
+              w-[140px]
+              md:w-[180px]
+              h-[70px]
+              md:h-[90px]
               rounded-full
-              bg-violet-500/8
-              blur-[70px]
+              bg-violet-500/[0.05]
+              blur-[55px]
             "
           />
 
@@ -202,7 +189,7 @@ export default function MetricCard({
 
       {status && (
 
-        <div className="absolute top-4 right-4 flex items-center gap-2">
+        <div className="absolute top-3 right-3 flex items-center gap-1.5">
 
           <div
             className="
@@ -210,16 +197,15 @@ export default function MetricCard({
               h-1.5
               rounded-full
               bg-emerald-300
-              shadow-[0_0_10px_rgba(52,211,153,0.6)]
             "
           />
 
           <p
             className="
-              text-[8px]
+              text-[7px]
               uppercase
-              tracking-[0.18em]
-              text-white/30
+              tracking-[0.16em]
+              text-white/25
             "
           >
 
@@ -239,7 +225,7 @@ export default function MetricCard({
           inset-0
           pointer-events-none
           bg-gradient-to-b
-          from-white/[0.025]
+          from-white/[0.015]
           via-transparent
           to-transparent
         "
@@ -254,8 +240,8 @@ export default function MetricCard({
             text-[8px]
             md:text-[9px]
             uppercase
-            tracking-[0.22em]
-            mb-3
+            tracking-[0.18em]
+            mb-2
             font-medium
             ${style.label}
           `}
@@ -267,21 +253,22 @@ export default function MetricCard({
 
         <h3
           className={`
+            tabular-nums
             w-full
             font-semibold
-            tracking-[-0.04em]
+            tracking-[-0.03em]
             leading-[1]
             break-words
             ${
               featured
-                ? 'text-[clamp(1.3rem,7vw,2.6rem)]'
+                ? 'text-[clamp(1.2rem,7vw,2.2rem)]'
                 : large
-                ? 'text-[clamp(1rem,5vw,1.7rem)]'
-                : 'text-[clamp(0.95rem,4vw,1.15rem)]'
+                ? 'text-[clamp(1rem,5vw,1.5rem)]'
+                : 'text-[clamp(0.9rem,4vw,1.05rem)]'
             }
             ${
               status
-                ? 'text-[clamp(0.85rem,4vw,1rem)]'
+                ? 'text-[clamp(0.82rem,4vw,0.95rem)]'
                 : ''
             }
             ${style.text}

@@ -20,35 +20,35 @@ export default function MiniStatCard({
   const accents = {
 
     default: {
-      border: 'border-white/10',
-      glow: 'bg-white/[0.03]',
+      border: 'border-white/[0.03]',
+      glow: 'bg-white/[0.015]',
       text: 'text-white',
-      label: 'text-white/35',
-      ambient: 'bg-white/[0.04]',
+      label: 'text-white/30',
+      ambient: 'bg-white/[0.025]',
     },
 
     orange: {
-      border: 'border-orange-500/15',
-      glow: 'bg-orange-500/[0.04]',
+      border: 'border-orange-500/[0.05]',
+      glow: 'bg-orange-500/[0.02]',
       text: 'text-orange-50',
-      label: 'text-orange-200/70',
-      ambient: 'bg-orange-500/[0.08]',
+      label: 'text-orange-200/65',
+      ambient: 'bg-orange-500/[0.04]',
     },
 
     emerald: {
-      border: 'border-emerald-500/15',
-      glow: 'bg-emerald-500/[0.04]',
+      border: 'border-emerald-500/[0.05]',
+      glow: 'bg-emerald-500/[0.02]',
       text: 'text-emerald-50',
-      label: 'text-emerald-200/70',
-      ambient: 'bg-emerald-500/[0.08]',
+      label: 'text-emerald-200/65',
+      ambient: 'bg-emerald-500/[0.04]',
     },
 
     cyan: {
-      border: 'border-cyan-500/15',
-      glow: 'bg-cyan-500/[0.04]',
+      border: 'border-cyan-500/[0.05]',
+      glow: 'bg-cyan-500/[0.02]',
       text: 'text-cyan-50',
-      label: 'text-cyan-200/70',
-      ambient: 'bg-cyan-500/[0.08]',
+      label: 'text-cyan-200/65',
+      ambient: 'bg-cyan-500/[0.04]',
     },
 
   };
@@ -63,16 +63,15 @@ export default function MiniStatCard({
         group
         relative
         overflow-hidden
-        rounded-[1.5rem]
+        rounded-[1.35rem]
         border
-        px-4
-        py-4
-        min-h-[96px]
-        backdrop-blur-2xl
-        transition-all
+        px-3
+        py-3
+        min-h-[82px]
+        backdrop-blur-xl
+        transition-transform
         duration-300
-        hover:border-white/15
-        hover:translate-y-[-2px]
+        hover:-translate-y-[1px]
         ${style.border}
         ${style.glow}
       `}
@@ -85,19 +84,19 @@ export default function MiniStatCard({
           absolute
           inset-0
           pointer-events-none
-          opacity-70
+          opacity-50
         "
       >
 
         <div
           className={`
             absolute
-            top-[-30px]
-            right-[-20px]
-            h-24
-            w-24
+            top-[-20px]
+            right-[-10px]
+            h-16
+            w-16
             rounded-full
-            blur-3xl
+            blur-[45px]
             ${style.ambient}
           `}
         />
@@ -112,7 +111,7 @@ export default function MiniStatCard({
           inset-0
           pointer-events-none
           bg-gradient-to-b
-          from-white/[0.03]
+          from-white/[0.015]
           via-transparent
           to-transparent
         "
@@ -120,14 +119,23 @@ export default function MiniStatCard({
 
       {/* CONTENT */}
 
-      <div className="relative z-10 flex flex-col justify-center h-full">
+      <div
+        className="
+          relative
+          z-10
+          flex
+          flex-col
+          justify-center
+          h-full
+        "
+      >
 
         <p
           className={`
-            text-[9px]
+            text-[8px]
             uppercase
-            tracking-[0.20em]
-            mb-3
+            tracking-[0.18em]
+            mb-2
             font-medium
             ${style.label}
           `}
@@ -139,11 +147,12 @@ export default function MiniStatCard({
 
         <h3
           className={`
-            text-base
-            md:text-lg
-            font-black
+            tabular-nums
+            text-sm
+            md:text-base
+            font-semibold
             leading-tight
-            tracking-tight
+            tracking-[-0.03em]
             break-words
             ${style.text}
           `}

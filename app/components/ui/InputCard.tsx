@@ -48,82 +48,82 @@ export default function InputCard({
 
     default: {
       border:
-        'border-white/8',
+        'border-white/[0.03]',
 
       glow:
-        'from-white/[0.04]',
+        'from-white/[0.025]',
 
       text:
         'text-white',
 
       label:
-        'text-white/38',
+        'text-white/30',
 
       placeholder:
         'placeholder:text-zinc-600',
 
       inputGlow:
-        'focus-within:border-white/10',
+        'focus-within:border-white/[0.06]',
     },
 
     cyan: {
       border:
-        'border-cyan-400/10',
+        'border-cyan-400/[0.05]',
 
       glow:
-        'from-cyan-400/[0.07]',
+        'from-cyan-400/[0.04]',
 
       text:
         'text-cyan-50',
 
       label:
-        'text-cyan-100/60',
+        'text-cyan-100/50',
 
       placeholder:
-        'placeholder:text-cyan-100/18',
+        'placeholder:text-cyan-100/15',
 
       inputGlow:
-        'focus-within:border-cyan-300/18',
+        'focus-within:border-cyan-300/[0.08]',
     },
 
     emerald: {
       border:
-        'border-emerald-400/10',
+        'border-emerald-400/[0.05]',
 
       glow:
-        'from-emerald-400/[0.07]',
+        'from-emerald-400/[0.04]',
 
       text:
         'text-emerald-50',
 
       label:
-        'text-emerald-200/65',
+        'text-emerald-200/55',
 
       placeholder:
-        'placeholder:text-emerald-100/18',
+        'placeholder:text-emerald-100/15',
 
       inputGlow:
-        'focus-within:border-emerald-300/18',
+        'focus-within:border-emerald-300/[0.08]',
     },
 
     fuchsia: {
       border:
-        'border-fuchsia-400/10',
+        'border-fuchsia-400/[0.05]',
 
       glow:
-        'from-fuchsia-400/[0.06]',
+        'from-fuchsia-400/[0.04]',
 
       text:
         'text-fuchsia-50',
 
       label:
-        'text-fuchsia-100/58',
+        'text-fuchsia-100/50',
 
       placeholder:
-        'placeholder:text-fuchsia-100/18',
+        'placeholder:text-fuchsia-100/15',
 
       inputGlow:
-        'focus-within:border-fuchsia-300/18',
+        'focus-within:border-fuchsia-300/[0.08]',
     },
 
   };
@@ -136,36 +136,43 @@ export default function InputCard({
     <div
       className={`
         card-premium
-        hover-premium
         group
         relative
         overflow-hidden
-        min-h-[96px]
-        md:min-h-[124px]
+        min-h-[84px]
+        md:min-h-[108px]
         px-4
-        py-5
+        py-4
         md:px-5
-        md:py-6
-        backdrop-blur-2xl
-        transition-all
+        md:py-5
+        backdrop-blur-xl
+        transition-transform
         duration-300
+        hover:-translate-y-[1px]
         ${style.border}
       `}
     >
 
       {/* AMBIENT */}
 
-      <div className="absolute inset-0 opacity-50 pointer-events-none">
+      <div
+        className="
+          absolute
+          inset-0
+          opacity-40
+          pointer-events-none
+        "
+      >
 
         <div
           className={`
             absolute
-            -top-20
-            right-[-20px]
-            w-40
-            h-40
+            -top-14
+            right-[-10px]
+            w-28
+            h-28
             rounded-full
-            blur-3xl
+            blur-[50px]
             bg-gradient-to-br
             ${style.glow}
             to-transparent
@@ -182,7 +189,7 @@ export default function InputCard({
           inset-0
           pointer-events-none
           bg-gradient-to-b
-          from-white/[0.025]
+          from-white/[0.015]
           via-transparent
           to-transparent
         "
@@ -190,7 +197,16 @@ export default function InputCard({
 
       {/* CONTENT */}
 
-      <div className="relative z-10 h-full flex flex-col justify-between">
+      <div
+        className="
+          relative
+          z-10
+          h-full
+          flex
+          flex-col
+          justify-between
+        "
+      >
 
         <div>
 
@@ -199,10 +215,10 @@ export default function InputCard({
           <p
             className={`
               uppercase
-              tracking-[0.22em]
+              tracking-[0.18em]
               text-[8px]
               md:text-[9px]
-              mb-3
+              mb-2
               font-medium
               ${style.label}
             `}
@@ -218,14 +234,15 @@ export default function InputCard({
 
             <div
               className={`
+                tabular-nums
                 w-full
                 min-w-0
-                text-[clamp(1rem,2.8vw,1.65rem)]
-                md:text-[clamp(1.1rem,2vw,1.9rem)]
+                text-[clamp(0.95rem,2.6vw,1.45rem)]
+                md:text-[clamp(1rem,2vw,1.7rem)]
                 font-semibold
                 leading-none
                 break-words
-                tracking-[-0.04em]
+                tracking-[-0.03em]
                 ${style.text}
               `}
             >
@@ -239,12 +256,12 @@ export default function InputCard({
             <div
               className={`
                 relative
-                rounded-2xl
+                rounded-[1.2rem]
                 border
-                border-white/5
-                bg-black/25
-                backdrop-blur-xl
-                transition-all
+                border-white/[0.03]
+                bg-black/20
+                backdrop-blur-md
+                transition-colors
                 duration-300
                 ${style.inputGlow}
               `}
@@ -256,9 +273,9 @@ export default function InputCard({
                 className="
                   absolute
                   inset-0
-                  rounded-2xl
+                  rounded-[1.2rem]
                   bg-gradient-to-r
-                  from-white/[0.015]
+                  from-white/[0.01]
                   to-transparent
                   pointer-events-none
                 "
@@ -278,16 +295,17 @@ export default function InputCard({
                 className={`
                   relative
                   z-10
+                  tabular-nums
                   w-full
                   min-w-0
                   bg-transparent
                   px-4
                   py-3
-                  text-[clamp(1rem,2.8vw,1.6rem)]
-                  md:text-[clamp(1.1rem,2vw,1.9rem)]
+                  text-[clamp(0.95rem,2.6vw,1.45rem)]
+                  md:text-[clamp(1rem,2vw,1.7rem)]
                   font-semibold
                   leading-none
-                  tracking-[-0.04em]
+                  tracking-[-0.03em]
                   outline-none
                   ${style.text}
                   ${style.placeholder}
@@ -306,9 +324,9 @@ export default function InputCard({
 
           <p
             className="
-              text-white/30
-              mt-4
-              text-[10px]
+              text-white/24
+              mt-3
+              text-[9px]
               tracking-wide
             "
           >

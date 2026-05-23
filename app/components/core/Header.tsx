@@ -4,22 +4,22 @@ export default function Header() {
 
   return (
 
-    <div className="relative mb-6 md:mb-8">
+    <div className="relative mb-5 md:mb-6">
 
-      {/* AMBIENT GLOW */}
+      {/* AMBIENT */}
 
       <div
         className="
           absolute
-          -top-20
+          -top-16
           left-1/2
           -translate-x-1/2
-          w-[260px]
-          md:w-[360px]
-          h-[140px]
-          md:h-[180px]
-          bg-violet-500/10
-          blur-[90px]
+          w-[220px]
+          md:w-[300px]
+          h-[120px]
+          md:h-[150px]
+          bg-violet-500/[0.05]
+          blur-[65px]
           rounded-full
           pointer-events-none
         "
@@ -33,34 +33,28 @@ export default function Header() {
           items-center
           gap-2
           px-3
-          md:px-4
           py-1.5
           rounded-full
           border
-          border-white/10
-          bg-white/[0.03]
-          backdrop-blur-xl
-          shadow-[0_0_18px_rgba(0,0,0,0.18)]
+          border-white/[0.04]
+          bg-white/[0.02]
+          backdrop-blur-md
           mb-4
         "
       >
 
-        <div className="relative flex items-center justify-center">
+        <div className="flex items-center justify-center">
 
-          <div className="absolute w-3 h-3 rounded-full bg-violet-400/30 blur-sm" />
-
-          <div className="relative w-1.5 h-1.5 rounded-full bg-violet-300" />
+          <div className="w-1.5 h-1.5 rounded-full bg-violet-300" />
 
         </div>
 
         <p
           className="
             text-[8px]
-            md:text-[9px]
             uppercase
             tracking-[0.22em]
-            md:tracking-[0.26em]
-            text-white/45
+            text-white/40
             whitespace-nowrap
           "
         >
@@ -93,16 +87,24 @@ export default function Header() {
 
           <div className="relative inline-block max-w-full">
 
-            <div className="absolute inset-0 bg-violet-500/10 blur-2xl rounded-full" />
+            <div
+              className="
+                absolute
+                inset-0
+                bg-violet-500/[0.05]
+                blur-[40px]
+                rounded-full
+              "
+            />
 
             <h1
               className="
                 relative
                 title-gradient
-                text-[clamp(2rem,8vw,5rem)]
+                text-[clamp(1.9rem,7vw,4.2rem)]
                 font-black
-                tracking-[-0.06em]
-                leading-[0.9]
+                tracking-[-0.05em]
+                leading-[0.92]
                 break-words
               "
             >
@@ -120,22 +122,19 @@ export default function Header() {
             <div
               className="
                 h-[1px]
-                w-8
-                md:w-10
+                w-7
                 bg-gradient-to-r
-                from-violet-400/50
+                from-violet-400/35
                 to-transparent
               "
             />
 
             <p
               className="
-                text-white/35
+                text-white/28
                 tracking-[0.22em]
-                md:tracking-[0.28em]
                 uppercase
                 text-[8px]
-                md:text-[9px]
               "
             >
 
@@ -149,18 +148,17 @@ export default function Header() {
 
           <p
             className="
-              text-white/58
+              text-white/50
               mt-4
-              text-sm
-              md:text-base
-              max-w-[520px]
+              text-[13px]
+              md:text-[15px]
+              max-w-[500px]
               leading-relaxed
             "
           >
 
             Ferramenta premium de conversão para streamers Alii Live.
-            Calcule valores, pontos, diamantes e saques com velocidade,
-            precisão e uma experiência visual refinada.
+            Calcule pontos, diamantes, USD, BRL e saques em tempo real.
 
           </p>
 
@@ -179,25 +177,32 @@ export default function Header() {
           "
         >
 
-          {/* RADIO CONTAINER */}
+          {/* RADIO */}
 
           <div
             className="
-              card-premium
-              hover-premium
               relative
               p-2
-              md:p-3
-              rounded-[1.6rem]
-              md:rounded-[1.8rem]
-              w-full
-              max-w-fit
+              rounded-[1.5rem]
+              border
+              border-white/[0.03]
+              bg-white/[0.015]
+              backdrop-blur-md
             "
           >
 
-            {/* GLOW */}
+            {/* LIGHT */}
 
-            <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-[1.8rem]">
+            <div
+              className="
+                absolute
+                inset-0
+                overflow-hidden
+                rounded-[1.5rem]
+                pointer-events-none
+                opacity-50
+              "
+            >
 
               <div
                 className="
@@ -206,13 +211,11 @@ export default function Header() {
                   left-1/2
                   -translate-x-1/2
                   -translate-y-1/2
-                  w-20
-                  md:w-24
-                  h-20
-                  md:h-24
+                  w-16
+                  h-16
                   rounded-full
-                  bg-violet-500/10
-                  blur-3xl
+                  bg-violet-500/[0.05]
+                  blur-[45px]
                 "
               />
 
@@ -222,8 +225,8 @@ export default function Header() {
               className="
                 relative
                 z-10
-                scale-[0.88]
-                md:scale-[0.92]
+                scale-[0.86]
+                md:scale-[0.9]
                 origin-left
               "
             >
@@ -240,8 +243,10 @@ export default function Header() {
 
       {/* DIVIDER */}
 
-      <div className="mt-6 soft-divider" />
+      <div className="mt-5 soft-divider" />
 
     </div>
+
   );
+
 }
