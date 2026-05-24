@@ -14,29 +14,38 @@ export default function ClockCard({
       className="
         relative
         overflow-hidden
-        px-4
-        py-4
-        md:px-5
-        md:py-5
+        h-[104px]
+        px-5
+        flex
+        items-center
       "
     >
 
-      {/* AMBIENT LIGHT */}
+      {/* LIGHT */}
 
-      <div className="absolute inset-0 pointer-events-none opacity-60">
-
-        {/* MAIN GLOW */}
+      <div
+        className="
+          absolute
+          inset-0
+          overflow-hidden
+          rounded-[1.5rem]
+          pointer-events-none
+          opacity-50
+        "
+      >
 
         <div
           className="
             absolute
-            top-[-40px]
-            right-[-20px]
-            w-32
-            h-32
+            top-1/2
+            left-1/2
+            -translate-x-1/2
+            -translate-y-1/2
+            w-20
+            h-20
             rounded-full
-            bg-orange-500/[0.06]
-            blur-[60px]
+            bg-orange-500/[0.05]
+            blur-[45px]
           "
         />
 
@@ -44,109 +53,100 @@ export default function ClockCard({
 
       {/* CONTENT */}
 
-      <div className="relative z-10">
+      <div
+        className="
+          relative
+          z-10
+          w-full
+          flex
+          items-center
+          justify-between
+          gap-4
+        "
+      >
+
+        {/* LEFT */}
 
         <div
           className="
+            min-w-0
             flex
-            items-center
-            justify-between
-            gap-4
-            flex-wrap
+            flex-col
+            gap-2
           "
         >
 
-          {/* LEFT */}
+          {/* LABEL */}
 
-          <div>
+          <div
+            className="
+              inline-flex
+              items-center
+              gap-2
+              px-2.5
+              py-1
+              rounded-full
+              border
+              border-orange-400/[0.06]
+              bg-orange-400/[0.03]
+              backdrop-blur-sm
+              w-fit
+            "
+          >
 
-            {/* LABEL */}
+            <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
 
-            <div
+            <p
               className="
-                inline-flex
-                items-center
-                gap-2
-                px-2.5
-                py-1
-                rounded-full
-                border
-                border-orange-400/[0.06]
-                bg-orange-400/[0.03]
-                backdrop-blur-sm
+                text-[8px]
+                uppercase
+                tracking-[0.22em]
+                text-orange-200/70
+                whitespace-nowrap
               "
             >
 
-              <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
+              HORÁRIO OFICIAL
 
-              <p
-                className="
-                  text-[8px]
-                  uppercase
-                  tracking-[0.22em]
-                  text-orange-200/70
-                "
-              >
-
-                HORÁRIO OFICIAL
-
-              </p>
-
-            </div>
-
-            {/* LOCATION */}
-
-            <div className="mt-3">
-
-              <p
-                className="
-                  text-white/60
-                  text-sm
-                  font-medium
-                "
-              >
-
-                São Paulo
-
-              </p>
-
-              <p
-                className="
-                  mt-1
-                  text-white/25
-                  text-[11px]
-                  tracking-wide
-                "
-              >
-
-                UTC -3 • Brasil
-
-              </p>
-
-            </div>
+            </p>
 
           </div>
 
-          {/* TIME */}
+          {/* LOCATION */}
 
-          <div className="text-left md:text-right">
+          <p
+            className="
+              text-white/38
+              text-[11px]
+              whitespace-nowrap
+            "
+          >
 
-            <h2
-              className="
-                tabular-nums
-                text-[clamp(1.8rem,5vw,3.4rem)]
-                font-semibold
-                tracking-[-0.06em]
-                leading-none
-                text-white
-              "
-            >
+            São Paulo • UTC -3
 
-              {time}
+          </p>
 
-            </h2>
+        </div>
 
-          </div>
+        {/* TIME */}
+
+        <div className="shrink-0">
+
+          <h2
+            className="
+              tabular-nums
+              text-[2.25rem]
+              font-semibold
+              tracking-[-0.08em]
+              leading-none
+              text-white
+              whitespace-nowrap
+            "
+          >
+
+            {time}
+
+          </h2>
 
         </div>
 
@@ -155,4 +155,5 @@ export default function ClockCard({
     </Card>
 
   );
+
 }

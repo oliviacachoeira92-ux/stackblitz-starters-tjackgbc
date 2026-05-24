@@ -1,25 +1,32 @@
 import FenixRadio from './FenixRadio';
 
-export default function Header() {
+import ClockCard from '../dashboard/ClockCard';
+
+interface HeaderProps {
+  time: string;
+}
+
+export default function Header({
+  time,
+}: HeaderProps) {
 
   return (
 
-    <div className="relative mb-5 md:mb-6">
+    <div className="relative mb-5">
 
       {/* AMBIENT */}
 
       <div
         className="
           absolute
-          -top-16
+          -top-14
           left-1/2
           -translate-x-1/2
           w-[220px]
-          md:w-[300px]
+          md:w-[280px]
           h-[120px]
-          md:h-[150px]
           bg-violet-500/[0.05]
-          blur-[65px]
+          blur-[60px]
           rounded-full
           pointer-events-none
         "
@@ -73,9 +80,9 @@ export default function Header() {
           flex
           flex-col
           xl:flex-row
-          xl:items-start
+          xl:items-center
           xl:justify-between
-          gap-4
+          gap-5
         "
       >
 
@@ -92,7 +99,7 @@ export default function Header() {
                 absolute
                 inset-0
                 bg-violet-500/[0.05]
-                blur-[40px]
+                blur-[35px]
                 rounded-full
               "
             />
@@ -101,7 +108,7 @@ export default function Header() {
               className="
                 relative
                 title-gradient
-                text-[clamp(1.9rem,7vw,4.2rem)]
+                text-[clamp(2rem,6vw,4rem)]
                 font-black
                 tracking-[-0.05em]
                 leading-[0.92]
@@ -117,7 +124,7 @@ export default function Header() {
 
           {/* SUB */}
 
-          <div className="mt-3 flex items-center gap-3">
+          <div className="mt-2.5 flex items-center gap-3">
 
             <div
               className="
@@ -149,10 +156,10 @@ export default function Header() {
           <p
             className="
               text-white/50
-              mt-4
+              mt-3
               text-[13px]
-              md:text-[15px]
-              max-w-[500px]
+              md:text-[14px]
+              max-w-[520px]
               leading-relaxed
             "
           >
@@ -168,14 +175,28 @@ export default function Header() {
 
         <div
           className="
-            relative
             flex
             items-center
-            justify-start
-            xl:justify-center
-            min-w-0
+            gap-4
+            flex-wrap
+            xl:flex-nowrap
           "
         >
+
+          {/* CLOCK */}
+
+          <div
+            className="
+              w-[320px]
+              shrink-0
+            "
+          >
+
+            <ClockCard
+              time={time}
+            />
+
+          </div>
 
           {/* RADIO */}
 
@@ -188,6 +209,10 @@ export default function Header() {
               border-white/[0.03]
               bg-white/[0.015]
               backdrop-blur-md
+              h-[104px]
+              flex
+              items-center
+              shrink-0
             "
           >
 
@@ -215,7 +240,7 @@ export default function Header() {
                   h-16
                   rounded-full
                   bg-violet-500/[0.05]
-                  blur-[45px]
+                  blur-[40px]
                 "
               />
 
@@ -225,9 +250,9 @@ export default function Header() {
               className="
                 relative
                 z-10
-                scale-[0.86]
-                md:scale-[0.9]
-                origin-left
+                scale-[0.84]
+                md:scale-[0.88]
+                origin-center
               "
             >
 

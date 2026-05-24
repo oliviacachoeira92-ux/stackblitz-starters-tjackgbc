@@ -18,28 +18,28 @@ export default function Card({
         group
         relative
         overflow-hidden
-        rounded-[1.9rem]
+        rounded-[1.8rem]
         border
-        border-white/[0.03]
-        bg-[rgba(12,12,16,0.68)]
-        backdrop-blur-xl
-        transition-transform
-        duration-500
-        shadow-[0_6px_30px_rgba(0,0,0,0.22)]
+        border-white/[0.035]
+        bg-[rgba(12,12,16,0.74)]
+        backdrop-blur-md
+        transition-all
+        duration-300
+        shadow-[0_4px_24px_rgba(0,0,0,0.18)]
         hover:-translate-y-[1px]
-        hover:shadow-[0_10px_40px_rgba(0,0,0,0.28)]
+        hover:shadow-[0_8px_34px_rgba(0,0,0,0.22)]
         ${className}
       `}
     >
 
-      {/* AMBIENT LIGHT */}
+      {/* AMBIENT */}
 
       <div
         className="
           pointer-events-none
           absolute
           inset-0
-          opacity-35
+          opacity-30
         "
       >
 
@@ -48,14 +48,14 @@ export default function Card({
         <div
           className="
             absolute
-            -top-20
+            -top-16
             left-1/2
-            h-32
-            w-32
+            h-24
+            w-24
             -translate-x-1/2
             rounded-full
-            bg-violet-500/[0.03]
-            blur-[70px]
+            bg-violet-500/[0.025]
+            blur-[45px]
           "
         />
 
@@ -64,13 +64,13 @@ export default function Card({
         <div
           className="
             absolute
-            top-[42%]
-            right-[-25px]
-            h-20
-            w-20
+            top-[45%]
+            right-[-18px]
+            h-16
+            w-16
             rounded-full
-            bg-cyan-400/[0.025]
-            blur-[50px]
+            bg-cyan-400/[0.02]
+            blur-[35px]
           "
         />
 
@@ -84,7 +84,7 @@ export default function Card({
           absolute
           inset-0
           bg-gradient-to-b
-          from-white/[0.015]
+          from-white/[0.012]
           via-transparent
           to-transparent
         "
@@ -97,43 +97,11 @@ export default function Card({
           pointer-events-none
           absolute
           inset-[1px]
-          rounded-[calc(1.9rem-1px)]
+          rounded-[calc(1.8rem-1px)]
           border
-          border-white/[0.015]
+          border-white/[0.012]
         "
       />
-
-      {/* HOVER SHINE */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          opacity-0
-          transition-opacity
-          duration-500
-          group-hover:opacity-100
-        "
-      >
-
-        <div
-          className="
-            absolute
-            top-0
-            left-[-20%]
-            h-full
-            w-[22%]
-            rotate-12
-            bg-gradient-to-r
-            from-transparent
-            via-white/[0.012]
-            to-transparent
-            blur-xl
-          "
-        />
-
-      </div>
 
       {/* CONTENT */}
 
@@ -146,4 +114,5 @@ export default function Card({
     </div>
 
   );
+
 }

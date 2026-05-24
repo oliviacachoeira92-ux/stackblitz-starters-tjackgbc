@@ -10,30 +10,29 @@ export default function FenixRadio() {
 
     toggleRadio,
 
+    nextTrack,
+
+    currentTrack,
+
   } = useRadio();
 
   return (
 
-    <button
-      onClick={toggleRadio}
+    <div
       className="
-        group
         relative
         flex
         items-center
-        gap-3
+        gap-4
         overflow-hidden
         rounded-full
         border
         border-white/[0.03]
         bg-[rgba(15,15,20,0.58)]
         backdrop-blur-md
-        px-3
-        py-2.5
-        transition-transform
-        duration-300
-        hover:-translate-y-[1px]
-        active:scale-[0.985]
+        px-4
+        py-3
+        min-w-[280px]
       "
     >
 
@@ -47,8 +46,6 @@ export default function FenixRadio() {
           opacity-45
         "
       >
-
-        {/* MAIN */}
 
         <div
           className={`
@@ -71,9 +68,10 @@ export default function FenixRadio() {
 
       </div>
 
-      {/* VINYL */}
+      {/* PLAY BUTTON */}
 
-      <div
+      <button
+        onClick={toggleRadio}
         className="
           relative
           flex
@@ -127,8 +125,6 @@ export default function FenixRadio() {
             animationDuration: '10s',
           }}
         >
-
-          {/* LINES */}
 
           <div
             className="
@@ -201,7 +197,7 @@ export default function FenixRadio() {
 
         </div>
 
-      </div>
+      </button>
 
       {/* INFO */}
 
@@ -212,7 +208,8 @@ export default function FenixRadio() {
           flex
           flex-col
           items-start
-          text-left
+          min-w-0
+          flex-1
         "
       >
 
@@ -258,32 +255,112 @@ export default function FenixRadio() {
 
         </div>
 
-        {/* TITLE */}
+        {/* TRACK */}
 
         <h3
-          className={`
-            mt-1.5
+          className="
+            mt-1
             text-[13px]
-            font-medium
-            transition-colors
-            duration-300
-            ${
-              isPlaying
-                ? 'text-white'
-                : 'text-white/55'
-            }
-          `}
+            font-semibold
+            text-white
+            truncate
+            max-w-[180px]
+          "
         >
 
-          {isPlaying
-            ? 'Transmitindo Agora'
-            : 'Clique para Ouvir'}
+          {currentTrack.title}
 
         </h3>
 
+        {/* ARTIST */}
+
+        <p
+          className="
+            mt-0.5
+            text-[11px]
+            text-white/38
+            truncate
+            max-w-[180px]
+          "
+        >
+
+          {currentTrack.artist}
+
+        </p>
+
       </div>
 
-    </button>
+      {/* ACTIONS */}
+
+      <div
+        className="
+          flex
+          items-center
+          gap-2
+          shrink-0
+        "
+      >
+
+        {/* NEXT */}
+
+        <button
+          onClick={nextTrack}
+          className="
+            h-9
+            w-9
+            rounded-full
+            border
+            border-white/[0.05]
+            bg-white/[0.02]
+            flex
+            items-center
+            justify-center
+            text-white/55
+            transition-all
+            duration-300
+            hover:text-white
+            hover:bg-white/[0.05]
+          "
+        >
+
+          →
+
+        </button>
+
+        {/* SPOTIFY */}
+
+        <a
+          href={currentTrack.spotify}
+          target="_blank"
+          rel="noreferrer"
+          className="
+            h-9
+            px-3
+            rounded-full
+            border
+            border-white/[0.05]
+            bg-white/[0.02]
+            flex
+            items-center
+            justify-center
+            text-[10px]
+            uppercase
+            tracking-[0.18em]
+            text-white/55
+            transition-all
+            duration-300
+            hover:text-white
+            hover:bg-white/[0.05]
+          "
+        >
+
+          Spotify
+
+        </a>
+
+      </div>
+
+    </div>
 
   );
 

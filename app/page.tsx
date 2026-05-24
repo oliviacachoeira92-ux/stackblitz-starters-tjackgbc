@@ -9,13 +9,14 @@ import Header from './components/core/Header';
 
 import USDConverter from './components/dashboard/USDConverter';
 import ConversionSection from './components/dashboard/ConversionSection';
-import ClockCard from './components/dashboard/ClockCard';
 import StatsBar from './components/dashboard/StatsBar';
 
 import LiveTracker from './components/tracker/LiveTracker';
 
 import Parameters from './components/system/Parameters';
 import Rules from './components/system/Rules';
+
+import TabsSystem from './components/tabs/TabsSystem';
 
 import useClock from './hooks/useClock';
 import useUSD from './hooks/useUSD';
@@ -43,7 +44,8 @@ export default function Home() {
   // PARAMETERS
   // =========================
 
-  const [pointsPerDiamond, setPointsPerDiamond] = useState(750);
+  const [pointsPerDiamond, setPointsPerDiamond] =
+    useState(750);
 
   const [pointsPer20USD, setPointsPer20USD] =
     useState(12000000);
@@ -160,7 +162,7 @@ export default function Home() {
         className="
           relative
           z-20
-          max-w-[1500px]
+          max-w-[1400px]
           mx-auto
           px-4
           md:px-6
@@ -172,119 +174,136 @@ export default function Home() {
 
         {/* HEADER */}
 
-        <Header />
+        <Header
+          time={saoPauloTime}
+        />
 
-        {/* MAIN LAYOUT */}
+        {/* TABS */}
 
-        <div
-          className="
-            grid
-            grid-cols-1
-            xl:grid-cols-[1.7fr_0.82fr]
-            gap-5
-            mt-4
-          "
-        >
+        <div className="mt-5">
 
-          {/* LEFT SIDE */}
+          <TabsSystem
+            tabs={[
 
-          <div className="flex flex-col gap-5">
+              // =========================
+              // CONVERSOR
+              // =========================
 
-            {/* USD CONVERTER */}
+              {
+                id: 'converter',
+                label: 'Conversor',
 
-            <section className="glow-card">
+                content: (
 
-              <USDConverter
-                usdRate={usdRate}
-                lastUpdate={lastUpdate}
-                usdVariation={usdVariation}
-                loading={loadingRate}
-              />
+                  <div className="flex flex-col gap-5">
 
-            </section>
+                    <section className="glow-card">
 
-            {/* CONVERSION */}
+                      <USDConverter
+                        usdRate={usdRate}
+                        lastUpdate={lastUpdate}
+                        usdVariation={usdVariation}
+                        loading={loadingRate}
+                      />
 
-            <section className="glow-card">
+                    </section>
 
-              <ConversionSection
-                {...conversion}
-                pointsPerDiamond={pointsPerDiamond}
-                diamondsPerCharme={diamondsPerCharme}
-              />
+                    <section className="glow-card">
 
-            </section>
+                      <ConversionSection
+                        {...conversion}
+                        pointsPerDiamond={pointsPerDiamond}
+                        diamondsPerCharme={diamondsPerCharme}
+                      />
 
-            {/* STATS */}
+                    </section>
 
-            <section className="glow-card">
+                  </div>
 
-              <StatsBar
-                usdRate={usdRate}
-                usdVariation={usdVariation}
-                progress={tracker.progress}
-                remainingSeconds={tracker.remainingSeconds}
-                dailyTotalSeconds={tracker.dailyTotalSeconds}
-                formatTime={tracker.formatTime}
-                weeklyStatus={tracker.weeklyStatus}
-              />
+                ),
+              },
 
-            </section>
+              // =========================
+              // OPERACIONAL
+              // =========================
 
-          </div>
+              {
+                id: 'operacional',
+                label: 'Operacional',
 
-          {/* RIGHT SIDE */}
+                content: (
 
-          <div className="flex flex-col gap-5">
+                  <div className="flex flex-col gap-5">
 
-            {/* CLOCK */}
+                    <section className="glow-card">
 
-            <section className="glow-card">
+                      <LiveTracker
+                        {...tracker}
+                      />
 
-              <ClockCard
-                time={saoPauloTime}
-              />
+                    </section>
 
-            </section>
+                    <section className="glow-card">
 
-            {/* TRACKER */}
+                      <StatsBar
+                        usdRate={usdRate}
+                        usdVariation={usdVariation}
+                        progress={tracker.progress}
+                        remainingSeconds={tracker.remainingSeconds}
+                        dailyTotalSeconds={tracker.dailyTotalSeconds}
+                        formatTime={tracker.formatTime}
+                        weeklyStatus={tracker.weeklyStatus}
+                      />
 
-            <section className="glow-card">
+                    </section>
 
-              <LiveTracker
-                {...tracker}
-              />
+                  </div>
 
-            </section>
+                ),
+              },
 
-            {/* PARAMETERS */}
+              // =========================
+              // SISTEMA
+              // =========================
 
-            <section className="glow-card">
+              {
+                id: 'sistema',
+                label: 'Sistema',
 
-              <Parameters
-                pointsPerDiamond={pointsPerDiamond}
-                pointsPer20USD={pointsPer20USD}
-                diamondsPerCharme={diamondsPerCharme}
-                setPointsPerDiamond={setPointsPerDiamond}
-                setPointsPer20USD={setPointsPer20USD}
-                setDiamondsPerCharme={setDiamondsPerCharme}
-              />
+                content: (
 
-            </section>
+                  <div className="flex flex-col gap-5">
 
-            {/* RULES */}
+                    <section className="glow-card">
 
-            <section className="glow-card">
+                      <Parameters
+                        pointsPerDiamond={pointsPerDiamond}
+                        pointsPer20USD={pointsPer20USD}
+                        diamondsPerCharme={diamondsPerCharme}
+                        setPointsPerDiamond={setPointsPerDiamond}
+                        setPointsPer20USD={setPointsPer20USD}
+                        setDiamondsPerCharme={setDiamondsPerCharme}
+                      />
 
-              <Rules
-                pointsPerDiamond={pointsPerDiamond}
-                pointsPer20USD={pointsPer20USD}
-                diamondsPerCharme={diamondsPerCharme}
-              />
+                    </section>
 
-            </section>
+                    <section className="glow-card">
 
-          </div>
+                      <Rules
+                        pointsPerDiamond={pointsPerDiamond}
+                        pointsPer20USD={pointsPer20USD}
+                        diamondsPerCharme={diamondsPerCharme}
+                      />
+
+                    </section>
+
+                  </div>
+
+                ),
+              },
+
+            ]}
+          />
 
         </div>
 

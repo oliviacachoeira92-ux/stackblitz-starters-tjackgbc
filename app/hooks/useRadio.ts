@@ -1,153 +1,26 @@
 'use client';
 
 import {
-  useCallback,
   useEffect,
   useRef,
   useState,
 } from 'react';
 
+import { radioTracks } from '../data/radioTracks';
+
 export default function useRadio() {
 
-  // =========================
-  // PLAYLIST
-  // =========================
-
-  const playlist = useRef([
-
-    '/audio/Diamante Puro.mp3',
-
-    '/audio/Frequência Absoluta.mp3',
-
-    '/audio/Garota Liberiana.mp3',
-
-  ]).current;
-
-  // =========================
-  // STATE
-  // =========================
-
-  const [
-    isPlaying,
-    setIsPlaying,
-  ] = useState(false);
-
-  const [
-    volume,
-    setVolume,
-  ] = useState(0.5);
-
-  const [
-    currentTrack,
-    setCurrentTrack,
-  ] = useState(0);
-
-  // =========================
-  // AUDIO REF
-  // =========================
-
   const audioRef =
-    useRef<HTMLAudioElement | null>(
-      null
-    );
+    useRef<HTMLAudioElement | null>(null);
 
-  // =========================
-  // NEXT TRACK
-  // =========================
+  const [isPlaying, setIsPlaying] =
+    useState(false);
 
-  const handleNextTrack =
-    useCallback(async () => {
+  const [trackIndex, setTrackIndex] =
+    useState(0);
 
-      if (
-        !audioRef.current
-      ) return;
-
-      const nextIndex =
-        (
-          currentTrack + 1
-        ) % playlist.length;
-
-      setCurrentTrack(
-        nextIndex
-      );
-
-      audioRef.current.src =
-        playlist[nextIndex];
-
-      if (
-        isPlaying
-      ) {
-
-        try {
-
-          await audioRef.current.play();
-
-        } catch (
-          error
-        ) {
-
-          console.error(
-            error
-          );
-
-        }
-
-      }
-
-    }, [
-      currentTrack,
-      isPlaying,
-    ]);
-
-  // =========================
-  // PREVIOUS TRACK
-  // =========================
-
-  const handlePreviousTrack =
-    useCallback(async () => {
-
-      if (
-        !audioRef.current
-      ) return;
-
-      const prevIndex =
-        (
-          currentTrack -
-          1 +
-          playlist.length
-        ) % playlist.length;
-
-      setCurrentTrack(
-        prevIndex
-      );
-
-      audioRef.current.src =
-        playlist[prevIndex];
-
-      if (
-        isPlaying
-      ) {
-
-        try {
-
-          await audioRef.current.play();
-
-        } catch (
-          error
-        ) {
-
-          console.error(
-            error
-          );
-
-        }
-
-      }
-
-    }, [
-      currentTrack,
-      isPlaying,
-    ]);
+  const currentTrack =
+    radioTracks[trackIndex];
 
   // =========================
   // INIT
@@ -157,88 +30,87 @@ export default function useRadio() {
 
     const audio =
       new Audio(
-        playlist[0]
+        currentTrack.audio
       );
 
-    audio.volume =
-      volume;
+    audio.volume = 0.55;
 
-    audioRef.current =
-      audio;
+    audio.preload = 'auto';
 
-    audio.addEventListener(
-      'ended',
-      handleNextTrack
-    );
+    audioRef.current = audio;
 
     return () => {
 
       audio.pause();
 
-      audio.removeEventListener(
-        'ended',
-        handleNextTrack
-      );
-
     };
 
-  }, [
-    handleNextTrack,
-    volume,
-  ]);
+  }, []);
 
   // =========================
-  // VOLUME
+  // TRACK CHANGE
   // =========================
 
   useEffect(() => {
 
-    if (
-      audioRef.current
-    ) {
+    if (!audioRef.current)
+      return;
 
-      audioRef.current.volume =
-        volume;
+    const audio =
+      audioRef.current;
+
+    audio.src =
+      currentTrack.audio;
+
+    audio.load();
+
+    audio.onended = () => {
+
+      nextTrack(true);
+
+    };
+
+    if (isPlaying) {
+
+      audio.play();
 
     }
 
-  }, [volume]);
+  }, [trackIndex]);
 
   // =========================
-  // TOGGLE
+  // PLAY / PAUSE
   // =========================
 
   const toggleRadio =
     async () => {
 
-      if (
-        !audioRef.current
-      ) return;
+      if (!audioRef.current)
+        return;
+
+      const audio =
+        audioRef.current;
 
       try {
 
-        if (
-          isPlaying
-        ) {
+        if (isPlaying) {
 
-          audioRef.current.pause();
+          audio.pause();
 
           setIsPlaying(false);
 
         } else {
 
-          await audioRef.current.play();
+          await audio.play();
 
           setIsPlaying(true);
 
         }
 
-      } catch (
-        error
-      ) {
+      } catch (error) {
 
         console.error(
-          'Erro no rádio:',
+          'Radio error:',
           error
         );
 
@@ -246,23 +118,49 @@ export default function useRadio() {
 
     };
 
+  // =========================
+  // NEXT
+  // =========================
+
+  const nextTrack = (
+    autoplay = false
+  ) => {
+
+    setTrackIndex((prev) => {
+
+      if (
+        prev + 1 >=
+        radioTracks.length
+      ) {
+        return 0;
+      }
+
+      return prev + 1;
+
+    });
+
+    if (autoplay) {
+
+      setTimeout(() => {
+
+        audioRef.current
+          ?.play();
+
+      }, 120);
+
+    }
+
+  };
+
   return {
 
     isPlaying,
 
-    volume,
-
-    setVolume,
-
     toggleRadio,
 
+    nextTrack,
+
     currentTrack,
-
-    playlist,
-
-    handleNextTrack,
-
-    handlePreviousTrack,
 
   };
 
