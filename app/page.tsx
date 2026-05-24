@@ -25,9 +25,9 @@ import useConversionEngine from './hooks/useConversionEngine';
 
 export default function Home() {
 
-  // =========================
+  // =====================================================
   // HOOKS
-  // =========================
+  // =====================================================
 
   const saoPauloTime = useClock();
 
@@ -40,9 +40,9 @@ export default function Home() {
 
   const tracker = useLiveTracker();
 
-  // =========================
+  // =====================================================
   // PARAMETERS
-  // =========================
+  // =====================================================
 
   const [pointsPerDiamond, setPointsPerDiamond] =
     useState(750);
@@ -53,9 +53,9 @@ export default function Home() {
   const [diamondsPerCharme, setDiamondsPerCharme] =
     useState(5);
 
-  // =========================
+  // =====================================================
   // CONVERSION
-  // =========================
+  // =====================================================
 
   const conversion = useConversionEngine(
     pointsPerDiamond,
@@ -64,9 +64,9 @@ export default function Home() {
     usdRate,
   );
 
-  // =========================
+  // =====================================================
   // GSAP
-  // =========================
+  // =====================================================
 
   useEffect(() => {
 
@@ -75,17 +75,17 @@ export default function Home() {
     );
 
     gsap.fromTo(
-      '.glow-card',
+      '.cinematic-enter',
       {
         opacity: 0,
-        y: 14,
+        y: 18,
       },
       {
         opacity: 1,
         y: 0,
-        duration: 0.7,
-        stagger: 0.04,
-        ease: 'power2.out',
+        duration: 0.9,
+        stagger: 0.06,
+        ease: 'power3.out',
         clearProps: 'all',
       }
     );
@@ -99,95 +99,119 @@ export default function Home() {
         relative
         min-h-screen
         overflow-hidden
-        bg-[#07070A]
         text-white
       "
     >
 
-      {/* BACKGROUND */}
+      {/* =====================================================
+          PAGE ATMOSPHERE
+      ===================================================== */}
 
       <div
         className="
+          pointer-events-none
           absolute
           inset-0
-          pointer-events-none
+          overflow-hidden
         "
       >
 
+        {/* TOP ENERGY */}
+
         <div
           className="
             absolute
-            top-[-160px]
+            top-[-240px]
             left-1/2
             -translate-x-1/2
-            w-[720px]
+            w-[1200px]
+            h-[500px]
+            rounded-full
+            bg-orange-500/[0.08]
+            blur-[140px]
+          "
+        />
+
+        {/* RIGHT LIGHT */}
+
+        <div
+          className="
+            absolute
+            top-[18%]
+            right-[-180px]
+            w-[420px]
             h-[420px]
-            bg-violet-600/[0.05]
-            blur-[90px]
             rounded-full
+            bg-violet-500/[0.08]
+            blur-[120px]
           "
         />
+
+        {/* LEFT FOG */}
 
         <div
           className="
             absolute
-            top-[22%]
-            right-[-140px]
-            w-[320px]
-            h-[320px]
-            bg-fuchsia-500/[0.04]
-            blur-[80px]
+            bottom-[-120px]
+            left-[-120px]
+            w-[360px]
+            h-[360px]
             rounded-full
-          "
-        />
-
-        <div
-          className="
-            absolute
-            bottom-[-180px]
-            left-[10%]
-            w-[380px]
-            h-[380px]
-            bg-cyan-500/[0.03]
-            blur-[90px]
-            rounded-full
+            bg-cyan-500/[0.05]
+            blur-[120px]
           "
         />
 
       </div>
 
-      {/* CONTENT */}
+      {/* =====================================================
+          MAIN CONTAINER
+      ===================================================== */}
 
       <div
         className="
           relative
-          z-20
-          max-w-[1400px]
+          z-10
+          max-w-[1480px]
           mx-auto
           px-4
           md:px-6
           xl:px-8
-          pt-7
-          pb-14
+          pt-6
+          md:pt-8
+          pb-20
         "
       >
 
-        {/* HEADER */}
+        {/* =====================================================
+            HERO
+        ===================================================== */}
 
-        <Header
-          time={saoPauloTime}
-        />
+        <div className="cinematic-enter">
 
-        {/* TABS */}
+          <Header
+            time={saoPauloTime}
+          />
 
-        <div className="mt-5">
+        </div>
+
+        {/* =====================================================
+            TABS SYSTEM
+        ===================================================== */}
+
+        <div
+          className="
+            cinematic-enter
+            mt-6
+          "
+        >
 
           <TabsSystem
             tabs={[
 
-              // =========================
+              // =====================================================
               // CONVERSOR
-              // =========================
+              // =====================================================
 
               {
                 id: 'converter',
@@ -195,9 +219,17 @@ export default function Home() {
 
                 content: (
 
-                  <div className="flex flex-col gap-5">
+                  <div
+                    className="
+                      grid
+                      grid-cols-1
+                      gap-5
+                    "
+                  >
 
-                    <section className="glow-card">
+                    {/* USD */}
+
+                    <section className="cinematic-enter">
 
                       <USDConverter
                         usdRate={usdRate}
@@ -208,7 +240,9 @@ export default function Home() {
 
                     </section>
 
-                    <section className="glow-card">
+                    {/* CONVERSION */}
+
+                    <section className="cinematic-enter">
 
                       <ConversionSection
                         {...conversion}
@@ -223,9 +257,9 @@ export default function Home() {
                 ),
               },
 
-              // =========================
+              // =====================================================
               // OPERACIONAL
-              // =========================
+              // =====================================================
 
               {
                 id: 'operacional',
@@ -233,9 +267,17 @@ export default function Home() {
 
                 content: (
 
-                  <div className="flex flex-col gap-5">
+                  <div
+                    className="
+                      grid
+                      grid-cols-1
+                      gap-5
+                    "
+                  >
 
-                    <section className="glow-card">
+                    {/* TRACKER */}
+
+                    <section className="cinematic-enter">
 
                       <LiveTracker
                         {...tracker}
@@ -243,7 +285,9 @@ export default function Home() {
 
                     </section>
 
-                    <section className="glow-card">
+                    {/* STATS */}
+
+                    <section className="cinematic-enter">
 
                       <StatsBar
                         usdRate={usdRate}
@@ -262,9 +306,9 @@ export default function Home() {
                 ),
               },
 
-              // =========================
+              // =====================================================
               // SISTEMA
-              // =========================
+              // =====================================================
 
               {
                 id: 'sistema',
@@ -272,9 +316,17 @@ export default function Home() {
 
                 content: (
 
-                  <div className="flex flex-col gap-5">
+                  <div
+                    className="
+                      grid
+                      grid-cols-1
+                      gap-5
+                    "
+                  >
 
-                    <section className="glow-card">
+                    {/* PARAMETERS */}
+
+                    <section className="cinematic-enter">
 
                       <Parameters
                         pointsPerDiamond={pointsPerDiamond}
@@ -287,7 +339,9 @@ export default function Home() {
 
                     </section>
 
-                    <section className="glow-card">
+                    {/* RULES */}
+
+                    <section className="cinematic-enter">
 
                       <Rules
                         pointsPerDiamond={pointsPerDiamond}

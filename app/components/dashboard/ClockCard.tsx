@@ -14,25 +14,28 @@ export default function ClockCard({
       className="
         relative
         overflow-hidden
-        h-[104px]
+        min-h-[112px]
         px-5
+        py-5
         flex
         items-center
       "
     >
 
-      {/* LIGHT */}
+      {/* =====================================================
+          ATMOSPHERE
+      ===================================================== */}
 
       <div
         className="
           absolute
           inset-0
           overflow-hidden
-          rounded-[1.5rem]
           pointer-events-none
-          opacity-50
         "
       >
+
+        {/* CENTER GLOW */}
 
         <div
           className="
@@ -41,17 +44,36 @@ export default function ClockCard({
             left-1/2
             -translate-x-1/2
             -translate-y-1/2
-            w-20
-            h-20
+            w-28
+            h-28
             rounded-full
-            bg-orange-500/[0.05]
-            blur-[45px]
+            bg-orange-500/[0.06]
+            blur-[65px]
+          "
+        />
+
+        {/* TOP LIGHT */}
+
+        <div
+          className="
+            absolute
+            top-0
+            left-1/2
+            -translate-x-1/2
+            w-[55%]
+            h-[1px]
+            bg-gradient-to-r
+            from-transparent
+            via-orange-200/35
+            to-transparent
           "
         />
 
       </div>
 
-      {/* CONTENT */}
+      {/* =====================================================
+          CONTENT
+      ===================================================== */}
 
       <div
         className="
@@ -61,47 +83,72 @@ export default function ClockCard({
           flex
           items-center
           justify-between
-          gap-4
+          gap-5
         "
       >
 
-        {/* LEFT */}
+        {/* =========================================
+            LEFT
+        ========================================= */}
 
         <div
           className="
             min-w-0
             flex
             flex-col
-            gap-2
+            gap-3
           "
         >
 
-          {/* LABEL */}
+          {/* BADGE */}
 
           <div
             className="
               inline-flex
               items-center
               gap-2
-              px-2.5
-              py-1
+              px-3
+              py-1.5
               rounded-full
               border
-              border-orange-400/[0.06]
-              bg-orange-400/[0.03]
-              backdrop-blur-sm
+              border-orange-400/[0.08]
+              bg-orange-400/[0.04]
+              backdrop-blur-md
               w-fit
             "
           >
 
-            <div className="w-1.5 h-1.5 rounded-full bg-orange-300" />
+            <div className="relative flex items-center justify-center">
+
+              <div
+                className="
+                  absolute
+                  h-3
+                  w-3
+                  rounded-full
+                  bg-orange-400/20
+                  animate-pulse
+                "
+              />
+
+              <div
+                className="
+                  relative
+                  h-1.5
+                  w-1.5
+                  rounded-full
+                  bg-orange-300
+                "
+              />
+
+            </div>
 
             <p
               className="
                 text-[8px]
                 uppercase
-                tracking-[0.22em]
-                text-orange-200/70
+                tracking-[0.24em]
+                text-orange-100/70
                 whitespace-nowrap
               "
             >
@@ -114,32 +161,55 @@ export default function ClockCard({
 
           {/* LOCATION */}
 
-          <p
-            className="
-              text-white/38
-              text-[11px]
-              whitespace-nowrap
-            "
-          >
+          <div className="flex flex-col gap-1">
 
-            São Paulo • UTC -3
+            <p
+              className="
+                text-[12px]
+                text-white/70
+                font-medium
+              "
+            >
 
-          </p>
+              São Paulo
+
+            </p>
+
+            <p
+              className="
+                text-[11px]
+                text-white/34
+              "
+            >
+
+              UTC -3 • Tempo Real
+
+            </p>
+
+          </div>
 
         </div>
 
-        {/* TIME */}
+        {/* =========================================
+            TIME
+        ========================================= */}
 
-        <div className="shrink-0">
+        <div
+          className="
+            shrink-0
+            text-right
+          "
+        >
 
           <h2
             className="
+              thermal-text
               tabular-nums
-              text-[2.25rem]
+              text-[1.95rem]
+              md:text-[2.3rem]
               font-semibold
-              tracking-[-0.08em]
+              tracking-[-0.05em]
               leading-none
-              text-white
               whitespace-nowrap
             "
           >
@@ -147,6 +217,20 @@ export default function ClockCard({
             {time}
 
           </h2>
+
+          <p
+            className="
+              mt-2
+              text-[10px]
+              uppercase
+              tracking-[0.22em]
+              text-white/24
+            "
+          >
+
+            LIVE CLOCK
+
+          </p>
 
         </div>
 

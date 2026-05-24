@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
   manifest: '/manifest.json',
 
-  themeColor: '#000000',
+  themeColor: '#050507',
 
   appleWebApp: {
     capable: true,
@@ -152,10 +152,106 @@ export default function RootLayout({
       </head>
 
       <body
-        className={`${inter.className} bg-black text-white antialiased`}
+        className={`
+          ${inter.className}
+          bg-black
+          text-white
+          antialiased
+          selection:bg-orange-500/20
+        `}
       >
 
-        {children}
+        {/* GLOBAL ATMOSPHERIC SYSTEM */}
+
+        <div
+          className="
+            pointer-events-none
+            fixed
+            inset-0
+            overflow-hidden
+            z-0
+          "
+        >
+
+          {/* TOP THERMAL LIGHT */}
+
+          <div
+            className="
+              absolute
+              top-[-240px]
+              left-1/2
+              -translate-x-1/2
+              w-[1200px]
+              h-[520px]
+              rounded-full
+              bg-orange-500/[0.10]
+              blur-[140px]
+              opacity-70
+            "
+          />
+
+          {/* VIOLET ENERGY */}
+
+          <div
+            className="
+              absolute
+              top-[10%]
+              right-[-180px]
+              w-[460px]
+              h-[460px]
+              rounded-full
+              bg-violet-500/[0.08]
+              blur-[120px]
+            "
+          />
+
+          {/* CYAN AMBIENT */}
+
+          <div
+            className="
+              absolute
+              bottom-[-160px]
+              left-[-120px]
+              w-[420px]
+              h-[420px]
+              rounded-full
+              bg-cyan-500/[0.05]
+              blur-[120px]
+            "
+          />
+
+          {/* CENTER ATMOSPHERE */}
+
+          <div
+            className="
+              absolute
+              top-[28%]
+              left-1/2
+              -translate-x-1/2
+              w-[900px]
+              h-[420px]
+              rounded-full
+              bg-orange-400/[0.04]
+              blur-[140px]
+            "
+          />
+
+        </div>
+
+        {/* MAIN APP */}
+
+        <div
+          className="
+            relative
+            isolate
+            z-10
+            min-h-screen
+          "
+        >
+
+          {children}
+
+        </div>
 
         <Analytics />
 

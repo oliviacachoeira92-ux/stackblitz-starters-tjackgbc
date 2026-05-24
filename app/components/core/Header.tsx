@@ -12,251 +12,483 @@ export default function Header({
 
   return (
 
-    <div className="relative mb-5">
+    <header className="relative mb-8 md:mb-10">
 
-      {/* AMBIENT */}
+      {/* =====================================================
+          HERO ATMOSPHERE
+      ===================================================== */}
 
       <div
         className="
-          absolute
-          -top-14
-          left-1/2
-          -translate-x-1/2
-          w-[220px]
-          md:w-[280px]
-          h-[120px]
-          bg-violet-500/[0.05]
-          blur-[60px]
-          rounded-full
           pointer-events-none
-        "
-      />
-
-      {/* TOP TAG */}
-
-      <div
-        className="
-          inline-flex
-          items-center
-          gap-2
-          px-3
-          py-1.5
-          rounded-full
-          border
-          border-white/[0.04]
-          bg-white/[0.02]
-          backdrop-blur-md
-          mb-4
+          absolute
+          inset-0
+          overflow-hidden
         "
       >
 
-        <div className="flex items-center justify-center">
+        {/* TOP THERMAL */}
 
-          <div className="w-1.5 h-1.5 rounded-full bg-violet-300" />
+        <div
+          className="
+            absolute
+            top-[-180px]
+            left-1/2
+            -translate-x-1/2
+            w-[760px]
+            h-[320px]
+            rounded-full
+            bg-orange-500/[0.10]
+            blur-[120px]
+          "
+        />
+
+        {/* SIDE ENERGY */}
+
+        <div
+          className="
+            absolute
+            top-[10%]
+            right-[-120px]
+            w-[300px]
+            h-[300px]
+            rounded-full
+            bg-violet-500/[0.08]
+            blur-[90px]
+          "
+        />
+
+        {/* HERO FOG */}
+
+        <div
+          className="
+            absolute
+            top-[22%]
+            left-[10%]
+            w-[240px]
+            h-[240px]
+            rounded-full
+            bg-orange-400/[0.04]
+            blur-[70px]
+          "
+        />
+
+      </div>
+
+      {/* =====================================================
+          TOP STATUS
+      ===================================================== */}
+
+      <div
+        className="
+          relative
+          z-10
+          inline-flex
+          items-center
+          gap-3
+          px-4
+          py-2
+          rounded-full
+          border
+          border-white/[0.05]
+          bg-white/[0.025]
+          backdrop-blur-xl
+          mb-6
+          shadow-[0_8px_40px_rgba(0,0,0,0.25)]
+        "
+      >
+
+        {/* STATUS DOT */}
+
+        <div className="relative flex items-center justify-center">
+
+          <div
+            className="
+              absolute
+              h-4
+              w-4
+              rounded-full
+              bg-orange-400/20
+              animate-pulse
+            "
+          />
+
+          <div
+            className="
+              relative
+              h-1.5
+              w-1.5
+              rounded-full
+              bg-orange-300
+            "
+          />
 
         </div>
 
+        {/* LABEL */}
+
         <p
           className="
-            text-[8px]
+            text-[9px]
             uppercase
-            tracking-[0.22em]
-            text-white/40
+            tracking-[0.28em]
+            text-white/45
             whitespace-nowrap
           "
         >
 
-          ALII LIVE CONVERSION SYSTEM
+          FENIX ARCANE • OPERATIONAL SYSTEM
 
         </p>
 
       </div>
 
-      {/* HERO */}
+      {/* =====================================================
+          HERO
+      ===================================================== */}
 
       <div
         className="
           relative
-          flex
-          flex-col
-          xl:flex-row
-          xl:items-center
-          xl:justify-between
-          gap-5
+          z-10
+          overflow-hidden
+          rounded-[2.2rem]
+          border
+          border-white/[0.05]
+          bg-[linear-gradient(to_bottom,rgba(18,18,24,0.84),rgba(10,10,14,0.74))]
+          backdrop-blur-xl
+          shadow-[0_24px_90px_rgba(0,0,0,0.42)]
         "
       >
 
-        {/* LEFT */}
-
-        <div className="flex-1 min-w-0">
-
-          {/* TITLE */}
-
-          <div className="relative inline-block max-w-full">
-
-            <div
-              className="
-                absolute
-                inset-0
-                bg-violet-500/[0.05]
-                blur-[35px]
-                rounded-full
-              "
-            />
-
-            <h1
-              className="
-                relative
-                title-gradient
-                text-[clamp(2rem,6vw,4rem)]
-                font-black
-                tracking-[-0.05em]
-                leading-[0.92]
-                break-words
-              "
-            >
-
-              Fenix Arcane
-
-            </h1>
-
-          </div>
-
-          {/* SUB */}
-
-          <div className="mt-2.5 flex items-center gap-3">
-
-            <div
-              className="
-                h-[1px]
-                w-7
-                bg-gradient-to-r
-                from-violet-400/35
-                to-transparent
-              "
-            />
-
-            <p
-              className="
-                text-white/28
-                tracking-[0.22em]
-                uppercase
-                text-[8px]
-              "
-            >
-
-              by Olivia Cachoeira
-
-            </p>
-
-          </div>
-
-          {/* DESCRIPTION */}
-
-          <p
-            className="
-              text-white/50
-              mt-3
-              text-[13px]
-              md:text-[14px]
-              max-w-[520px]
-              leading-relaxed
-            "
-          >
-
-            Ferramenta premium de conversão para streamers Alii Live.
-            Calcule pontos, diamantes, USD, BRL e saques em tempo real.
-
-          </p>
-
-        </div>
-
-        {/* RIGHT */}
+        {/* HERO OVERLAY */}
 
         <div
           className="
-            flex
-            items-center
-            gap-4
-            flex-wrap
-            xl:flex-nowrap
+            absolute
+            inset-0
+            pointer-events-none
           "
         >
 
-          {/* CLOCK */}
+          {/* TOP LIGHT */}
 
           <div
             className="
-              w-[320px]
-              shrink-0
+              absolute
+              top-0
+              left-1/2
+              -translate-x-1/2
+              w-[70%]
+              h-[1px]
+              bg-gradient-to-r
+              from-transparent
+              via-orange-200/50
+              to-transparent
             "
-          >
+          />
 
-            <ClockCard
-              time={time}
-            />
-
-          </div>
-
-          {/* RADIO */}
+          {/* ORANGE BLOOM */}
 
           <div
             className="
-              relative
-              p-2
-              rounded-[1.5rem]
-              border
-              border-white/[0.03]
-              bg-white/[0.015]
-              backdrop-blur-md
-              h-[104px]
+              absolute
+              top-[-120px]
+              right-[-40px]
+              w-[340px]
+              h-[340px]
+              rounded-full
+              bg-orange-500/[0.12]
+              blur-[120px]
+            "
+          />
+
+          {/* VIOLET ENERGY */}
+
+          <div
+            className="
+              absolute
+              bottom-[-120px]
+              left-[-80px]
+              w-[280px]
+              h-[280px]
+              rounded-full
+              bg-violet-500/[0.08]
+              blur-[100px]
+            "
+          />
+
+          {/* INNER GRADIENT */}
+
+          <div
+            className="
+              absolute
+              inset-0
+              bg-gradient-to-b
+              from-white/[0.03]
+              via-transparent
+              to-transparent
+            "
+          />
+
+        </div>
+
+        {/* CONTENT */}
+
+        <div
+          className="
+            relative
+            z-10
+            px-5
+            py-6
+            md:px-8
+            md:py-8
+            xl:px-10
+            xl:py-10
+          "
+        >
+
+          <div
+            className="
               flex
-              items-center
-              shrink-0
+              flex-col
+              xl:flex-row
+              xl:items-center
+              xl:justify-between
+              gap-8
             "
           >
 
-            {/* LIGHT */}
+            {/* =========================================
+                LEFT
+            ========================================= */}
 
-            <div
-              className="
-                absolute
-                inset-0
-                overflow-hidden
-                rounded-[1.5rem]
-                pointer-events-none
-                opacity-50
-              "
-            >
+            <div className="flex-1 min-w-0">
+
+              {/* MINI TAG */}
 
               <div
                 className="
-                  absolute
-                  top-1/2
-                  left-1/2
-                  -translate-x-1/2
-                  -translate-y-1/2
-                  w-16
-                  h-16
+                  inline-flex
+                  items-center
+                  gap-2
+                  px-3
+                  py-1.5
                   rounded-full
-                  bg-violet-500/[0.05]
-                  blur-[40px]
+                  border
+                  border-orange-400/[0.08]
+                  bg-orange-400/[0.04]
+                  backdrop-blur-md
                 "
-              />
+              >
+
+                <div
+                  className="
+                    h-1.5
+                    w-1.5
+                    rounded-full
+                    bg-orange-300
+                  "
+                />
+
+                <p
+                  className="
+                    text-[8px]
+                    uppercase
+                    tracking-[0.24em]
+                    text-orange-100/70
+                    whitespace-nowrap
+                  "
+                >
+
+                  PREMIUM CREATOR PLATFORM
+
+                </p>
+
+              </div>
+
+              {/* TITLE */}
+
+              <div className="mt-5 relative">
+
+                {/* AMBIENT */}
+
+                <div
+                  className="
+                    absolute
+                    -top-16
+                    left-0
+                    w-[280px]
+                    h-[160px]
+                    rounded-full
+                    bg-orange-500/[0.08]
+                    blur-[90px]
+                  "
+                />
+
+                <h1
+                  className="
+                    relative
+                    z-10
+                    thermal-text
+                    text-[clamp(2.8rem,8vw,6rem)]
+                    font-black
+                    tracking-[-0.08em]
+                    leading-[0.88]
+                  "
+                >
+
+                  Fenix Arcane
+
+                </h1>
+
+              </div>
+
+              {/* SUB */}
+
+              <div
+                className="
+                  mt-4
+                  flex
+                  items-center
+                  gap-3
+                  flex-wrap
+                "
+              >
+
+                <div
+                  className="
+                    h-[1px]
+                    w-10
+                    bg-gradient-to-r
+                    from-orange-400/40
+                    to-transparent
+                  "
+                />
+
+                <p
+                  className="
+                    text-[10px]
+                    uppercase
+                    tracking-[0.26em]
+                    text-white/34
+                  "
+                >
+
+                  by Olivia Cachoeira
+
+                </p>
+
+              </div>
+
+              {/* DESCRIPTION */}
+
+              <p
+                className="
+                  mt-5
+                  max-w-[680px]
+                  text-[14px]
+                  md:text-[15px]
+                  leading-relaxed
+                  text-white/48
+                "
+              >
+
+                Plataforma operacional premium para streamers Alii Live.
+                Conversões em tempo real, métricas operacionais,
+                controle de performance e ambiente visual cinematográfico.
+
+              </p>
 
             </div>
 
+            {/* =========================================
+                RIGHT
+            ========================================= */}
+
             <div
               className="
-                relative
-                z-10
-                scale-[0.84]
-                md:scale-[0.88]
-                origin-center
+                w-full
+                xl:w-auto
+                flex
+                flex-col
+                gap-4
+                xl:min-w-[360px]
               "
             >
 
-              <FenixRadio />
+              {/* CLOCK */}
+
+              <ClockCard
+                time={time}
+              />
+
+              {/* RADIO */}
+
+              <div
+                className="
+                  relative
+                  overflow-hidden
+                  rounded-[1.8rem]
+                  border
+                  border-white/[0.04]
+                  bg-white/[0.02]
+                  backdrop-blur-xl
+                  p-2
+                "
+              >
+
+                {/* TOP LIGHT */}
+
+                <div
+                  className="
+                    absolute
+                    top-0
+                    left-1/2
+                    -translate-x-1/2
+                    w-[50%]
+                    h-[1px]
+                    bg-gradient-to-r
+                    from-transparent
+                    via-orange-200/40
+                    to-transparent
+                  "
+                />
+
+                {/* GLOW */}
+
+                <div
+                  className="
+                    absolute
+                    inset-0
+                    pointer-events-none
+                  "
+                >
+
+                  <div
+                    className="
+                      absolute
+                      top-1/2
+                      left-1/2
+                      -translate-x-1/2
+                      -translate-y-1/2
+                      w-24
+                      h-24
+                      rounded-full
+                      bg-orange-500/[0.06]
+                      blur-[50px]
+                    "
+                  />
+
+                </div>
+
+                <div className="relative z-10">
+
+                  <FenixRadio />
+
+                </div>
+
+              </div>
 
             </div>
 
@@ -266,11 +498,13 @@ export default function Header({
 
       </div>
 
-      {/* DIVIDER */}
+      {/* =====================================================
+          DIVIDER
+      ===================================================== */}
 
-      <div className="mt-5 soft-divider" />
+      <div className="mt-6 soft-divider" />
 
-    </div>
+    </header>
 
   );
 

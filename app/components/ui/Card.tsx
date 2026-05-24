@@ -18,28 +18,31 @@ export default function Card({
         group
         relative
         overflow-hidden
-        rounded-[1.8rem]
+        rounded-[2rem]
         border
-        border-white/[0.035]
-        bg-[rgba(12,12,16,0.74)]
-        backdrop-blur-md
+        border-white/[0.05]
+        bg-[linear-gradient(to_bottom,rgba(18,18,24,0.82),rgba(10,10,14,0.72))]
+        backdrop-blur-xl
         transition-all
-        duration-300
-        shadow-[0_4px_24px_rgba(0,0,0,0.18)]
-        hover:-translate-y-[1px]
-        hover:shadow-[0_8px_34px_rgba(0,0,0,0.22)]
+        duration-500
+        shadow-[0_20px_70px_rgba(0,0,0,0.42)]
+        hover:-translate-y-[2px]
+        hover:shadow-[0_28px_90px_rgba(0,0,0,0.52)]
+        hover:border-white/[0.07]
         ${className}
       `}
     >
 
-      {/* AMBIENT */}
+      {/* =====================================================
+          GLOBAL ATMOSPHERE
+      ===================================================== */}
 
       <div
         className="
           pointer-events-none
           absolute
           inset-0
-          opacity-30
+          overflow-hidden
         "
       >
 
@@ -48,62 +51,115 @@ export default function Card({
         <div
           className="
             absolute
-            -top-16
+            top-0
             left-1/2
-            h-24
-            w-24
             -translate-x-1/2
-            rounded-full
-            bg-violet-500/[0.025]
-            blur-[45px]
+            w-[70%]
+            h-[1px]
+            bg-gradient-to-r
+            from-transparent
+            via-orange-200/45
+            to-transparent
           "
         />
 
-        {/* SIDE LIGHT */}
+        {/* ORANGE BLOOM */}
 
         <div
           className="
             absolute
-            top-[45%]
-            right-[-18px]
-            h-16
-            w-16
+            -top-24
+            right-[-40px]
+            w-[240px]
+            h-[180px]
             rounded-full
-            bg-cyan-400/[0.02]
-            blur-[35px]
+            bg-orange-500/[0.10]
+            blur-[90px]
+            opacity-80
+            transition-all
+            duration-700
+            group-hover:opacity-100
+          "
+        />
+
+        {/* VIOLET ENERGY */}
+
+        <div
+          className="
+            absolute
+            bottom-[-80px]
+            left-[-40px]
+            w-[180px]
+            h-[180px]
+            rounded-full
+            bg-violet-500/[0.06]
+            blur-[80px]
+            opacity-70
+          "
+        />
+
+        {/* INNER FOG */}
+
+        <div
+          className="
+            absolute
+            inset-0
+            bg-gradient-to-b
+            from-white/[0.03]
+            via-transparent
+            to-transparent
           "
         />
 
       </div>
 
-      {/* TOP GRADIENT */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          bg-gradient-to-b
-          from-white/[0.012]
-          via-transparent
-          to-transparent
-        "
-      />
-
-      {/* INNER BORDER */}
+      {/* =====================================================
+          INNER BORDER
+      ===================================================== */}
 
       <div
         className="
           pointer-events-none
           absolute
           inset-[1px]
-          rounded-[calc(1.8rem-1px)]
+          rounded-[calc(2rem-1px)]
           border
-          border-white/[0.012]
+          border-white/[0.018]
         "
       />
 
-      {/* CONTENT */}
+      {/* =====================================================
+          SHINE
+      ===================================================== */}
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          opacity-0
+          transition-opacity
+          duration-700
+          group-hover:opacity-100
+        "
+      >
+
+        <div
+          className="
+            absolute
+            inset-0
+            bg-gradient-to-r
+            from-transparent
+            via-white/[0.02]
+            to-transparent
+          "
+        />
+
+      </div>
+
+      {/* =====================================================
+          CONTENT
+      ===================================================== */}
 
       <div className="relative z-10">
 
