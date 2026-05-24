@@ -168,19 +168,23 @@ export default function Home() {
           MAIN CONTAINER
       ===================================================== */}
 
-      <div
-        className="
-          relative
-          z-10
-          max-w-[1480px]
-          mx-auto
-          px-4
-          md:px-6
-          xl:px-8
-          pt-6
-          md:pt-8
-          pb-20
-        "
+<div
+  className="
+    relative
+    z-10
+
+    w-full
+
+    px-3
+    md:px-4
+    xl:px-5
+
+    pt-5
+    md:pt-6
+
+    pb-20
+  "
+>
       >
 
         {/* =====================================================

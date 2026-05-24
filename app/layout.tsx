@@ -243,7 +243,6 @@ export default function RootLayout({
         <div
           className="
             relative
-            isolate
             z-10
             min-h-screen
           "

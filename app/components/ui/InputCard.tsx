@@ -48,30 +48,33 @@ export default function InputCard({
 
     default: {
       border:
-        'border-white/[0.03]',
+        'border-orange-400/[0.08]',
 
       glow:
-        'from-white/[0.025]',
+        'from-orange-500/[0.10]',
 
       text:
         'text-white',
 
       label:
-        'text-white/30',
+        'text-orange-100/42',
 
       placeholder:
         'placeholder:text-zinc-600',
 
       inputGlow:
-        'focus-within:border-white/[0.06]',
+        'focus-within:border-orange-300/[0.18]',
+
+      focus:
+        'focus-within:shadow-[0_0_30px_rgba(255,120,40,0.12)]',
     },
 
     cyan: {
       border:
-        'border-cyan-400/[0.05]',
+        'border-cyan-400/[0.08]',
 
       glow:
-        'from-cyan-400/[0.04]',
+        'from-cyan-400/[0.08]',
 
       text:
         'text-cyan-50',
@@ -83,15 +86,18 @@ export default function InputCard({
         'placeholder:text-cyan-100/15',
 
       inputGlow:
-        'focus-within:border-cyan-300/[0.08]',
+        'focus-within:border-cyan-300/[0.18]',
+
+      focus:
+        'focus-within:shadow-[0_0_30px_rgba(34,211,238,0.14)]',
     },
 
     emerald: {
       border:
-        'border-emerald-400/[0.05]',
+        'border-emerald-400/[0.08]',
 
       glow:
-        'from-emerald-400/[0.04]',
+        'from-emerald-400/[0.08]',
 
       text:
         'text-emerald-50',
@@ -103,15 +109,18 @@ export default function InputCard({
         'placeholder:text-emerald-100/15',
 
       inputGlow:
-        'focus-within:border-emerald-300/[0.08]',
+        'focus-within:border-emerald-300/[0.18]',
+
+      focus:
+        'focus-within:shadow-[0_0_30px_rgba(16,185,129,0.14)]',
     },
 
     fuchsia: {
       border:
-        'border-fuchsia-400/[0.05]',
+        'border-fuchsia-400/[0.08]',
 
       glow:
-        'from-fuchsia-400/[0.04]',
+        'from-fuchsia-400/[0.08]',
 
       text:
         'text-fuchsia-50',
@@ -123,7 +132,10 @@ export default function InputCard({
         'placeholder:text-fuchsia-100/15',
 
       inputGlow:
-        'focus-within:border-fuchsia-300/[0.08]',
+        'focus-within:border-fuchsia-300/[0.18]',
+
+      focus:
+        'focus-within:shadow-[0_0_30px_rgba(217,70,239,0.14)]',
     },
 
   };
@@ -135,73 +147,141 @@ export default function InputCard({
 
     <div
       className={`
-        card-premium
         group
         relative
         overflow-hidden
+
         min-h-[84px]
         md:min-h-[108px]
+
+        rounded-[1.8rem]
+
+        border
+        ${style.border}
+
+        bg-[linear-gradient(to_bottom,rgba(10,10,12,0.94),rgba(5,5,7,0.92))]
+
         px-4
         py-4
+
         md:px-5
         md:py-5
-        backdrop-blur-xl
-        transition-transform
-        duration-300
-        hover:-translate-y-[1px]
-        ${style.border}
+
+        backdrop-blur-[20px]
+
+        shadow-[0_18px_60px_rgba(0,0,0,0.55)]
+
+        transition-all
+        duration-500
+
+        hover:-translate-y-[2px]
       `}
     >
 
-      {/* AMBIENT */}
+      {/* =====================================================
+          ATMOSPHERE
+      ===================================================== */}
 
       <div
         className="
           absolute
           inset-0
-          opacity-40
+          overflow-hidden
           pointer-events-none
         "
       >
 
+        {/* THERMAL GLOW */}
+
         <div
           className={`
             absolute
-            -top-14
-            right-[-10px]
-            w-28
-            h-28
+            -top-20
+            right-[-20px]
+
+            w-[180px]
+            h-[180px]
+
             rounded-full
-            blur-[50px]
+
+            blur-[90px]
+
+            opacity-80
+
             bg-gradient-to-br
             ${style.glow}
             to-transparent
           `}
         />
 
+        {/* LOWER FIRE */}
+
+        <div
+          className="
+            absolute
+            bottom-[-60px]
+            left-[-30px]
+
+            w-[140px]
+            h-[140px]
+
+            rounded-full
+
+            bg-orange-500/[0.06]
+
+            blur-[80px]
+          "
+        />
+
+        {/* TOP LIGHT */}
+
+        <div
+          className="
+            absolute
+            top-0
+            left-1/2
+            -translate-x-1/2
+
+            w-[70%]
+            h-[1px]
+
+            bg-gradient-to-r
+            from-transparent
+            via-orange-200/55
+            to-transparent
+          "
+        />
+
       </div>
 
-      {/* TOP LIGHT */}
+      {/* =====================================================
+          INNER BORDER
+      ===================================================== */}
 
       <div
         className="
-          absolute
-          inset-0
           pointer-events-none
-          bg-gradient-to-b
-          from-white/[0.015]
-          via-transparent
-          to-transparent
+          absolute
+          inset-[1px]
+
+          rounded-[calc(1.8rem-1px)]
+
+          border
+          border-white/[0.025]
         "
       />
 
-      {/* CONTENT */}
+      {/* =====================================================
+          CONTENT
+      ===================================================== */}
 
       <div
         className="
           relative
           z-10
+
           h-full
+
           flex
           flex-col
           justify-between
@@ -216,10 +296,14 @@ export default function InputCard({
             className={`
               uppercase
               tracking-[0.18em]
+
               text-[8px]
               md:text-[9px]
+
               mb-2
+
               font-medium
+
               ${style.label}
             `}
           >
@@ -235,14 +319,21 @@ export default function InputCard({
             <div
               className={`
                 tabular-nums
+
                 w-full
                 min-w-0
+
                 text-[clamp(0.95rem,2.6vw,1.45rem)]
                 md:text-[clamp(1rem,2vw,1.7rem)]
+
                 font-semibold
+
                 leading-none
+
                 break-words
+
                 tracking-[-0.03em]
+
                 ${style.text}
               `}
             >
@@ -256,28 +347,54 @@ export default function InputCard({
             <div
               className={`
                 relative
-                rounded-[1.2rem]
+                overflow-hidden
+
+                rounded-[1.3rem]
+
                 border
-                border-white/[0.03]
-                bg-black/20
-                backdrop-blur-md
-                transition-colors
-                duration-300
+                border-white/[0.04]
+
+                bg-[linear-gradient(to_bottom,rgba(0,0,0,0.34),rgba(0,0,0,0.54))]
+
+                backdrop-blur-xl
+
+                transition-all
+                duration-500
+
                 ${style.inputGlow}
+                ${style.focus}
               `}
             >
 
-              {/* INPUT LIGHT */}
+              {/* INNER LIGHT */}
 
               <div
                 className="
                   absolute
                   inset-0
-                  rounded-[1.2rem]
+
+                  rounded-[1.3rem]
+
+                  bg-[linear-gradient(to_right,rgba(255,255,255,0.02),transparent)]
+                "
+              />
+
+              {/* FIRE EDGE */}
+
+              <div
+                className="
+                  absolute
+                  top-0
+                  left-1/2
+                  -translate-x-1/2
+
+                  w-[55%]
+                  h-[1px]
+
                   bg-gradient-to-r
-                  from-white/[0.01]
+                  from-transparent
+                  via-orange-200/50
                   to-transparent
-                  pointer-events-none
                 "
               />
 
@@ -295,18 +412,28 @@ export default function InputCard({
                 className={`
                   relative
                   z-10
+
                   tabular-nums
+
                   w-full
                   min-w-0
+
                   bg-transparent
+
                   px-4
                   py-3
+
                   text-[clamp(0.95rem,2.6vw,1.45rem)]
                   md:text-[clamp(1rem,2vw,1.7rem)]
+
                   font-semibold
+
                   leading-none
+
                   tracking-[-0.03em]
+
                   outline-none
+
                   ${style.text}
                   ${style.placeholder}
                 `}
