@@ -71,7 +71,7 @@ export default function FenixRadio() {
       {/* PLAY BUTTON */}
 
       <button
-        onClick={toggleRadio}
+        onClick={() => toggleRadio()}
         className="
           relative
           flex
@@ -304,7 +304,7 @@ export default function FenixRadio() {
         {/* NEXT */}
 
         <button
-          onClick={nextTrack}
+          onClick={() => nextTrack()}
           className="
             h-9
             w-9
