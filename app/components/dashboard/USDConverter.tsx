@@ -25,7 +25,10 @@ export default function USDConverter({
   const formattedDate =
     lastUpdate && lastUpdate !== 'offline'
       ? `${new Date(lastUpdate).toLocaleDateString(
-          'pt-BR'
+          'pt-BR',
+          {
+            timeZone: 'UTC',
+          }
         )} às ${new Date(
           lastUpdate
         ).toLocaleTimeString(
@@ -33,8 +36,9 @@ export default function USDConverter({
           {
             hour: '2-digit',
             minute: '2-digit',
+            timeZone: 'UTC',
           }
-        )}`
+        )} UTC`
       : lastUpdate || '...';
 
   return (
@@ -49,8 +53,6 @@ export default function USDConverter({
         md:py-5
       "
     >
-
-      {/* AMBIENT */}
 
       <div
         className="
@@ -328,7 +330,7 @@ export default function USDConverter({
               "
             >
 
-              Última Atualização
+              BASE CAMBIAL
 
             </p>
 
