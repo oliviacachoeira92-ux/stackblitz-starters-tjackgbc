@@ -1,38 +1,75 @@
 export async function fetchUSDBRL() {
   try {
-    const response = await fetch(
-      'https://open.er-api.com/v6/latest/USD',
-      {
-        cache: 'no-store',
-      }
-    );
+    const [rateResponse, variationResponse] =
+      await Promise.all([
+        fetch(
+          'https://open.er-api.com/v6/latest/USD',
+          {
+            cache: 'no-store',
+          }
+        ),
+        fetch(
+          'https://economia.awesomeapi.com.br/json/last/USD-BRL',
+          {
+            cache: 'no-store',
+          }
+        ),
+      ]);
 
-    const data = await response.json();
+    const rateData =
+      await rateResponse.json();
+
+    const variationData =
+      await variationResponse.json();
 
     if (
-      data.result !== 'success' ||
-      !data.rates?.BRL
+      rateData.result !== 'success' ||
+      !rateData.rates?.BRL
     ) {
-      throw new Error('Invalid response');
+      throw new Error(
+        'Invalid exchange rate response'
+      );
     }
+
+    const usdAwesome =
+      variationData?.USDBRL;
 
     return {
       success: true,
 
-      bid: Number(data.rates.BRL),
+      bid: Number(
+        rateData.rates.BRL
+      ),
 
-      high: Number(data.rates.BRL),
+      high:
+        usdAwesome?.high
+          ? Number(
+              usdAwesome.high
+            )
+          : Number(
+              rateData.rates.BRL
+            ),
 
-      low: Number(data.rates.BRL),
+      low:
+        usdAwesome?.low
+          ? Number(
+              usdAwesome.low
+            )
+          : Number(
+              rateData.rates.BRL
+            ),
 
-      pctChange: 0,
+      pctChange:
+        usdAwesome?.pctChange
+          ? Number(
+              usdAwesome.pctChange
+            )
+          : 0,
 
       createDate:
-        data.time_last_update_utc,
+        rateData.time_last_update_utc,
     };
-
   } catch (error) {
-
     return {
       success: false,
 
@@ -46,6 +83,5 @@ export async function fetchUSDBRL() {
 
       createDate: 'offline',
     };
-
   }
 }
