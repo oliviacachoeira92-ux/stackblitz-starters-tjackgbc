@@ -22,6 +22,21 @@ export default function USDConverter({
   const isPositive =
     usdVariation >= 0;
 
+  const formattedDate =
+    lastUpdate && lastUpdate !== 'offline'
+      ? `${new Date(lastUpdate).toLocaleDateString(
+          'pt-BR'
+        )} às ${new Date(
+          lastUpdate
+        ).toLocaleTimeString(
+          'pt-BR',
+          {
+            hour: '2-digit',
+            minute: '2-digit',
+          }
+        )}`
+      : lastUpdate || '...';
+
   return (
 
     <Card
@@ -46,8 +61,6 @@ export default function USDConverter({
         "
       >
 
-        {/* TOP LIGHT */}
-
         <div
           className="
             absolute
@@ -62,8 +75,6 @@ export default function USDConverter({
             rounded-full
           "
         />
-
-        {/* SIDE LIGHT */}
 
         <div
           className="
@@ -82,11 +93,7 @@ export default function USDConverter({
 
       </div>
 
-      {/* CONTENT */}
-
       <div className="relative z-10">
-
-        {/* TOP */}
 
         <div
           className="
@@ -99,11 +106,7 @@ export default function USDConverter({
           "
         >
 
-          {/* LEFT */}
-
           <div className="min-w-0">
-
-            {/* LABEL */}
 
             <div
               className="
@@ -137,8 +140,6 @@ export default function USDConverter({
               </p>
 
             </div>
-
-            {/* HERO VALUE */}
 
             <div className="mt-4">
 
@@ -210,8 +211,6 @@ export default function USDConverter({
 
           </div>
 
-          {/* VARIATION */}
-
           <div
             className={`
               w-fit
@@ -256,8 +255,6 @@ export default function USDConverter({
 
         </div>
 
-        {/* BOTTOM */}
-
         <div
           className="
             mt-6
@@ -272,8 +269,6 @@ export default function USDConverter({
             gap-5
           "
         >
-
-          {/* RATE */}
 
           <div className="min-w-0">
 
@@ -321,8 +316,6 @@ export default function USDConverter({
 
           </div>
 
-          {/* UPDATE */}
-
           <div className="text-left md:text-right">
 
             <p
@@ -347,7 +340,7 @@ export default function USDConverter({
               "
             >
 
-              {lastUpdate || '...'}
+              {formattedDate}
 
             </p>
 
