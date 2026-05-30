@@ -1,49 +1,39 @@
 export async function fetchUSDBRL() {
-
   try {
-
     const response = await fetch(
-      'https://economia.awesomeapi.com.br/json/last/USD-BRL',
+      'https://open.er-api.com/v6/latest/USD',
       {
         cache: 'no-store',
       }
     );
 
-    const data =
-      await response.json();
+    const data = await response.json();
 
-    const usd =
-      data?.USDBRL;
+    if (
+      data.result !== 'success' ||
+      !data.rates?.BRL
+    ) {
+      throw new Error('Invalid response');
+    }
 
     return {
-
       success: true,
 
-      bid: Number(
-        usd.bid
-      ),
+      bid: Number(data.rates.BRL),
 
-      high: Number(
-        usd.high
-      ),
+      high: Number(data.rates.BRL),
 
-      low: Number(
-        usd.low
-      ),
+      low: Number(data.rates.BRL),
 
-      pctChange: Number(
-        usd.pctChange
-      ),
+      pctChange: 0,
 
       createDate:
-        usd.create_date,
-
+        data.time_last_update_utc,
     };
 
   } catch (error) {
 
     return {
-
       success: false,
 
       bid: 5,
@@ -55,9 +45,7 @@ export async function fetchUSDBRL() {
       pctChange: 0,
 
       createDate: 'offline',
-
     };
 
   }
-
 }
